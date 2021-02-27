@@ -1,5 +1,5 @@
 # Text-Adventure
- Text adventure in Java with influence from Collosal Cave
+ Text adventure in Java with influence from Collosal Cave. 
  The game is played in the terminal using a Scanner to get input from the keyboard. You can run the program with Java 8.
  
 Here are some puzzles ideas I had to be put in the adventure:
