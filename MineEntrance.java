@@ -17,16 +17,16 @@ public class MineEntrance extends Location {
     // If you try to get nails if they haven't been knocked off yet
     public void nails(Location location) {
         // First ask if you actually want to get them. If you do get them you die. If not you don't. Loop until they answer the question
-        if (!((MineEntrance) location).nailsOff) {
+        if(!((MineEntrance) location).nailsOff) {
             Scanner scan = new Scanner(System.in);
             System.out.println("Are you sure you want to get the nails? The structure is very fragile and may fall apart and onto\nyou.");
             // input will always be lowercase so don't have to worry about checking .equalsIgnoreCase
             String input = scan.nextLine().toLowerCase();
-            while (!(input.equals("yes") || input.equals("y") || input.equals("no") || input.equals("n"))) {
+            while(!(input.equals("yes") || input.equals("y") || input.equals("no") || input.equals("n"))) {
                 System.out.println("Please answer the question.");
                 input = scan.nextLine().toLowerCase();
             }
-            if (input.equals("yes") || input.equals("y")) {
+            if(input.equals("yes") || input.equals("y")) {
                 System.out.println("OK. I warned you.\nYou walk up to the wooden supports and start to remove the loose nails and, before you can even get\nthem out, there is a loud crack and the support you were working on snaps and the ceiling comes\ncrashing down on top of you. Unfortunately being crushed by a mountain and old wood is very\ndangerous, thus this decision has cost you your life.");
                 System.exit(0);
             } else {
