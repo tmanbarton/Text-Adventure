@@ -50,14 +50,14 @@ public class MineEntrance extends Location {
             Item nails = new Item(7, "There are some nails scattered on the ground here", "Some nails", "nails");
             location.items.add(nails);
             ((MineEntrance) location).nailsOff = true;
-            // Find mine shaft in connecting locations and remove it
-            for(ConnectingLocation cl : location.connectingLocations) {
-                if(cl.location.name.equals("mine shaft")) {
-                    location.connectingLocations.remove(cl);
-                    break;
+            // 2 ways to get to mine shaft. Find and remove both
+            for(int i = 0; i < location.connectingLocations.size(); i++) {
+                if(location.connectingLocations.get(i).location.name.equals("mine shaft")) {
+                    location.connectingLocations.remove(location.connectingLocations.get(i));
+                    i--;
                 }
             }
-            location.description = "You've come to the entrance to the abandoned gold mine. Looks like it had a recent cave-in. There's\nno way you're getting in there now. Piles of tailings are all over leaving one path away from the\nentrance to the north.";
+            location.description = "You've come to the entrance to the abandoned gold mine. Looks like it had a recent cave-in, leaving\nno way to get in. Piles of tailings are all over leaving one path away from the entrance to the\nnorth.";
         }
         // If nails are already off, print message and remove arrow from inventory and add to location.
         else {

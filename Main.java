@@ -21,7 +21,9 @@ public class Main implements Comparator<Item> {
     String shedDescription;
     String topOfHillDescription;
     String topOfStairsDescription;
-    String undergroundLakeDescription;
+    String undergroundLakeNorthDescription;
+    String undergroundLakeWestDescription;
+    String undergroundLakeSWDescription;
     String westEndOfMainstreetDescription;
 
     ArrayList<String> north;
@@ -69,9 +71,11 @@ public class Main implements Comparator<Item> {
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and it's doors firmly shut and\nlocked, the one and only thing that needs to be on this plot of land.";
         topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes around a\nbend to the north and down the hill to the south."; // TODO add more connecting locations
         topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill. A dam is to the north, at the\nbottom of the stairs, and the mainstreet of the abandoned gold mining town stretches east and west.";
-        undergroundLakeDescription = "Here is a large underground lake with a rickety wooden boat at the shore. It seems odd that the miners\ntolerated this. There are three passages across the lake from where you are standing: one going west,\none southwest, one northwest. There's a dim light coming from around a corner to the east."; // TODO description doesn't match connecting locations. need to add 3 connecting locations
+        undergroundLakeNorthDescription = "You are on the north side of large underground lake with a rickety wooden boat at the shore. It\nseems odd that the miners tolerated this. There are two passages across the lake from where you\nare standing: one going west and one going southwest. There's a dim light coming from around a\ncorner to the east."; // TODO description doesn't match connecting locations. need to add 3 connecting locations
+        undergroundLakeWestDescription = "You are on the west side of a large underground lake. There are passages to the south an sw across\nthe lake. The tunnel you're in now continues to the west.";
+        undergroundLakeSWDescription = "You are on the sw side of a large underground lake. There are passages to the north and west across\nthe lake and a tunnel continues south from here.";
         westEndOfMainstreetDescription = "You are at the west and of an abandoned gold mining town's main street.";
-        // Create arraylists that contain all possible, valid inputs for directions. Use for location objects in arraylist of string arraylists
+        // Arraylists that contain all possible, valid inputs for directions. Use for location objects in arraylist of string arraylists
         north = new ArrayList<>(Arrays.asList("north", "n", "go north", "go n", "walk north", "walk n", "run north", "run n"));
         south = new ArrayList<>(Arrays.asList("south", "s", "go south", "go s", "walk south", "walk s", "run south", "run s"));
         east = new ArrayList<>(Arrays.asList("east", "e", "go east", "go e", "walk east", "walk e", "run east", "run e"));
@@ -82,7 +86,7 @@ public class Main implements Comparator<Item> {
         southwest = new ArrayList<>(Arrays.asList("sw", "go sw", "walk sw", "run sw"));
         up = new ArrayList<>(Arrays.asList("up", "u", "go up", "go u", "walk up", "walk u", "run u", "run up"));
         down = new ArrayList<>(Arrays.asList("down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d"));
-        // One big arraylist containing all possible direction commands to loop through to see if the entered command was a direction
+        // One big arraylist containing all possible direction commands to check if the entered command was a direction
         directions = new ArrayList<>(Arrays.asList("north", "n", "go north", "go n", "walk north", "walk n", "run north", "run n",
                 "south", "s", "go south", "go s", "walk south", "walk s", "run south", "run s",
                 "east", "e", "go east", "go e", "walk east", "walk e", "run east", "run e",
@@ -95,7 +99,6 @@ public class Main implements Comparator<Item> {
                 "down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d",
                 "in", "out"));
 
-        // Item objects
         key = new Item(1, "There is a shiny key here", "Shiny key", "key");
         hammer = new Item(2, "There is a hammer here", "Hammer", "hammer");
         bow = new Item(3, "There is a bow here, strung an ready for shooting", "Bow", "bow");
@@ -106,14 +109,13 @@ public class Main implements Comparator<Item> {
         tent = new Item(9, "There is a tent here, packed neatly in a bag.", "Tent in bag", "tent");
         magnet = new Item(10, "There is a thick, circular magnet here, about the size of your palm.", "Magnet", "magnet");
 
-        // Lists of all valid verbs that the player can enter that are not directions. Check input against verbs and take appropriate actions
+        // Lists of all valid verbs that the player can enter that are not directions.
         allVerbs = new ArrayList<>(Arrays.asList("get", "drop", "inventory", "look", "throw", "open", "close", "unlock", "jqkkq", "turn", "shoot", "fill"));
     }
 
     public static void main(String[] args) {
         Main m = new Main();
         // Locations for graph
-        // Some have their own class because they need extra booleans
         Location abandonedGoldMine = new Location(m.abandonedGoldMineDescription, new ArrayList<>(), new ArrayList<>(), false, "abandoned gold mine");
         Location archeryRange = new Location(m.archeryRangeDescription, new ArrayList<>(), new ArrayList<>(), false, "archery range");
         Location boat = new Location(m.boatDescription, new ArrayList<>(), new ArrayList<>(), false, "boat");
@@ -130,22 +132,23 @@ public class Main implements Comparator<Item> {
         Location privateProperty = new Location(m.privatePropertyDescription, new ArrayList<>(), new ArrayList<>(), false, "private property");
         Location topOfHill = new Location(m.topOfHillDescription, new ArrayList<>(), new ArrayList<>(), false, "top of hill");
         Location topOfStairs = new Location(m.topOfStairsDescription, new ArrayList<>(), new ArrayList<>(), false, "top of stairs");
-        Location undergroundLake = new Location(m.undergroundLakeDescription, new ArrayList<>(), new ArrayList<>(), false, "underground lake");
+        Location undergroundLakeNorth = new Location(m.undergroundLakeNorthDescription, new ArrayList<>(), new ArrayList<>(), false, "north side of underground lake");
+        Location undergroundLakeWest = new Location(m.undergroundLakeWestDescription, new ArrayList<>(), new ArrayList<>(), false, "west side of underground lake");
+        Location undergroundLakeSW = new Location(m.undergroundLakeSWDescription, new ArrayList<>(), new ArrayList<>(), false, "sw side of underground lake");
         Location westEndOfMainstreet = new Location(m.westEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), false, "west end of mainstreet");
         Dam dam = new Dam(m.damDescription, new ArrayList<>(), new ArrayList<>(), false, "dam", false, false);
         Shed shed = new Shed(m.shedDescription, new ArrayList<>(), new ArrayList<>(), false, "shed", false, false);
         MineEntrance mineEntrance = new MineEntrance(m.mineEntranceDescription, new ArrayList<>(Collections.singletonList(m.gold)), new ArrayList<>(), false, "mine entrance", false);
-        // Adding locations to connectingLocations arraylist parameter of Location to create graph
+        // Add locations to connectingLocations arraylist parameter of Location to create graph
         // Some ConnectingLocations have in and out as directions since that will get you to another location in addition to entering a direction
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.south, mineEntrance));
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.west, lake));
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.east, intersection));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.west, privateProperty));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.east, ditch));
-        boat.connectingLocations.add(new ConnectingLocation(m.north, undergroundLake));// North leads to the underground lake location.
-//        boat.connectingLocations.add(new ConnectingLocation(m.west, another location));// w,nw,sw go other places yet to be determined so
-//        boat.connectingLocations.add(new ConnectingLocation(m.northwest, some other location));// for now just back to boat
-//        boat.connectingLocations.add(new ConnectingLocation(m.southwest, a different location));
+        boat.connectingLocations.add(new ConnectingLocation(m.north, undergroundLakeNorth));
+        boat.connectingLocations.add(new ConnectingLocation(m.west, undergroundLakeWest));
+        boat.connectingLocations.add(new ConnectingLocation(m.southwest, undergroundLakeSW));
         dam.connectingLocations.add(new ConnectingLocation(m.north, lake));
         dam.connectingLocations.add(new ConnectingLocation(m.south, topOfStairs));
         dam.connectingLocations.add(new ConnectingLocation(m.up, topOfStairs));
@@ -166,7 +169,7 @@ public class Main implements Comparator<Item> {
         lake.connectingLocations.add(new ConnectingLocation(m.east, abandonedGoldMine));
         lake.connectingLocations.add(new ConnectingLocation(m.south, dam));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.north, mineEntrance));
-        mineShaft.connectingLocations.add(new ConnectingLocation(m.south, undergroundLake));
+        mineShaft.connectingLocations.add(new ConnectingLocation(m.south, undergroundLakeNorth));
         mineShaft.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("out")), mineEntrance));
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.north, abandonedGoldMine));
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.south, mineShaft));
@@ -185,8 +188,12 @@ public class Main implements Comparator<Item> {
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.down, dam));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.east, eastEndOfMainstreet));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.west, westEndOfMainstreet));
-        undergroundLake.connectingLocations.add(new ConnectingLocation(m.east, mineShaft));
-        undergroundLake.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
+        undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(m.east, mineShaft));
+        undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
+        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
+//        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.south, somelocation));
+        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
+//        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.west, somelocation));
         westEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.east, topOfStairs));
 
         // Arraylist of Items for when you get an Item from a location and a Scanner for input from keyboard
@@ -502,32 +509,27 @@ public class Main implements Comparator<Item> {
     // If input is shoot determine what action to take and what to print
     public static void shoot(String input, Location location, ArrayList<Item> inventory) {
         boolean bowInInventory = isItemHere("bow", inventory);
-        if(input.equals("shoot")) {
-            System.out.println("What do you want to shoot?");
-        }
-        // If bow is not in inventory you can't shoot anything
-        else if(!bowInInventory && input.equals("shoot") && input.length() >= 7) {
+        if(!bowInInventory && input.startsWith("shoot")) {
             System.out.println("You have nothing to shoot with.");
         }
         // If bow is in inventory you can do something. I have to check more things
         else {
-            if(!input.substring(6).equals("arrow")) {
+            boolean arrowInInventory = isItemHere("arrow", inventory);
+            if(input.startsWith("shoot") && !arrowInInventory) {
+                System.out.println("You have nothing to shoot");
+            }
+            else if(input.length() >= 7 && !input.substring(6).equals("arrow")) {
                 System.out.println("You can't shoot that");
             }
             else {
-                boolean arrowInInventory = isItemHere("arrow", inventory);
-                if(!arrowInInventory) {
-                    System.out.println("You have nothing to shoot");
-                } else {
-                    MineEntrance mineEntrance = new MineEntrance();
-                    if(!(location instanceof MineEntrance) || (location instanceof MineEntrance && mineEntrance.nailsOff)) {
-                        System.out.println("Your arrow goes flying off into the the distance and lands with a soft thud into the ground.");
-                        Item arrow = findItem("arrow", inventory);
-                        addAndRemove(location.items, inventory, arrow);
-                    }
-                    else {
-                        mineEntrance.shoot(inventory, location);
-                    }
+                MineEntrance mineEntrance = new MineEntrance();
+                if(!(location instanceof MineEntrance) || (location instanceof MineEntrance && mineEntrance.nailsOff)) {
+                    System.out.println("Your arrow goes flying off into the the distance and lands with a soft thud into the ground.");
+                    Item arrow = findItem("arrow", inventory);
+                    addAndRemove(location.items, inventory, arrow);
+                }
+                else {
+                    mineEntrance.shoot(inventory, location);
                 }
             }
         }
@@ -595,33 +597,21 @@ public class Main implements Comparator<Item> {
         }
     }
 
-    // What to do if in is entered. Only applicable for boat
+    //
     public static void inBoat(String input, Location location) {
         Main m = new Main();
-        if(location.name.equals("boat")) {
+        if(location instanceof Boat) {
             if (input.equals("in")) {
                 // Trying to get in something other than the boat
                 if (input.length() >= 4 && !input.substring(3).equals("boat")) {
                     System.out.println("That's not something you can get in.");
                 }
-                // Else you entered it correctly in the right location so do all the stuff for getting in boat in UndergroundLake class
-                else {
-                    if (location instanceof Boat) {
-                        ((Boat) location).inBoat = true;
-                    }
-                    ConnectingLocation temp = location.connectingLocations.get(0); // That's the mine shaft. Index 0 will always be mine shaft
-                    location.connectingLocations.clear();
-                    location.connectingLocations.add(temp);
-//                    location.connectingLocations.add(new ConnectingLocation(m.west, a different location));
-//                    location.connectingLocations.add(new ConnectingLocation(m.southwest, a different location));
-//                    location.connectingLocations.add(new ConnectingLocation(m.northwest, a different location));
-                }
             }
         }
     }
 
-    // What to do when turn is entered. Only applicable for wheel
-    public static void turn(String input, Location location) {
-
-    }
+    // Drain lake when turn is entered. Only applicable for wheel at dam
+//    public static void turn(String input, Location location) {
+//
+//    }
 }
