@@ -110,7 +110,7 @@ public class Main implements Comparator<Item> {
         magnet = new Item(10, "There is a thick, circular magnet here, about the size of your palm.", "Magnet", "magnet");
 
         // Lists of all valid verbs that the player can enter that are not directions.
-        allVerbs = new ArrayList<>(Arrays.asList("get", "drop", "inventory", "look", "throw", "open", "close", "unlock", "jqkkq", "turn", "shoot", "fill"));
+        allVerbs = new ArrayList<>(Arrays.asList("get", "drop", "inventory", "look", "throw", "open", "unlock", "turn", "shoot", "fill"));
     }
 
     public static void main(String[] args) {
@@ -118,7 +118,6 @@ public class Main implements Comparator<Item> {
         // Locations for graph
         Location abandonedGoldMine = new Location(m.abandonedGoldMineDescription, new ArrayList<>(), new ArrayList<>(), false, "abandoned gold mine");
         Location archeryRange = new Location(m.archeryRangeDescription, new ArrayList<>(), new ArrayList<>(), false, "archery range");
-        Location boat = new Location(m.boatDescription, new ArrayList<>(), new ArrayList<>(), false, "boat");
         Location dirtRoad = new Location(m.dirtRoadDescription, new ArrayList<>(), new ArrayList<>(), false, "dirt road");
         Location ditch = new Location(m.ditchDescription, new ArrayList<>(Collections.singletonList(m.key)), new ArrayList<>(), false, "ditch");
         Location driveway = new Location(m.drivewayDescription, new ArrayList<>(), new ArrayList<>(), false, "driveway");
@@ -136,6 +135,7 @@ public class Main implements Comparator<Item> {
         Location undergroundLakeWest = new Location(m.undergroundLakeWestDescription, new ArrayList<>(), new ArrayList<>(), false, "west side of underground lake");
         Location undergroundLakeSW = new Location(m.undergroundLakeSWDescription, new ArrayList<>(), new ArrayList<>(), false, "sw side of underground lake");
         Location westEndOfMainstreet = new Location(m.westEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), false, "west end of mainstreet");
+        Boat boat = new Boat(m.boatDescription, new ArrayList<>(), new ArrayList<>(), false, "rickety wooden boat", false);
         Dam dam = new Dam(m.damDescription, new ArrayList<>(), new ArrayList<>(), false, "dam", false, false);
         Shed shed = new Shed(m.shedDescription, new ArrayList<>(), new ArrayList<>(), false, "shed", false, false);
         MineEntrance mineEntrance = new MineEntrance(m.mineEntranceDescription, new ArrayList<>(Collections.singletonList(m.gold)), new ArrayList<>(), false, "mine entrance", false);
@@ -188,8 +188,8 @@ public class Main implements Comparator<Item> {
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.down, dam));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.east, eastEndOfMainstreet));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.west, westEndOfMainstreet));
-        undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(m.east, mineShaft));
         undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
+        undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(m.east, mineShaft));
         undergroundLakeSW.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
 //        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.south, somelocation));
         undergroundLakeWest.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
@@ -200,13 +200,14 @@ public class Main implements Comparator<Item> {
         ArrayList<Item> inventory = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-        Location currentLocation = driveway;
-//        Location currentLocation = shed;
+//        Location currentLocation = driveway;
+        Location currentLocation = shed;
+//        Location currentLocation = mineEntrance;
 //        mineEntrance.items.add(m.jar);
 //        mineEntrance.items.add(m.bow);
 //        mineEntrance.items.add(m.arrow);
 //        mineEntrance.items.sort(m);
-//        shed.items.add(m.key);
+        shed.items.add(m.key);
         currentLocation.visited = true;
 
         // Game introduction
@@ -242,15 +243,18 @@ public class Main implements Comparator<Item> {
                     // It's a legal direction. Change current location and decide what to print based on visited or not
                     if (currentLocation.connectingLocations.get(i).directions.contains(input) && !currentLocation.equals(currentLocation.connectingLocations.get(i))) {
                         currentLocation = currentLocation.connectingLocations.get(i).location;
-                        if((input.equals("in") || input.equals("out") && currentLocation instanceof Boat)) {
-                            inBoat(input, currentLocation);
-                        }
                         if (!currentLocation.visited) {
                             currentLocation.visited = true;
                             printLocation(currentLocation);
                         }
                         else {
-                            System.out.println("You're at " + currentLocation.name + ".");
+                            //Corner case for printing short version of boat location
+                            if(currentLocation instanceof Boat) {
+                                System.out.println("You're sitting in a rickety wooden boat in a large underground lake.");
+                            }
+                            else {
+                                System.out.println("You're at " + currentLocation.name + ".");
+                            }
                             for (Item item : currentLocation.items) {
                                 System.out.println(item.locationPrint);
                             }
@@ -281,22 +285,25 @@ public class Main implements Comparator<Item> {
                     findAction(input.toLowerCase(), currentLocation, inventory);
                 }
                 //If input isn't a legal verb, direction, or if it's "in" or "out" + another word, print one of 3 Strings to let user know it's not a legal input
-                else if(!(m.allVerbs.contains(inputCheck) || m.directions.contains(inputCheck)) || ((inputCheck.equals("out") || inputCheck.equals("in") || input.equals("unlock") || input.equals("open")) && inputArray.length >= 2)) {
-                    Random r = new Random();
-                    int randomNum = r.nextInt(3);
-                    if(randomNum == 0) {
-                        System.out.println("I don't understand that.");
-                    }
-                    else if(randomNum == 1) {
-                        System.out.println("What?");
-                    }
-                    else {
-                        System.out.println("I don't know that word.");
-                    }
+                else if(!(m.allVerbs.contains(inputCheck) || m.directions.contains(inputCheck)) || ((inputCheck.equals("out") || inputCheck.equals("in") || input.equals("unlock") || input.equals("open")) && inputArray.length >= 2)) {//                    Random r = new Random();
+                    dontKnowWord();
                 }
             }
             // input will always be lowercase so don't have to worry about checking .equalsIgnoreCase
             input = scan.nextLine().toLowerCase();
+        }
+    }
+    public static void dontKnowWord() {
+        Random r = new Random();
+        int randomNum = r.nextInt(3);
+        if(randomNum == 0) {
+            System.out.println("I don't understand that.");
+        }
+        else if(randomNum == 1) {
+            System.out.println("What?");
+        }
+        else {
+            System.out.println("I don't know that word.");
         }
     }
 
@@ -310,7 +317,6 @@ public class Main implements Comparator<Item> {
         return i1.order - i2.order;
     }
 
-    // Format for printing Locations
     public static void printLocation(Location location) {
         System.out.println(location.description);
         if(!location.items.isEmpty()) {
@@ -320,16 +326,13 @@ public class Main implements Comparator<Item> {
         }
     }
 
-    // Every time I add an Item to inventory I remove that thing from the location and vice versa. So this method does both of those and
-    // sorts whatever arraylist got something added to it.
+    // Either add an item to inventory and remove from location or vice versa
     public static void addAndRemove(ArrayList<Item> listToAddTo, ArrayList<Item> listToRemoveFrom, Item itemToAddAndRemove) {
         listToAddTo.add(itemToAddAndRemove);
         listToAddTo.sort(new Main());
         listToRemoveFrom.remove(itemToAddAndRemove);
     }
 
-    // Check if an Item is in either inventory or the location depending on what's passed as parameter. Find out by looping through the list
-    // and comparing the name of the Item to the input. Return true if it's in the list, false otherwise
     public static boolean isItemHere(String itemName, ArrayList<Item> listToSearch) {
         for(Item i : listToSearch) {
             if(i.name.equals(itemName)) {
@@ -339,7 +342,6 @@ public class Main implements Comparator<Item> {
         return  false;
     }
 
-    // Similar to isItemHere but returning an Item if it's there or null if it isn't instead of a boolean
     public static Item findItem(String itemToFind, ArrayList<Item> listToSearch) {
         for(Item i : listToSearch) {
             if(i.name.equals(itemToFind)) {
@@ -349,112 +351,59 @@ public class Main implements Comparator<Item> {
         return null;
     }
 
-    // Find what to print and what action to take if input is a generic verb
-    // input is coming in as lowercase so don't need .equalsIgnoreCase in this or any other method
+    // Parse input and, based on first word, decide what action to take
     public static void findAction(String input, Location location, ArrayList<Item> inventory) {
         String[] countWords = input.split(" ");
         if(countWords.length >= 3) {
             System.out.println("Try to stick to one or two word commands.");
         }
-        else if(input.substring(0, 3).equals("get")) {
-            // Corner case if only get was entered
+        else if(input.startsWith("get")) {
             if(input.equals("get") || input.equals("get ")) {
                 System.out.println("What do you want to get?");
                 return;
             }
-            if(input.substring(0, 3).equals("get")) {
+            if(input.startsWith("get")) {
                 location.get(input.substring(4), location, inventory);
             }
         }
-        else if(input.equals("fill")) {
+        else if(input.startsWith("fill")) {
             fill(input, location, inventory);
         }
-        else if(input.substring(0, 4).equals("drop")) {
-            // Corner case if nothing was entered to drop
+        else if(input.length() >= 4 && input.startsWith("drop")) {
             if(input.equals("drop") || input.equals("drop ")) {
                 System.out.println("What do you want to drop?");
                 return;
             }
             location.drop(input.substring(5), location, inventory);
         }
-        else if(input.length() >= 5 && input.substring(0, 5).equals("shoot")) {
+        else if(input.length() >= 5 && input.startsWith("shoot")) {
             shoot(input, location, inventory);
         }
-        else if(input.length() >= 6 && input.substring(0, 6).equals("unlock")) {
-            unlock(input, location, inventory);
+        else if(input.length() >= 6 && input.equals("unlock")) {
+            location.unlock(location, inventory);
         }
-        else if(input.length() >= 4 && input.substring(0, 4).equals("open")) {
-            open(input, location, inventory);
+        else if(input.length() >= 4 && input.equals("open")) {
+            location.open(location);
         }
         else if(input.length() >= 5 && "inventory".contains(input)) {
-            inventory(inventory);
+            location.inventory(inventory);
         }
         else if(input.equals("look")) {
             printLocation(location);
         }
-    }
-
-    /*public static void drop(String input, Location location, ArrayList<Item> inventory) {
-        // boolean to check if the item is in inventory and items for jar and gold since they require special cases for getting and dropping
-        // If you have gold in inventory and you drop jar, then remove both gold and jar from inventory since gold is in jar
-        // If you drop just gold, keep jar and remove gold
-        boolean itemInInventory = isItemHere(input, inventory);
-        Item gold = findItem("gold", inventory);
-        Item jar = findItem("jar", inventory);
-        if(inventory.isEmpty()) {
-            System.out.println("You're not carrying anything!");
-            return;
-        }
-        // If you drop gold, change parameter inventoryPrint back to "Jar" since it no longer has gold in it
-        else if(input.equals("gold") && itemInInventory) {
-            addAndRemove(location.items, inventory, gold);
-            jar.inventoryPrint = "Jar";
-            System.out.println("OK");
-            return;
-        }
-        // If you drop the jar the gold drops with it so remove gold and jar from inventory and add them to location items
-        else if(input.equals("jar") && itemInInventory && jar != null && gold != null) {
-            addAndRemove(location.items, inventory, jar);
-            jar.inventoryPrint = "Jar";
-            addAndRemove(location.items, inventory, gold);
-            System.out.println("OK");
-            return;
-        }
-        // Find the item in inventory and add it to location items then remove from inventory
-        Item item = findItem(input, inventory);
-        if(item == null) {
-            // If findItem() returns null, the item isn't in inventory so say so
-            System.out.println("You don't have that!");
-        }
-        // else if, check if findItem() returned the requested item to drop
-        else if(item.name.equals(input)) {
-            addAndRemove(location.items, inventory, item);
-            System.out.println("OK");
-            return;
-        }
-    }*/
-
-    // Print Items in inventory or nothing if inventory is empty
-    public static void inventory(ArrayList<Item> inventory) {
-        if(inventory.isEmpty()) {
-            System.out.println("You aren't carrying anything!");
-        }
         else {
-            System.out.println("You are carrying the following:");
-            for(Item i : inventory) {
-                System.out.println(i.inventoryPrint);
-            }
+            dontKnowWord();
         }
     }
 
-    // If input is shoot determine what action to take and what to print
     public static void shoot(String input, Location location, ArrayList<Item> inventory) {
+        // Bow must be in inventory before you can shoot anything
         boolean bowInInventory = isItemHere("bow", inventory);
         if(!bowInInventory && input.startsWith("shoot")) {
             System.out.println("You have nothing to shoot with.");
         }
-        // If bow is in inventory you can do something. I have to check more things
         else {
+            // You can only shoot the arrow
             boolean arrowInInventory = isItemHere("arrow", inventory);
             if(input.startsWith("shoot") && !arrowInInventory) {
                 System.out.println("You have nothing to shoot");
@@ -478,19 +427,16 @@ public class Main implements Comparator<Item> {
 
     // Similar to get but only applies to jar and gold items
     public static void fill(String input, Location location, ArrayList<Item> inventory) {
-        // Find out if jar is in inventory. If it isn't you can't get gold
+        // Jar must be in inventory to fill
         boolean jarInInventory = isItemHere("jar", inventory);
-        // You can't fill anything other than the jar, so if input is "fill (something other than jar)" tell user you can't fill that
+        // You can't fill anything other than the jar
         if(input.length() >= 6 && !input.substring(5).equals("jar")) {
             System.out.println("You can't fill that.");
         }
-        // If jar isn't in inventory you have nothing to fill
         else if(!jarInInventory) {
             System.out.println("You have nothing to fill.");
         }
-        // Else jar is inventory: if gold isn't at location you can't fill the jar with anything
-        // If gold is at location all the stuff happens: change description of jar to "Jar full of gold flakes", add gold
-        // to inventory and remove from location
+        // Else jar is inventory: Can only be filled with gold, change description if it's filled, and add gold to inventory if necessary
         else {
             boolean goldAtLocation = isItemHere("gold", location.items);
             if(!goldAtLocation) {
@@ -504,52 +450,4 @@ public class Main implements Comparator<Item> {
             }
         }
     }
-
-    // Can only unlock the shed if you have the key. If anywhere else say there's nothing here to unlock
-    public static void unlock(String input, Location location, ArrayList<Item> inventory) {
-        if(!(location instanceof Shed)) {
-            System.out.println("There's nothing here to unlock.");
-        }
-        else {
-            if(input.equals("unlock") || input.equals("unlock shed")) {
-                ((Shed) location).unlock(((Shed) location), inventory);
-            }
-            else {
-                System.out.println("That's not something you can unlock.");
-            }
-        }
-    }
-
-    // What to do when open is entered. Only applicable for shed
-    public static void open(String input, Location location, ArrayList<Item> inventory) {
-        if(!(location instanceof Shed)) {
-            System.out.println("There's nothing here to open.");
-        }
-        else {
-            if(input.equals("open") || input.equals("open shed")) {
-                ((Shed) location).open(((Shed) location));
-            }
-            else {
-                System.out.println("That's not something you can open.");
-            }
-        }
-    }
-
-    //
-    public static void inBoat(String input, Location location) {
-        Main m = new Main();
-        if(location instanceof Boat) {
-            if (input.equals("in")) {
-                // Trying to get in something other than the boat
-                if (input.length() >= 4 && !input.substring(3).equals("boat")) {
-                    System.out.println("That's not something you can get in.");
-                }
-            }
-        }
-    }
-
-    // Drain lake when turn is entered. Only applicable for wheel at dam
-//    public static void turn(String input, Location location) {
-//
-//    }
 }

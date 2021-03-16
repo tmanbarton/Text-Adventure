@@ -18,42 +18,37 @@ public class Location {
 
     public Location(){}
 
-    public static void get(String input, Location location, ArrayList<Item> inventory) {
-        // Conditionals to check for whether requested item is in inventory already or at location
+    public void get(String input, Location location, ArrayList<Item> inventory) {
+        // Check for whether requested item is in inventory or at location already
         MineEntrance mineEntrance = new MineEntrance();
         boolean itemInInventory = Main.isItemHere(input, inventory);
         boolean itemToGetAtLocation = Main.isItemHere(input, location.items);
-        // Conditionals for if jar is in inventory and gold at location
+        // Is jar in inventory? Is gold at location?
         Item jar = Main.findItem("jar", inventory);
         boolean jarInInventory = Main.isItemHere("jar", inventory);
         boolean goldAtLocation = Main.isItemHere("gold", location.items);
-        //Corner case for mine entrance. If input is get nails special stuff happens at mine entrance.
+        //Corner case for mine entrance. If input is "get nails" special stuff happens at mine entrance.
         if(location instanceof MineEntrance && input.equals("nails") && !((MineEntrance) location).nailsOff) {
             mineEntrance.nails(location);
         }
-        // Corner case if you try to get shed at shed location
+        // Corner cases for trying to get stuff you're not allowed to get
         else if(location instanceof Shed && input.equals("shed")) {
             System.out.println("Don't be ridiculous! The shed is way too heavy to be lifted, let alone carried around.");
         }
-        // Corner case if you try to get table at picnic table
         else if(location.name.equals("picnic table")) {
             System.out.println("How could you carry such a thing? It's much to heavy and awkward to be picked up.");
         }
-        // Corner case if you try to get sign in mine shaft
         else if(location.name.equals("mine shaft") && input.equals("sign")) {
             System.out.println("You can't get that. It's firmly attached to the wall.");
         }
-        // If item is already in inventory, let user know they already have it and do nothing
+
         else if(itemInInventory) {
             System.out.println("You're already carrying it!");
         }
-        // If it's not in inventory and not at location, let user know it's not here
         else if(!itemToGetAtLocation) {
             System.out.println("I see no " + input + " here");
         }
-        // Corner case if getting gold, you must have the jar in inventory to be able to get gold
-        // If you do have the jar and there's gold to get print the message and change the parameter inventoryPrint for jar and
-        // remove gold from location and add to inventory
+        // If you're getting gold at Mine Entrance and you have all the right stuff
         else if(input.equals("gold") && jarInInventory && goldAtLocation) {
             System.out.println("The jar is now full of gold flakes.");
             jar.inventoryPrint = "Jar filled with gold flakes";
@@ -64,22 +59,20 @@ public class Location {
                 }
             }
         }
-        // If you don't have the jar in inventory and try to get gold
+        // Try to get gold without jar in inventory
         else if(input.equals("gold") && !jarInInventory && goldAtLocation) {
             System.out.println("You don't have anything to put the gold flakes in");
         }
+        // Everything's right for getting an Item.
         else {
-            // If it's at the location and it isn't in inventory, add it to inventory and remove from location's item arraylist
             Item toGet = Main.findItem(input, location.items);
             Main.addAndRemove(inventory, location.items, toGet);
             System.out.println("OK");
         }
     }
 
-    public static void drop(String input, Location location, ArrayList<Item> inventory) {
-        // boolean to check if the item is in inventory and items for jar and gold since they require special cases for getting and dropping
-        // If you have gold in inventory and you drop jar, then remove both gold and jar from inventory since gold is in jar
-        // If you drop just gold, keep jar and remove gold
+    // Basically the reverse of get()
+    public void drop(String input, Location location, ArrayList<Item> inventory) {
         boolean itemInInventory = Main.isItemHere(input, inventory);
         Item gold = Main.findItem("gold", inventory);
         Item jar = Main.findItem("jar", inventory);
@@ -102,18 +95,48 @@ public class Location {
             System.out.println("OK");
             return;
         }
-        // Find the item in inventory and add it to location items then remove from inventory
         Item item = Main.findItem(input, inventory);
+        // Not in inventory
         if(item == null) {
-            // If findItem() returns null, the item isn't in inventory so say so
             System.out.println("You don't have that!");
         }
-        // else if, check if findItem() returned the requested item to drop
+        // Everything is correct and no corner case, so drop requested item
         else if(item.name.equals(input)) {
             Main.addAndRemove(location.items, inventory, item);
             System.out.println("OK");
-            return;
         }
     }
 
+    // Print Items in inventory or nothing if inventory is empty
+    public void inventory(ArrayList<Item> inventory) {
+        if(inventory.isEmpty()) {
+            System.out.println("You aren't carrying anything!");
+        }
+        else {
+            System.out.println("You are carrying the following:");
+            for(Item i : inventory) {
+                System.out.println(i.inventoryPrint);
+            }
+        }
+    }
+
+    // Can only unlock the shed. Can only unlock it if you have the key.
+    public void unlock(Location location, ArrayList<Item> inventory) {
+        if(!(location instanceof Shed)) {
+            System.out.println("There's nothing here to unlock.");
+        }
+        else {
+            ((Shed) location).unlock(((Shed) location), inventory);
+        }
+    }
+
+    // Can only open the shed. Can only open it once it's been unlocked
+    public void open(Location location) {
+        if (!(location instanceof Shed)) {
+            System.out.println("There's nothing here to open.");
+        }
+        else {
+            ((Shed) location).open(((Shed) location));
+        }
+    }
 }
