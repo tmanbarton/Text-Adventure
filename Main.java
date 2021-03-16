@@ -125,7 +125,7 @@ public class Main implements Comparator<Item> {
         Location eastEndOfMainstreet = new Location(m.eastEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), false, "east end of mainstreet");
         Location insideLogCabin = new Location(m.insideLogCabinDescription, new ArrayList<>(Collections.singletonList(m.magnet)), new ArrayList<>(), false, "inside log cabin");
         Location intersection = new Location(m.intersectionDescription, new ArrayList<>(), new ArrayList<>(), false, "intersection");
-        Location lake = new Location(m.lakeDescription, new ArrayList<>(), new ArrayList<>(), false, "river");
+        Location lake = new Location(m.lakeDescription, new ArrayList<>(), new ArrayList<>(), false, "lake");
         Location mineShaft = new Location(m.mineShaftDescription, new ArrayList<>(), new ArrayList<>(), false, "mine shaft");
         Location outsideLogCabin = new Location(m.outsideLogCabinDescription, new ArrayList<>(), new ArrayList<>(), false, "outside log cabin");
         Location picnicTable = new Location(m.picnicTableDescription, new ArrayList<>(), new ArrayList<>(), false, "picnic table");
@@ -200,12 +200,12 @@ public class Main implements Comparator<Item> {
         ArrayList<Item> inventory = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-//        Location currentLocation = driveway;
-        Location currentLocation = mineEntrance;
-        mineEntrance.items.add(m.jar);
-        mineEntrance.items.add(m.bow);
-        mineEntrance.items.add(m.arrow);
-        mineEntrance.items.sort(m);
+        Location currentLocation = driveway;
+//        Location currentLocation = shed;
+//        mineEntrance.items.add(m.jar);
+//        mineEntrance.items.add(m.bow);
+//        mineEntrance.items.add(m.arrow);
+//        mineEntrance.items.sort(m);
 //        shed.items.add(m.key);
         currentLocation.visited = true;
 
@@ -363,7 +363,7 @@ public class Main implements Comparator<Item> {
                 return;
             }
             if(input.substring(0, 3).equals("get")) {
-                get(input.substring(4), location, inventory);
+                location.get(input.substring(4), location, inventory);
             }
         }
         else if(input.equals("fill")) {
@@ -375,7 +375,7 @@ public class Main implements Comparator<Item> {
                 System.out.println("What do you want to drop?");
                 return;
             }
-            drop(input.substring(5), location, inventory);
+            location.drop(input.substring(5), location, inventory);
         }
         else if(input.length() >= 5 && input.substring(0, 5).equals("shoot")) {
             shoot(input, location, inventory);
@@ -390,70 +390,11 @@ public class Main implements Comparator<Item> {
             inventory(inventory);
         }
         else if(input.equals("look")) {
-            // Print entire location description if "look" is entered
             printLocation(location);
         }
     }
 
-    public static void get(String input, Location location, ArrayList<Item> inventory) {
-        // Conditionals to check for whether requested item is in inventory already or at location
-        MineEntrance mineEntrance = new MineEntrance();
-        boolean itemInInventory = isItemHere(input, inventory);
-        boolean itemToGetAtLocation = isItemHere(input, location.items);
-        // Conditionals for if jar is in inventory and gold at location
-        Item jar = findItem("jar", inventory);
-        boolean jarInInventory = isItemHere("jar", inventory);
-        boolean goldAtLocation = isItemHere("gold", location.items);
-        //Corner case for mine entrance. If input is get nails special stuff happens at mine entrance.
-        if(location instanceof MineEntrance && input.equals("nails") && !((MineEntrance) location).nailsOff) {
-            mineEntrance.nails(location);
-        }
-        // Corner case if you try to get shed at shed location
-        else if(location instanceof Shed && input.equals("shed")) {
-            System.out.println("Don't be ridiculous! The shed is way too heavy to be lifted, let alone carried around.");
-        }
-        // Corner case if you try to get table at picnic table
-        else if(location.name.equals("picnic table")) {
-            System.out.println("How could you carry such a thing? It's much to heavy and awkward to be picked up by just you.");
-        }
-        // Corner case if you try to get sign in mine shaft
-        else if(location.name.equals("mine shaft") && input.equals("sign")) {
-            System.out.println("You can't get that. It's firmly attached to the wall.");
-        }
-        // If item is already in inventory, let user know they already have it and do nothing
-        else if(itemInInventory) {
-            System.out.println("You're already carrying it!");
-        }
-        // If it's not in inventory and not at location, let user know it's not here
-        else if(!itemToGetAtLocation) {
-            System.out.println("I see no " + input + " here");
-        }
-        // Corner case if getting gold, you must have the jar in inventory to be able to get gold
-        // If you do have the jar and there's gold to get print the message and change the parameter inventoryPrint for jar and
-        // remove gold from location and add to inventory
-        else if(input.equals("gold") && jarInInventory && goldAtLocation) {
-            System.out.println("The jar is now full of gold flakes.");
-            jar.inventoryPrint = "Jar filled with gold flakes";
-            for(Item i : location.items) {
-                if(i.name.equals("gold")) {
-                    addAndRemove(inventory, location.items, i);
-                    break;
-                }
-            }
-        }
-        // If you don't have the jar in inventory and try to get gold
-        else if(input.equals("gold") && !jarInInventory && goldAtLocation) {
-            System.out.println("You don't have anything to put the gold flakes in");
-        }
-        else {
-            // If it's at the location and it isn't in inventory, add it to inventory and remove from location's item arraylist
-            Item toGet = findItem(input, location.items);
-            addAndRemove(inventory, location.items, toGet);
-            System.out.println("OK");
-        }
-    }
-
-    public static void drop(String input, Location location, ArrayList<Item> inventory) {
+    /*public static void drop(String input, Location location, ArrayList<Item> inventory) {
         // boolean to check if the item is in inventory and items for jar and gold since they require special cases for getting and dropping
         // If you have gold in inventory and you drop jar, then remove both gold and jar from inventory since gold is in jar
         // If you drop just gold, keep jar and remove gold
@@ -491,7 +432,7 @@ public class Main implements Comparator<Item> {
             System.out.println("OK");
             return;
         }
-    }
+    }*/
 
     // Print Items in inventory or nothing if inventory is empty
     public static void inventory(ArrayList<Item> inventory) {
@@ -570,15 +511,12 @@ public class Main implements Comparator<Item> {
             System.out.println("There's nothing here to unlock.");
         }
         else {
-            if(input.equals("unlock")) {
+            if(input.equals("unlock") || input.equals("unlock shed")) {
                 ((Shed) location).unlock(((Shed) location), inventory);
             }
-//            if(input.length() >= 8 && !input.substring(7).equals("shed")) {
-//                System.out.println("That's not something you can unlock.");
-//            }
-//            else {
-//                ((Shed) location).unlock(((Shed) location), inventory);
-//            }
+            else {
+                System.out.println("That's not something you can unlock.");
+            }
         }
     }
 
@@ -588,11 +526,11 @@ public class Main implements Comparator<Item> {
             System.out.println("There's nothing here to open.");
         }
         else {
-            if(input.length() >= 8 && !input.substring(7).equals("shed")) {
-                System.out.println("That's not something you can open.");
+            if(input.equals("open") || input.equals("open shed")) {
+                ((Shed) location).open(((Shed) location));
             }
             else {
-                ((Shed) location).open(((Shed) location));
+                System.out.println("That's not something you can open.");
             }
         }
     }
