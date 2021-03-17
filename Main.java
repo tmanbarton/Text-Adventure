@@ -200,14 +200,14 @@ public class Main implements Comparator<Item> {
         ArrayList<Item> inventory = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-        Location currentLocation = driveway;
+//        Location currentLocation = driveway;
 //        Location currentLocation = shed;
-//        Location currentLocation = mineEntrance;
-//        mineEntrance.items.add(m.jar);
-//        mineEntrance.items.add(m.bow);
-//        mineEntrance.items.add(m.arrow);
-//        mineEntrance.items.sort(m);
-        shed.items.add(m.key);
+        Location currentLocation = mineEntrance;
+        mineEntrance.items.add(m.jar);
+        mineEntrance.items.add(m.bow);
+        mineEntrance.items.add(m.arrow);
+        mineEntrance.items.sort(m);
+//        shed.items.add(m.key);
         currentLocation.previousLocation = currentLocation;
         currentLocation.visited = true;
 
@@ -248,6 +248,8 @@ public class Main implements Comparator<Item> {
                             printLocation(input, currentLocation);
                             break;
                         }
+                        // Update previous location and current location. Only allowed to go back once, so
+                        // Location.previous.previous is set to itself.
                         Location previous = currentLocation;
                         currentLocation = currentLocation.connectingLocations.get(i).location;
                         currentLocation.previousLocation = previous;

@@ -78,6 +78,10 @@ public class Location {
 
     // Basically the reverse of get()
     public void drop(String input, Location location, ArrayList<Item> inventory) {
+        if(location instanceof Boat) {
+            ((Boat) location).loseItem("drop " + input, location, inventory);
+            return;
+        }
         boolean itemInInventory = Main.isItemHere(input, inventory);
         Item gold = Main.findItem("gold", inventory);
         Item jar = Main.findItem("jar", inventory);
@@ -174,6 +178,10 @@ public class Location {
 
     public void shoot(String input, Location location, ArrayList<Item> inventory) {
         // Bow must be in inventory before you can shoot anything
+        if(location instanceof Boat) {
+            ((Boat)location).loseItem(input, location, inventory);
+            return;
+        }
         boolean bowInInventory = Main.isItemHere("bow", inventory);
         if(!bowInInventory && input.startsWith("shoot")) {
             System.out.println("You have nothing to shoot with.");
