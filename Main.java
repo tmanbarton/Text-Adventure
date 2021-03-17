@@ -97,7 +97,7 @@ public class Main implements Comparator<Item> {
                 "sw", "go sw", "walk sw", "run sw",
                 "up", "u", "go up", "go u", "walk up", "walk u", "run u", "run up",
                 "down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d",
-                "in", "out"));
+                "in", "out", "back"));
 
         key = new Item(1, "There is a shiny key here", "Shiny key", "key");
         hammer = new Item(2, "There is a hammer here", "Hammer", "hammer");
@@ -116,29 +116,29 @@ public class Main implements Comparator<Item> {
     public static void main(String[] args) {
         Main m = new Main();
         // Locations for graph
-        Location abandonedGoldMine = new Location(m.abandonedGoldMineDescription, new ArrayList<>(), new ArrayList<>(), false, "abandoned gold mine");
-        Location archeryRange = new Location(m.archeryRangeDescription, new ArrayList<>(), new ArrayList<>(), false, "archery range");
-        Location dirtRoad = new Location(m.dirtRoadDescription, new ArrayList<>(), new ArrayList<>(), false, "dirt road");
-        Location ditch = new Location(m.ditchDescription, new ArrayList<>(Collections.singletonList(m.key)), new ArrayList<>(), false, "ditch");
-        Location driveway = new Location(m.drivewayDescription, new ArrayList<>(), new ArrayList<>(), false, "driveway");
-        Location eastEndOfMainstreet = new Location(m.eastEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), false, "east end of mainstreet");
-        Location insideLogCabin = new Location(m.insideLogCabinDescription, new ArrayList<>(Collections.singletonList(m.magnet)), new ArrayList<>(), false, "inside log cabin");
-        Location intersection = new Location(m.intersectionDescription, new ArrayList<>(), new ArrayList<>(), false, "intersection");
-        Location lake = new Location(m.lakeDescription, new ArrayList<>(), new ArrayList<>(), false, "lake");
-        Location mineShaft = new Location(m.mineShaftDescription, new ArrayList<>(), new ArrayList<>(), false, "mine shaft");
-        Location outsideLogCabin = new Location(m.outsideLogCabinDescription, new ArrayList<>(), new ArrayList<>(), false, "outside log cabin");
-        Location picnicTable = new Location(m.picnicTableDescription, new ArrayList<>(), new ArrayList<>(), false, "picnic table");
-        Location privateProperty = new Location(m.privatePropertyDescription, new ArrayList<>(), new ArrayList<>(), false, "private property");
-        Location topOfHill = new Location(m.topOfHillDescription, new ArrayList<>(), new ArrayList<>(), false, "top of hill");
-        Location topOfStairs = new Location(m.topOfStairsDescription, new ArrayList<>(), new ArrayList<>(), false, "top of stairs");
-        Location undergroundLakeNorth = new Location(m.undergroundLakeNorthDescription, new ArrayList<>(), new ArrayList<>(), false, "north side of underground lake");
-        Location undergroundLakeWest = new Location(m.undergroundLakeWestDescription, new ArrayList<>(), new ArrayList<>(), false, "west side of underground lake");
-        Location undergroundLakeSW = new Location(m.undergroundLakeSWDescription, new ArrayList<>(), new ArrayList<>(), false, "sw side of underground lake");
-        Location westEndOfMainstreet = new Location(m.westEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), false, "west end of mainstreet");
-        Boat boat = new Boat(m.boatDescription, new ArrayList<>(), new ArrayList<>(), false, "rickety wooden boat", false);
-        Dam dam = new Dam(m.damDescription, new ArrayList<>(), new ArrayList<>(), false, "dam", false, false);
-        Shed shed = new Shed(m.shedDescription, new ArrayList<>(), new ArrayList<>(), false, "shed", false, false);
-        MineEntrance mineEntrance = new MineEntrance(m.mineEntranceDescription, new ArrayList<>(Collections.singletonList(m.gold)), new ArrayList<>(), false, "mine entrance", false);
+        Location abandonedGoldMine = new Location(m.abandonedGoldMineDescription, new ArrayList<>(), new ArrayList<>(), new Location(),  false, "abandoned gold mine");
+        Location archeryRange = new Location(m.archeryRangeDescription, new ArrayList<>(), new ArrayList<>(), new Location(),false, "archery range");
+        Location dirtRoad = new Location(m.dirtRoadDescription, new ArrayList<>(), new ArrayList<>(), new Location(),false, "dirt road");
+        Location ditch = new Location(m.ditchDescription, new ArrayList<>(Collections.singletonList(m.key)), new ArrayList<>(), new Location(), false, "ditch");
+        Location driveway = new Location(m.drivewayDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "driveway");
+        Location eastEndOfMainstreet = new Location(m.eastEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "east end of mainstreet");
+        Location insideLogCabin = new Location(m.insideLogCabinDescription, new ArrayList<>(Collections.singletonList(m.magnet)), new ArrayList<>(), new Location(), false, "inside log cabin");
+        Location intersection = new Location(m.intersectionDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "intersection");
+        Location lake = new Location(m.lakeDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lake");
+        Location mineShaft = new Location(m.mineShaftDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "mine shaft");
+        Location outsideLogCabin = new Location(m.outsideLogCabinDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "outside log cabin");
+        Location picnicTable = new Location(m.picnicTableDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "picnic table");
+        Location privateProperty = new Location(m.privatePropertyDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "private property");
+        Location topOfHill = new Location(m.topOfHillDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "top of hill");
+        Location topOfStairs = new Location(m.topOfStairsDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "top of stairs");
+        Location undergroundLakeNorth = new Location(m.undergroundLakeNorthDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "north side of underground lake");
+        Location undergroundLakeWest = new Location(m.undergroundLakeWestDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "west side of underground lake");
+        Location undergroundLakeSW = new Location(m.undergroundLakeSWDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "sw side of underground lake");
+        Location westEndOfMainstreet = new Location(m.westEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "west end of mainstreet");
+        Boat boat = new Boat(m.boatDescription, new ArrayList<>(), new ArrayList<>(), new Boat(), false, "rickety wooden boat", false);
+        Dam dam = new Dam(m.damDescription, new ArrayList<>(), new ArrayList<>(), new Dam(), false, "dam", false, false);
+        Shed shed = new Shed(m.shedDescription, new ArrayList<>(), new ArrayList<>(), new Shed(), false, "shed", false, false);
+        MineEntrance mineEntrance = new MineEntrance(m.mineEntranceDescription, new ArrayList<>(Collections.singletonList(m.gold)), new ArrayList<>(), new MineEntrance(), false, "mine entrance", false);
         // Add locations to connectingLocations arraylist parameter of Location to create graph
         // Some ConnectingLocations have in and out as directions since that will get you to another location in addition to entering a direction
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.south, mineEntrance));
@@ -200,14 +200,15 @@ public class Main implements Comparator<Item> {
         ArrayList<Item> inventory = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-//        Location currentLocation = driveway;
-        Location currentLocation = shed;
+        Location currentLocation = driveway;
+//        Location currentLocation = shed;
 //        Location currentLocation = mineEntrance;
 //        mineEntrance.items.add(m.jar);
 //        mineEntrance.items.add(m.bow);
 //        mineEntrance.items.add(m.arrow);
 //        mineEntrance.items.sort(m);
         shed.items.add(m.key);
+        currentLocation.previousLocation = currentLocation;
         currentLocation.visited = true;
 
         // Game introduction
@@ -241,24 +242,17 @@ public class Main implements Comparator<Item> {
                 // Loop through legal directions in the current location and compare to see if you can go that way
                 for (int i = 0; i < currentLocation.connectingLocations.size(); i++) {
                     // It's a legal direction. Change current location and decide what to print based on visited or not
-                    if (currentLocation.connectingLocations.get(i).directions.contains(input) && !currentLocation.equals(currentLocation.connectingLocations.get(i))) {
+                    if ((currentLocation.connectingLocations.get(i).directions.contains(input) && !currentLocation.equals(currentLocation.connectingLocations.get(i))) || (input.equals("back") && !currentLocation.previousLocation.equals(currentLocation)) || (input.equals("out") && currentLocation instanceof Boat)) {
+                        if(input.equals("back") || (input.equals("out") && currentLocation instanceof Boat)) {
+                            currentLocation = currentLocation.previousLocation;
+                            printLocation(input, currentLocation);
+                            break;
+                        }
+                        Location previous = currentLocation;
                         currentLocation = currentLocation.connectingLocations.get(i).location;
-                        if (!currentLocation.visited) {
-                            currentLocation.visited = true;
-                            printLocation(currentLocation);
-                        }
-                        else {
-                            //Corner case for printing short version of boat location
-                            if(currentLocation instanceof Boat) {
-                                System.out.println("You're sitting in a rickety wooden boat in a large underground lake.");
-                            }
-                            else {
-                                System.out.println("You're at " + currentLocation.name + ".");
-                            }
-                            for (Item item : currentLocation.items) {
-                                System.out.println(item.locationPrint);
-                            }
-                        }
+                        currentLocation.previousLocation = previous;
+                        currentLocation.previousLocation.previousLocation = previous;
+                        printLocation(input, currentLocation);
                         break;
                     }
                     // It isn't a legal direction for current location
@@ -317,10 +311,25 @@ public class Main implements Comparator<Item> {
         return i1.order - i2.order;
     }
 
-    public static void printLocation(Location location) {
-        System.out.println(location.description);
-        if(!location.items.isEmpty()) {
-            for(Item item : location.items) {
+    public static void printLocation(String input, Location location) {
+        if (!location.visited || input.equals("look")) {
+            location.visited = true;
+            System.out.println(location.description);
+            if(!location.items.isEmpty()) {
+                for(Item item : location.items) {
+                    System.out.println(item.locationPrint);
+                }
+            }
+        }
+        else {
+            //Corner case for printing short version of boat location
+            if(location instanceof Boat) {
+                System.out.println("You're sitting in a rickety wooden boat in a large underground lake.");
+            }
+            else {
+                System.out.println("You're at " + location.name + ".");
+            }
+            for (Item item : location.items) {
                 System.out.println(item.locationPrint);
             }
         }
@@ -355,7 +364,7 @@ public class Main implements Comparator<Item> {
     public static void findAction(String input, Location location, ArrayList<Item> inventory) {
         String[] countWords = input.split(" ");
         if(countWords.length >= 3) {
-            System.out.println("Try to stick to one or two word commands.");
+            dontKnowWord();
         }
         else if(input.startsWith("get")) {
             if(input.equals("get") || input.equals("get ")) {
@@ -367,7 +376,7 @@ public class Main implements Comparator<Item> {
             }
         }
         else if(input.startsWith("fill")) {
-            fill(input, location, inventory);
+            location.fill(input, location, inventory);
         }
         else if(input.length() >= 4 && input.startsWith("drop")) {
             if(input.equals("drop") || input.equals("drop ")) {
@@ -377,7 +386,7 @@ public class Main implements Comparator<Item> {
             location.drop(input.substring(5), location, inventory);
         }
         else if(input.length() >= 5 && input.startsWith("shoot")) {
-            shoot(input, location, inventory);
+            location.shoot(input, location, inventory);
         }
         else if(input.length() >= 6 && input.equals("unlock")) {
             location.unlock(location, inventory);
@@ -389,65 +398,10 @@ public class Main implements Comparator<Item> {
             location.inventory(inventory);
         }
         else if(input.equals("look")) {
-            printLocation(location);
+            printLocation(input, location);
         }
         else {
             dontKnowWord();
-        }
-    }
-
-    public static void shoot(String input, Location location, ArrayList<Item> inventory) {
-        // Bow must be in inventory before you can shoot anything
-        boolean bowInInventory = isItemHere("bow", inventory);
-        if(!bowInInventory && input.startsWith("shoot")) {
-            System.out.println("You have nothing to shoot with.");
-        }
-        else {
-            // You can only shoot the arrow
-            boolean arrowInInventory = isItemHere("arrow", inventory);
-            if(input.startsWith("shoot") && !arrowInInventory) {
-                System.out.println("You have nothing to shoot");
-            }
-            else if(input.length() >= 7 && !input.substring(6).equals("arrow")) {
-                System.out.println("You can't shoot that");
-            }
-            else {
-                MineEntrance mineEntrance = new MineEntrance();
-                if(!(location instanceof MineEntrance) || (location instanceof MineEntrance && mineEntrance.nailsOff)) {
-                    System.out.println("Your arrow goes flying off into the the distance and lands with a soft thud into the ground.");
-                    Item arrow = findItem("arrow", inventory);
-                    addAndRemove(location.items, inventory, arrow);
-                }
-                else {
-                    mineEntrance.shoot(inventory, location);
-                }
-            }
-        }
-    }
-
-    // Similar to get but only applies to jar and gold items
-    public static void fill(String input, Location location, ArrayList<Item> inventory) {
-        // Jar must be in inventory to fill
-        boolean jarInInventory = isItemHere("jar", inventory);
-        // You can't fill anything other than the jar
-        if(input.length() >= 6 && !input.substring(5).equals("jar")) {
-            System.out.println("You can't fill that.");
-        }
-        else if(!jarInInventory) {
-            System.out.println("You have nothing to fill.");
-        }
-        // Else jar is inventory: Can only be filled with gold, change description if it's filled, and add gold to inventory if necessary
-        else {
-            boolean goldAtLocation = isItemHere("gold", location.items);
-            if(!goldAtLocation) {
-                System.out.println("There's nothing here to fill the jar with.");
-            } else {
-                Item jar = findItem("jar", inventory);
-                jar.inventoryPrint = "Jar full of gold flakes.";
-                Item gold = findItem("gold", location.items);
-                addAndRemove(inventory, location.items, gold);
-                System.out.println("The jar is now full of gold flakes.");
-            }
         }
     }
 }

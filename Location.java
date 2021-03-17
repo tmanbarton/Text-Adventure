@@ -5,13 +5,15 @@ public class Location {
     String description;                         // Description of the location to be printed when user arrives there
     ArrayList<Item> items;                      // Items available to pick up at the location
     ArrayList<ConnectingLocation> connectingLocations;    // Legal locations that are able to be reached from this one
+    Location previousLocation;                  // The last Location you were at. "back" will take you there
     boolean visited;                            // Has this location been visited yet? Used to know what to print for description
     String name;
 
-    public Location(String description, ArrayList<Item> items, ArrayList<ConnectingLocation> connectingLocations, boolean visited, String name) {
+    public Location(String description, ArrayList<Item> items, ArrayList<ConnectingLocation> connectingLocations, Location previousLocation, boolean visited, String name) {
         this.description = description;
         this.items = items;
         this.connectingLocations = connectingLocations;
+        this.previousLocation = previousLocation;
         this.visited = visited;
         this.name = name;
     }
@@ -35,11 +37,14 @@ public class Location {
         else if(location instanceof Shed && input.equals("shed")) {
             System.out.println("Don't be ridiculous! The shed is way too heavy to be lifted, let alone carried around.");
         }
-        else if(location.name.equals("picnic table")) {
+        else if(location.name.equals("picnic table") && input.equals("table")) {
             System.out.println("How could you carry such a thing? It's much to heavy and awkward to be picked up.");
         }
         else if(location.name.equals("mine shaft") && input.equals("sign")) {
             System.out.println("You can't get that. It's firmly attached to the wall.");
+        }
+        else if(input.equals("tree")) {
+            System.out.println("You walk to the nearest tree and start pulling. After a couple minutes of this you give up. You\ncan't get a tree.");
         }
 
         else if(itemInInventory) {
@@ -137,6 +142,62 @@ public class Location {
         }
         else {
             ((Shed) location).open(((Shed) location));
+        }
+    }
+
+    // Similar to get but only applies to jar and gold items
+    public void fill(String input, Location location, ArrayList<Item> inventory) {
+        // Jar must be in inventory to fill
+        boolean jarInInventory = Main.isItemHere("jar", inventory);
+        // You can't fill anything other than the jar
+        if(input.length() >= 6 && !input.substring(5).equals("jar")) {
+            System.out.println("You can't fill that.");
+        }
+        else if(!jarInInventory) {
+            System.out.println("You have nothing to fill.");
+        }
+        // Else jar is inventory: Can only be filled with gold, change description if it's filled, and add gold to inventory if necessary
+        else {
+            boolean goldAtLocation = Main.isItemHere("gold", location.items);
+            if(!goldAtLocation) {
+                System.out.println("There's nothing here to fill the jar with.");
+            }
+            else {
+                Item jar = Main.findItem("jar", inventory);
+                jar.inventoryPrint = "Jar full of gold flakes.";
+                Item gold = Main.findItem("gold", location.items);
+                Main.addAndRemove(inventory, location.items, gold);
+                System.out.println("The jar is now full of gold flakes.");
+            }
+        }
+    }
+
+    public void shoot(String input, Location location, ArrayList<Item> inventory) {
+        // Bow must be in inventory before you can shoot anything
+        boolean bowInInventory = Main.isItemHere("bow", inventory);
+        if(!bowInInventory && input.startsWith("shoot")) {
+            System.out.println("You have nothing to shoot with.");
+        }
+        else {
+            // You can only shoot the arrow
+            boolean arrowInInventory = Main.isItemHere("arrow", inventory);
+            if(input.startsWith("shoot") && !arrowInInventory) {
+                System.out.println("You have nothing to shoot");
+            }
+            else if(input.length() >= 7 && !input.substring(6).equals("arrow")) {
+                System.out.println("You can't shoot that");
+            }
+            else {
+                MineEntrance mineEntrance = new MineEntrance();
+                if(!(location instanceof MineEntrance) || mineEntrance.nailsOff) {
+                    System.out.println("Your arrow goes flying off into the the distance and lands with a soft thud into the ground.");
+                    Item arrow = Main.findItem("arrow", inventory);
+                    Main.addAndRemove(location.items, inventory, arrow);
+                }
+                else {
+                    mineEntrance.shoot(inventory, location);
+                }
+            }
         }
     }
 }

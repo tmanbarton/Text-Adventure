@@ -7,8 +7,8 @@ public class MineEntrance extends Location {
     // been knocked off then it has to be checked that they are knocked off so they
     // aren't able to be knocked off over and over
 
-    public MineEntrance(String description, ArrayList<Item> items, ArrayList<ConnectingLocation> connectingLocations, boolean visited, String name, boolean nailsOff) {
-        super(description, items, connectingLocations, visited, name);
+    public MineEntrance(String description, ArrayList<Item> items, ArrayList<ConnectingLocation> connectingLocations, Location location, boolean visited, String name, boolean nailsOff) {
+        super(description, items, connectingLocations, location, visited, name);
         this.nailsOff = nailsOff;
     }
 
