@@ -10,6 +10,7 @@ public class Main implements Comparator<Item> {
     String ditchDescription;
     String drivewayDescription;
     String eastEndOfMainstreetDescription;
+    String footPathDescription;
     String insideLogCabinDescription;
     String intersectionDescription;
     String lakeDescription;
@@ -58,18 +59,19 @@ public class Main implements Comparator<Item> {
         damDescription = "You're on a short dam that looks like it created this lake by stopping up a large river. The dam goes\nnorth and south along the west end of the lake. Close by is a wheel with it's axel extending deep\ninto the dam. It's orange metal is fading to rust except for some other metal at the center, shining\nin the sun. South leads around the lake and to the north there's a set of stairs."; // TODO add puzzle for unlocking wheel when magnet is dropped then draining lake when wheel is turned
         dirtRoadDescription = "You are on a badly washboarded dirt road in dire need of maintenance that extends far north and runs\nwinding down the hill to the south. Pine forests hug the road on both sides.";
         ditchDescription = "You are in the middle of the forest standing in a small ditch running north and south.";
-        drivewayDescription = "You are at the north end of a dirt road surrounded by a forest of pines except for a small gap to\nthe east that exposes a steep, dirt driveway sloping down into the forest. To the south you can see\nthrough the trees and into the valley, thanks to whoever made the road. There you see what might be\nthe shimmering of a lake in the mountain sun.";
+        drivewayDescription = "You are at the north end of a dirt road surrounded by a forest of pines except for a small gap to\nthe east that exposes a steep, dirt driveway sloping down into the forest. To the south you can see\nthrough the trees and into the valley, thanks to whoever made the road. There you see what might be\nthe shimmering of a lake in the mountain sun. There's also a foot path going north.";
         eastEndOfMainstreetDescription = "You are at the east end of an abandon gold mining town's mainstreet. Branching off from this\nstreet to the north is a smaller road and this mainstreet goes back west.";
+        footPathDescription = "You're on a foot path in the middle of a dense forest. Large pine trees are all around you, but not\nin an unnerving way. The path goes south and west from here.";
         insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace on the west wall with a magnificent fire\nburning inside. There's a little sign hanging on the same wall reads \"Portal Room\""; // TODO add an upstairs and maybe a portal room or something like that
         intersectionDescription = "You have reached an intersection in the road. Looking east, the road makes a gradual turn back into\nthe forest and to the west the shimmering look very much like a lake now. Behind you, to the north,\nthe road makes a sharp turn into the forest.";
         mineEntranceDescription = "You've come to the entrance to this abandoned gold mine. The supports on it are looking a little worn\nand there are some loose nails that might come in handy if you could safely get them out of the rotten\nwood. You could enter to the south if you're very careful. Piles of tailings are all over leaving one\npath away from the entrance to the north.";
         mineShaftDescription = "This is the mine shaft. It looks like it could cave in at any moment. If it does, hopefully there's\nanother way out. There's a small wooden sign here that says \"TOMMYKNOCKERS\" across the top. In smaller\nwriting underneath that it says, \"The most important thing you should know about tommyknockers is\nthat, when you hear them knocking on the walls of the mine it means there's about to be a cave-in.\nOne other thing to note is that they like to play tricks on those in the mines. One of their favorites\nis to take miners' possessions.\"";
         outsideLogCabinDescription = "You are in front of a log cabin that looks much less run-down than the rest of the town. Strange that\nsomeone would live here where it looks like no one has been in many years.";
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther south a shed\npeeks through the trees.";
-        privatePropertyDescription = "All around you is a sparse pine forest that gives the air a friendly smell. It looks like there's\nnothing to be concerned about on this property since there's no gate, no fence, nothing to keep out\ntrespassers. There's not even a house. This is must be private property though since someone took the\neffort to put in a driveway that continues east and a neat trail leading somewhere southeast.";
+        privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. It looks like there's\nnothing to be concerned about on this property since there's no gate, no fence, nothing to keep out\ntrespassers. There's not even a house. This is must be private property though since someone took the\neffort to put in a driveway that continues east and a neat trail leading somewhere southeast.";
         lakeDescription = "You are on the north side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going east and there's a dam to the south.";
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and it's doors firmly shut and\nlocked, the one and only thing that needs to be on this plot of land.";
-        topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes around a\nbend to the north and down the hill to the south."; // TODO add more connecting locations
+        topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes into the\ntrees to the north and down the hill to the west.";
         topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill. A dam is to the north, at the\nbottom of the stairs, and the mainstreet of the abandoned gold mining town stretches east and west.";
         undergroundLakeNorthDescription = "You are on the north side of large underground lake with a rickety wooden boat at the shore. It\nseems odd that the miners tolerated this. There are two passages across the lake from where you\nare standing: one going west and one going southwest. There's a dim light coming from around a\ncorner to the east."; // TODO description doesn't match connecting locations. need to add 3 connecting locations
         undergroundLakeWestDescription = "You are on the west side of a large underground lake. There are passages to the south an sw across\nthe lake. The tunnel you're in now continues to the west.";
@@ -122,6 +124,7 @@ public class Main implements Comparator<Item> {
         Location ditch = new Location(m.ditchDescription, new ArrayList<>(Collections.singletonList(m.key)), new ArrayList<>(), new Location(), false, "ditch");
         Location driveway = new Location(m.drivewayDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "driveway");
         Location eastEndOfMainstreet = new Location(m.eastEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "east end of mainstreet");
+        Location footPath = new Location(m.footPathDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "bend in road");
         Location insideLogCabin = new Location(m.insideLogCabinDescription, new ArrayList<>(Collections.singletonList(m.magnet)), new ArrayList<>(), new Location(), false, "inside log cabin");
         Location intersection = new Location(m.intersectionDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "intersection");
         Location lake = new Location(m.lakeDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lake");
@@ -146,6 +149,8 @@ public class Main implements Comparator<Item> {
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.east, intersection));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.west, privateProperty));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.east, ditch));
+        footPath.connectingLocations.add(new ConnectingLocation(m.south, driveway));
+        footPath.connectingLocations.add(new ConnectingLocation(m.west, topOfHill));
         boat.connectingLocations.add(new ConnectingLocation(m.north, undergroundLakeNorth));
         boat.connectingLocations.add(new ConnectingLocation(m.west, undergroundLakeWest));
         boat.connectingLocations.add(new ConnectingLocation(m.southwest, undergroundLakeSW));
@@ -154,8 +159,8 @@ public class Main implements Comparator<Item> {
         dam.connectingLocations.add(new ConnectingLocation(m.up, topOfStairs));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.north, driveway));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.south, intersection));
-        driveway.connectingLocations.add(new ConnectingLocation(m.south, dirtRoad));
         ditch.connectingLocations.add(new ConnectingLocation(m.west, archeryRange));
+        driveway.connectingLocations.add(new ConnectingLocation(m.north, footPath));
         driveway.connectingLocations.add(new ConnectingLocation(m.south, dirtRoad));
         driveway.connectingLocations.add(new ConnectingLocation(m.east, privateProperty));
         driveway.connectingLocations.add(new ConnectingLocation(m.down, privateProperty));
@@ -183,6 +188,7 @@ public class Main implements Comparator<Item> {
         privateProperty.connectingLocations.add(new ConnectingLocation(m.east, archeryRange));
         privateProperty.connectingLocations.add(new ConnectingLocation(m.southeast, picnicTable));
         shed.connectingLocations.add(new ConnectingLocation(m.north, picnicTable));
+        topOfHill.connectingLocations.add(new ConnectingLocation(m.north, footPath));
         topOfHill.connectingLocations.add(new ConnectingLocation(m.west, intersection));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.north, dam));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.down, dam));
@@ -200,20 +206,20 @@ public class Main implements Comparator<Item> {
         ArrayList<Item> inventory = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-//        Location currentLocation = driveway;
+        Location currentLocation = driveway;
 //        Location currentLocation = shed;
-        Location currentLocation = mineEntrance;
-        mineEntrance.items.add(m.jar);
-        mineEntrance.items.add(m.bow);
-        mineEntrance.items.add(m.arrow);
-        mineEntrance.items.sort(m);
+//        Location currentLocation = mineEntrance;
+//        mineEntrance.items.add(m.jar);
+//        mineEntrance.items.add(m.bow);
+//        mineEntrance.items.add(m.arrow);
+//        mineEntrance.items.sort(m);
 //        shed.items.add(m.key);
         currentLocation.previousLocation = currentLocation;
         currentLocation.visited = true;
 
         // Game introduction
         System.out.println("You're on an unnamed mountain with a rumored unnamed, abandoned gold mining town nearby. One of the\ngold mines might also be accessible somewhere around, but before you came here you heard that\ntommyknockers are in the mines here. You don't know much about them but the name doesn't give off\nthe most friendly vibes.\n");
-        System.out.println("At the moment you stand at the north end of a dirt road surrounded by a forrest of pines except for\na small gap to the east that exposes a steep, dirt driveway sloping down into the forest. To the\nsouth you can see through the trees and into the valley, thanks to whoever made the road. There you\nsee what might be the shimmering of a lake in the mountain sun.");
+        System.out.println("At the moment you stand at the north end of a dirt road surrounded by a forrest of pines except for\na small gap to the east that exposes a steep, dirt driveway sloping down into the forest. To the\nsouth you can see through the trees and into the valley, thanks to whoever made the road. There you\nsee what might be the shimmering of a lake in the mountain sun. There's also a foot path going north.");
 
         // Input will always be lowercase so don't have to worry about forgetting to check .equalsIgnoreCase
         String input = scan.nextLine().toLowerCase();
