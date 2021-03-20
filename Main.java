@@ -3,6 +3,7 @@ import java.util.*;
 public class Main implements Comparator<Item> {
 
     String abandonedGoldMineDescription;
+    String antHillDescription;
     String archeryRangeDescription;
     String boatDescription;
     String damDescription;
@@ -14,6 +15,7 @@ public class Main implements Comparator<Item> {
     String insideLogCabinDescription;
     String intersectionDescription;
     String lakeDescription;
+    String lightningTreeDescription;
     String mineEntranceDescription;
     String mineShaftDescription;
     String outsideLogCabinDescription;
@@ -54,6 +56,7 @@ public class Main implements Comparator<Item> {
     public Main() {
         // All the descriptions of the locations. Some have a second description for if an item is picked up
         abandonedGoldMineDescription = "All around are large piles of tailings that look like they have been puked into this valley. There's\nnot much else to be seen except the entrance to a mine to the south. The shimmering in the west is\ndefinitely a lake and there's a path leading in that direction.";
+        antHillDescription = "You are standing at an ant hill of unusual size. No ants of unusual size, just a fairly large ant\nhill. By your best guess, the highest point is at your belly button."; //TODO if input is "dig" and you have the shovel, reveal a salamander in ant hill. Then you can get the salamander
         archeryRangeDescription = "You step in front of two archery targets made of hay bales and spray-painted circles that are in a\nmakeshift archery range created by a rope tied to four trees in a rectangle around them. There's a\nditch to the east and a long driveway leading west.";
         boatDescription = "You're sitting in a rickety wooden boat in a large underground lake with passages to the north, west,\nnorthwest, and southwest.";
         damDescription = "You're on a short dam that looks like it created this lake by stopping up a large river. The dam goes\nnorth and south along the west end of the lake. Close by is a wheel with it's axel extending deep\ninto the dam. It's orange metal is fading to rust except for some other metal at the center, shining\nin the sun. South leads around the lake and to the north there's a set of stairs."; // TODO add puzzle for unlocking wheel when magnet is dropped then draining lake when wheel is turned
@@ -70,10 +73,11 @@ public class Main implements Comparator<Item> {
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther south a shed\npeeks through the trees.";
         privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. It looks like there's\nnothing to be concerned about on this property since there's no gate, no fence, nothing to keep out\ntrespassers. There's not even a house. This is must be private property though since someone took the\neffort to put in a driveway that continues east and a neat trail leading somewhere southeast.";
         lakeDescription = "You are on the north side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going east and there's a dam to the south.";
+        lightningTreeDescription = "You're in a little clearing with a large tree in the middle that looks like it was struck by\nlightning a long time ago. The bark has long since fallen off and the remaining part of the\ntree is a neat reddish color.";
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and it's doors firmly shut and\nlocked, the one and only thing that needs to be on this plot of land.";
         topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes into the\ntrees to the north and down the hill to the west.";
         topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill. A dam is to the north, at the\nbottom of the stairs, and the mainstreet of the abandoned gold mining town stretches east and west.";
-        undergroundLakeNorthDescription = "You are on the north side of large underground lake with a rickety wooden boat at the shore. It\nseems odd that the miners tolerated this. There are two passages across the lake from where you\nare standing: one going west and one going southwest. There's a dim light coming from around a\ncorner to the east."; // TODO description doesn't match connecting locations. need to add 3 connecting locations
+        undergroundLakeNorthDescription = "You are on the north side of large underground lake with a rickety wooden boat at the shore. It\nseems odd that the miners tolerated this. There are two passages across the lake from where you\nare standing: one going west and one going southwest. There's a dim light coming from around a\ncorner to the east.";
         undergroundLakeWestDescription = "You are on the west side of a large underground lake. There are passages to the south an sw across\nthe lake. The tunnel you're in now continues to the west.";
         undergroundLakeSWDescription = "You are on the sw side of a large underground lake. There are passages to the north and west across\nthe lake and a tunnel continues south from here.";
         westEndOfMainstreetDescription = "You are at the west and of an abandoned gold mining town's main street.";
@@ -119,6 +123,7 @@ public class Main implements Comparator<Item> {
         Main m = new Main();
         // Locations for graph
         Location abandonedGoldMine = new Location(m.abandonedGoldMineDescription, new ArrayList<>(), new ArrayList<>(), new Location(),  false, "abandoned gold mine");
+        Location antHill = new Location(m.antHillDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "ant hill");
         Location archeryRange = new Location(m.archeryRangeDescription, new ArrayList<>(), new ArrayList<>(), new Location(),false, "archery range");
         Location dirtRoad = new Location(m.dirtRoadDescription, new ArrayList<>(), new ArrayList<>(), new Location(),false, "dirt road");
         Location ditch = new Location(m.ditchDescription, new ArrayList<>(Collections.singletonList(m.key)), new ArrayList<>(), new Location(), false, "ditch");
@@ -128,6 +133,7 @@ public class Main implements Comparator<Item> {
         Location insideLogCabin = new Location(m.insideLogCabinDescription, new ArrayList<>(Collections.singletonList(m.magnet)), new ArrayList<>(), new Location(), false, "inside log cabin");
         Location intersection = new Location(m.intersectionDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "intersection");
         Location lake = new Location(m.lakeDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lake");
+        Location lightningTree = new Location(m.lightningTreeDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lightning tree");
         Location mineShaft = new Location(m.mineShaftDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "mine shaft");
         Location outsideLogCabin = new Location(m.outsideLogCabinDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "outside log cabin");
         Location picnicTable = new Location(m.picnicTableDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "picnic table");
@@ -147,6 +153,7 @@ public class Main implements Comparator<Item> {
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.south, mineEntrance));
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.west, lake));
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.east, intersection));
+        antHill.connectingLocations.add(new ConnectingLocation(m.north, ditch));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.west, privateProperty));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.east, ditch));
         footPath.connectingLocations.add(new ConnectingLocation(m.south, driveway));
@@ -159,6 +166,8 @@ public class Main implements Comparator<Item> {
         dam.connectingLocations.add(new ConnectingLocation(m.up, topOfStairs));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.north, driveway));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.south, intersection));
+        ditch.connectingLocations.add(new ConnectingLocation(m.north, lightningTree));
+        ditch.connectingLocations.add(new ConnectingLocation(m.south, antHill));
         ditch.connectingLocations.add(new ConnectingLocation(m.west, archeryRange));
         driveway.connectingLocations.add(new ConnectingLocation(m.north, footPath));
         driveway.connectingLocations.add(new ConnectingLocation(m.south, dirtRoad));
@@ -173,6 +182,7 @@ public class Main implements Comparator<Item> {
         intersection.connectingLocations.add(new ConnectingLocation(m.west, abandonedGoldMine));
         lake.connectingLocations.add(new ConnectingLocation(m.east, abandonedGoldMine));
         lake.connectingLocations.add(new ConnectingLocation(m.south, dam));
+        lightningTree.connectingLocations.add(new ConnectingLocation(m.south, ditch));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.north, mineEntrance));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.south, undergroundLakeNorth));
         mineShaft.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("out")), mineEntrance));
@@ -207,13 +217,9 @@ public class Main implements Comparator<Item> {
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
         Location currentLocation = driveway;
-//        Location currentLocation = shed;
-//        Location currentLocation = mineEntrance;
-//        mineEntrance.items.add(m.jar);
-//        mineEntrance.items.add(m.bow);
-//        mineEntrance.items.add(m.arrow);
-//        mineEntrance.items.sort(m);
-//        shed.items.add(m.key);
+//        Location currentLocation = dam;
+//        dam.items.add(m.magnet);
+//        dam.items.add(m.jar);
         currentLocation.previousLocation = currentLocation;
         currentLocation.visited = true;
 
@@ -225,8 +231,9 @@ public class Main implements Comparator<Item> {
         String input = scan.nextLine().toLowerCase();
         // Always loop for main game play
         while(true) {
-            // Check for input equals quit. End program if answer to question is yes. If answer is no, continue game.
-            // If it's anything else print you must answer the question
+            // End if input is "quit" -> "y"/"yes"
+            // Continue if input is "quit" -> "n"/"no"
+            // If "quit" -> anything else, anything else has to be yes or no
             if(input.equals("quit")) {
                 System.out.println("Are you sure you want to quit?");
                 input = scan.nextLine().toLowerCase();
@@ -235,7 +242,7 @@ public class Main implements Comparator<Item> {
                     input = scan.nextLine().toLowerCase();
                 }
                 if(input.equals("yes") || input.equals("y")) {
-                    System.out.println("Quitted");
+                    System.out.println("Quitted");      //TODO have a better quit message
                     break;
                 }
                 else {
@@ -246,9 +253,9 @@ public class Main implements Comparator<Item> {
             }
             if(m.isDirection(input)) {
                 // Loop through legal directions in the current location and compare to see if you can go that way
+                ArrayList<ConnectingLocation> currentConnections = currentLocation.connectingLocations;
                 for (int i = 0; i < currentLocation.connectingLocations.size(); i++) {
-                    // It's a legal direction. Change current location and decide what to print based on visited or not
-                    if ((currentLocation.connectingLocations.get(i).directions.contains(input) && !currentLocation.equals(currentLocation.connectingLocations.get(i))) || (input.equals("back") && !currentLocation.previousLocation.equals(currentLocation)) || (input.equals("out") && currentLocation instanceof Boat)) {
+                    if ((currentConnections.get(i).directions.contains(input) && !currentLocation.equals(currentConnections.get(i).location)) || (input.equals("back") && !currentLocation.previousLocation.equals(currentLocation)) || (input.equals("out") && currentLocation instanceof Boat)) {
                         if(input.equals("back") || (input.equals("out") && currentLocation instanceof Boat)) {
                             currentLocation = currentLocation.previousLocation;
                             printLocation(input, currentLocation);
@@ -257,14 +264,14 @@ public class Main implements Comparator<Item> {
                         // Update previous location and current location. Only allowed to go back once, so
                         // Location.previous.previous is set to itself.
                         Location previous = currentLocation;
-                        currentLocation = currentLocation.connectingLocations.get(i).location;
+                        currentLocation = currentConnections.get(i).location;
                         currentLocation.previousLocation = previous;
                         currentLocation.previousLocation.previousLocation = previous;
                         printLocation(input, currentLocation);
                         break;
                     }
                     // It isn't a legal direction for current location
-                    else if (i == currentLocation.connectingLocations.size() - 1) {
+                    else if (i == currentConnections.size() - 1) {
                         if(input.equals("in")) {
                             System.out.println("You can't get in anything here");
                         }
@@ -287,7 +294,7 @@ public class Main implements Comparator<Item> {
                     findAction(input.toLowerCase(), currentLocation, inventory);
                 }
                 //If input isn't a legal verb, direction, or if it's "in" or "out" + another word, print one of 3 Strings to let user know it's not a legal input
-                else if(!(m.allVerbs.contains(inputCheck) || m.directions.contains(inputCheck)) || ((inputCheck.equals("out") || inputCheck.equals("in") || input.equals("unlock") || input.equals("open")) && inputArray.length >= 2)) {//                    Random r = new Random();
+                else if(!(m.allVerbs.contains(inputCheck) || m.directions.contains(inputCheck)) || ((inputCheck.equals("out") || inputCheck.equals("in") || input.equals("unlock") || input.equals("open") || input.equals("shoot")) && inputArray.length >= 2)) {//                    Random r = new Random();
                     dontKnowWord();
                 }
             }
@@ -393,7 +400,7 @@ public class Main implements Comparator<Item> {
             }
             location.drop(input.substring(5), location, inventory);
         }
-        else if(input.length() >= 5 && input.startsWith("shoot")) {
+        else if(input.length() >= 5 && input.equals("shoot")) {
             location.shoot(input, location, inventory);
         }
         else if(input.length() >= 6 && input.equals("unlock")) {

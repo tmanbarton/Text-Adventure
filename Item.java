@@ -1,4 +1,3 @@
-import java.util.Comparator;
 
 public class Item {
 
@@ -13,6 +12,4 @@ public class Item {
         this.inventoryPrint = inventoryPrint;
         this.name = name;
     }
-
-    public Item(){}
 }

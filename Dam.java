@@ -13,6 +13,6 @@ public class Dam extends Location {
 
     // Turn wheel if magnet has been dropped
     public void turn(Location location) {
-
+        //The ground starts to rumble. On the opposite side of the lake you see a massive concrete wall start\nto rise out of the water, blocking the flow of\nwater from the river into the lake. Then there's\nanother shudder and a huge wave starts to move out\nin a circle from the middle of the lake and the\nwater level starts going down. After waiting in awe\nfor a few minutes, the water is completely\ngone, leaving a town that had been flooded by this dam at\nthe bottom of the valley.");
     }
 }

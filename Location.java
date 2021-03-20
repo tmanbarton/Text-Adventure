@@ -54,7 +54,7 @@ public class Location {
             System.out.println("I see no " + input + " here");
         }
         // If you're getting gold at Mine Entrance and you have all the right stuff
-        else if(input.equals("gold") && jarInInventory && goldAtLocation) {
+        else if(input.equals("gold") && jarInInventory && goldAtLocation && jar != null) {
             System.out.println("The jar is now full of gold flakes.");
             jar.inventoryPrint = "Jar filled with gold flakes";
             for(Item i : location.items) {
@@ -79,7 +79,7 @@ public class Location {
     // Basically the reverse of get()
     public void drop(String input, Location location, ArrayList<Item> inventory) {
         if(location instanceof Boat) {
-            ((Boat) location).loseItem("drop " + input, location, inventory);
+            ((Boat) location).loseItem("drop " + input, inventory);
             return;
         }
         boolean itemInInventory = Main.isItemHere(input, inventory);
@@ -90,7 +90,7 @@ public class Location {
             return;
         }
         // If you drop gold, change parameter inventoryPrint back to "Jar" since it no longer has gold in it
-        else if(input.equals("gold") && itemInInventory) {
+        else if(input.equals("gold") && itemInInventory && jar != null) {
             Main.addAndRemove(location.items, inventory, gold);
             jar.inventoryPrint = "Jar";
             System.out.println("OK");
@@ -113,6 +113,11 @@ public class Location {
         else if(item.name.equals(input)) {
             Main.addAndRemove(location.items, inventory, item);
             System.out.println("OK");
+            if(location instanceof Dam && input.equals("magnet")) {
+                System.out.println("You drop the magnet and as it's falling it snaps to the shiny center of the wheel. You can hear some\nmechanical clicking somewhere inside the dam.");
+                ((Dam)location).magnetDropped = true;
+            }
+
         }
     }
 
@@ -179,21 +184,18 @@ public class Location {
     public void shoot(String input, Location location, ArrayList<Item> inventory) {
         // Bow must be in inventory before you can shoot anything
         if(location instanceof Boat) {
-            ((Boat)location).loseItem(input, location, inventory);
+            ((Boat)location).loseItem(input, inventory);
             return;
         }
         boolean bowInInventory = Main.isItemHere("bow", inventory);
-        if(!bowInInventory && input.startsWith("shoot")) {
+        if(!bowInInventory) {
             System.out.println("You have nothing to shoot with.");
         }
         else {
             // You can only shoot the arrow
             boolean arrowInInventory = Main.isItemHere("arrow", inventory);
-            if(input.startsWith("shoot") && !arrowInInventory) {
+            if(!arrowInInventory) {
                 System.out.println("You have nothing to shoot");
-            }
-            else if(input.length() >= 7 && !input.substring(6).equals("arrow")) {
-                System.out.println("You can't shoot that");
             }
             else {
                 MineEntrance mineEntrance = new MineEntrance();
