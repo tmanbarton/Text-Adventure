@@ -33,9 +33,12 @@ public class Location {
         if(location instanceof MineEntrance && input.equals("nails") && !((MineEntrance) location).nailsOff) {
             mineEntrance.nails(location);
         }
-        // Corner cases for trying to get stuff you're not allowed to get
+        // Cases for trying to get stuff users might try to get but they aren't allowed to
         else if(location instanceof Shed && input.equals("shed")) {
             System.out.println("Don't be ridiculous! The shed is way too heavy to be lifted, let alone carried around.");
+        }
+        else if(location instanceof Dam && input.equals("magnet") && ((Dam) location).magnetDropped) {
+            System.out.println("The magnet will not budge. You cannot get it off the wheel.");
         }
         else if(location.name.equals("picnic table") && input.equals("table")) {
             System.out.println("How could you carry such a thing? It's much to heavy and awkward to be picked up.");
@@ -46,7 +49,6 @@ public class Location {
         else if(input.equals("tree")) {
             System.out.println("You walk to the nearest tree and start pulling. After a couple minutes of this you give up. You\ncan't get a tree.");
         }
-
         else if(itemInInventory) {
             System.out.println("You're already carrying it!");
         }
@@ -78,6 +80,7 @@ public class Location {
 
     // Basically the reverse of get()
     public void drop(String input, Location location, ArrayList<Item> inventory) {
+        // Items fall out of boat, let Boat class handle dropping if you're in the boat
         if(location instanceof Boat) {
             ((Boat) location).loseItem("drop " + input, inventory);
             return;
@@ -89,14 +92,14 @@ public class Location {
             System.out.println("You're not carrying anything!");
             return;
         }
-        // If you drop gold, change parameter inventoryPrint back to "Jar" since it no longer has gold in it
+        // If you request drop gold, jar must be in inventory.
         else if(input.equals("gold") && itemInInventory && jar != null) {
             Main.addAndRemove(location.items, inventory, gold);
             jar.inventoryPrint = "Jar";
             System.out.println("OK");
             return;
         }
-        // If you drop the jar the gold drops with it so remove gold and jar from inventory and add them to location items
+        // If you drop the jar the gold drops with it
         else if(input.equals("jar") && itemInInventory && jar != null && gold != null) {
             Main.addAndRemove(location.items, inventory, jar);
             jar.inventoryPrint = "Jar";
@@ -109,19 +112,25 @@ public class Location {
         if(item == null) {
             System.out.println("You don't have that!");
         }
-        // Everything is correct and no corner case, so drop requested item
+        // Drop requested item
         else if(item.name.equals(input)) {
-            Main.addAndRemove(location.items, inventory, item);
-            System.out.println("OK");
+            // Drop manet at dam
             if(location instanceof Dam && input.equals("magnet")) {
                 System.out.println("You drop the magnet and as it's falling it snaps to the shiny center of the wheel. You can hear some\nmechanical clicking somewhere inside the dam.");
                 ((Dam)location).magnetDropped = true;
+                location.description = "You're on a short dam that looks like it created this lake by stopping up a large river. The dam\ngoes north and south along the west end of the lake. Close by is a wheel with it's axel extending\ndeep into the dam. It's orange metal is fading to rust except for some other metal at the center,\nshining in the sun. There's a large magnet stuck to this part of the wheel. South leads around the\nlake and to the north there's a set of stairs.";
+                Item magnet = Main.findItem("magnet", inventory);
+                inventory.remove(magnet);
             }
-
+            // Plain ol' drop item
+            else {
+                Main.addAndRemove(location.items, inventory, item);
+                System.out.println("OK");
+            }
         }
     }
 
-    // Print Items in inventory or nothing if inventory is empty
+    // Print Items in inventory or says if inventory is empty
     public void inventory(ArrayList<Item> inventory) {
         if(inventory.isEmpty()) {
             System.out.println("You aren't carrying anything!");
@@ -168,7 +177,11 @@ public class Location {
         // Else jar is inventory: Can only be filled with gold, change description if it's filled, and add gold to inventory if necessary
         else {
             boolean goldAtLocation = Main.isItemHere("gold", location.items);
-            if(!goldAtLocation) {
+            boolean goldInInventory = Main.isItemHere("gold", inventory);
+            if(goldInInventory) {
+                System.out.println("Your jar is already full.");
+            }
+            else if(!goldAtLocation) {
                 System.out.println("There's nothing here to fill the jar with.");
             }
             else {
@@ -209,5 +222,9 @@ public class Location {
                 }
             }
         }
+    }
+
+    public void turn(Location location) {
+        System.out.println("There's nothing to turn here.");
     }
 }

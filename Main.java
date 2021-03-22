@@ -15,6 +15,7 @@ public class Main implements Comparator<Item> {
     String insideLogCabinDescription;
     String intersectionDescription;
     String lakeDescription;
+    String lakeTownDescription;
     String lightningTreeDescription;
     String mineEntranceDescription;
     String mineShaftDescription;
@@ -73,6 +74,7 @@ public class Main implements Comparator<Item> {
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther south a shed\npeeks through the trees.";
         privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. It looks like there's\nnothing to be concerned about on this property since there's no gate, no fence, nothing to keep out\ntrespassers. There's not even a house. This is must be private property though since someone took the\neffort to put in a driveway that continues east and a neat trail leading somewhere southeast.";
         lakeDescription = "You are on the north side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going east and there's a dam to the south.";
+        lakeTownDescription = "";
         lightningTreeDescription = "You're in a little clearing with a large tree in the middle that looks like it was struck by\nlightning a long time ago. The bark has long since fallen off and the remaining part of the\ntree is a neat reddish color.";
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and it's doors firmly shut and\nlocked, the one and only thing that needs to be on this plot of land.";
         topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes into the\ntrees to the north and down the hill to the west.";
@@ -414,6 +416,9 @@ public class Main implements Comparator<Item> {
         }
         else if(input.equals("look")) {
             printLocation(input, location);
+        }
+        else if(input.equals("turn")) {
+            location.turn(location);
         }
         else {
             dontKnowWord();
