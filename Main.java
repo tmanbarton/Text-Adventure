@@ -25,6 +25,7 @@ public class Main implements Comparator<Item> {
     String shedDescription;
     String topOfHillDescription;
     String topOfStairsDescription;
+    String upstairsLogCabin;
     String undergroundLakeNorthDescription;
     String undergroundLakeWestDescription;
     String undergroundLakeSWDescription;
@@ -66,7 +67,7 @@ public class Main implements Comparator<Item> {
         drivewayDescription = "You are at the north end of a dirt road surrounded by a forest of pines except for a small gap to\nthe east that exposes a steep, dirt driveway sloping down into the forest. To the south you can see\nthrough the trees and into the valley, thanks to whoever made the road. There you see what might be\nthe shimmering of a lake in the mountain sun. There's also a foot path going north.";
         eastEndOfMainstreetDescription = "You are at the east end of an abandon gold mining town's mainstreet. Branching off from this\nstreet to the north is a smaller road and this mainstreet goes back west.";
         footPathDescription = "You're on a foot path in the middle of a dense forest. Large pine trees are all around you, but not\nin an unnerving way. The path goes south and west from here.";
-        insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace on the west wall with a magnificent fire\nburning inside. There's a little sign hanging on the same wall reads \"Portal Room\""; // TODO add an upstairs and maybe a portal room or something like that
+        insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace on the west wall with a magnificent fire\nburning inside. There's a little sign hanging on the wall next to the fireplace that reads \"Portal\nRoom\" and there's a spiral staircase in one corner."; // TODO add an upstairs and maybe a portal room or something like that
         intersectionDescription = "You have reached an intersection in the road. Looking east, the road makes a gradual turn back into\nthe forest and to the west the shimmering look very much like a lake now. Behind you, to the north,\nthe road makes a sharp turn into the forest.";
         mineEntranceDescription = "You've come to the entrance to this abandoned gold mine. The supports on it are looking a little\nworn and there are some loose nails that might come in handy if you could safely get them out of\nthe rotten wood. You could enter to the south if you're very careful. Piles of tailings are all\nover leaving one path away from the entrance to the north.";
         mineShaftDescription = "This is the mine shaft. It looks like it could cave in at any moment. If it does, hopefully there's\nanother way out. There's a small wooden sign here that says \"TOMMYKNOCKERS\" across the top. In\nsmaller writing underneath that it says, \"The most important thing you should know about\ntommyknockers is that, when you hear them knocking on the walls of the mine it means there's about\nto be a cave-in. One other thing to note is that they like to play tricks on those in the mines.\nOne of their favorites is to take miners' possessions.\"";
@@ -74,11 +75,12 @@ public class Main implements Comparator<Item> {
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther south a\nshed peeks through the trees.";
         privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. It looks like there's\nnothing to be concerned about on this property since there's no gate, no fence, nothing to keep out\ntrespassers. There's not even a house. This is must be private property though since someone took\nthe effort to put in a driveway that continues east and a neat trail leading somewhere southeast.";
         lakeDescription = "You are on the north side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going east and there's a dam to the south.";
-        lakeTownDescription = "";
+        lakeTownDescription = "You are in what once was a charming little town. Now there is dripping wet plant life from the\nrecently drained lake clinging to the buildings. The muddy ground squelches as you walk. To the\nwest is the dam and you can go farther into the town to the east.";
         lightningTreeDescription = "You're in a little clearing with a large tree in the middle that looks like it was struck by\nlightning a long time ago. The bark has long since fallen off and the remaining part of the tree\nis a neat reddish color.";
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and it's doors firmly shut\nand locked, the one and only thing that needs to be on this plot of land.";
         topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes into the\ntrees to the north and down the hill to the west.";
         topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill. A dam is to the north, at the\nbottom of the stairs, and the mainstreet of the abandoned gold mining town stretches east and west.";
+        upstairsLogCabin = "The second floor of this cabin isn't nearly as well kept as the first floor. There are cob webs\neverywhere and dust covers every uncovered surface. There's a spiral staircase going back to the\nfirst floor.";
         undergroundLakeNorthDescription = "You are on the north side of large underground lake with a rickety wooden boat at the shore. It\nseems odd that the miners tolerated this. There are two passages across the lake from where you\nare standing: one going west and one going southwest. There's a dim light coming from around a\ncorner to the east.";
         undergroundLakeWestDescription = "You are on the west side of a large underground lake. There are passages to the south an sw across\nthe lake. The tunnel you're in now continues to the west.";
         undergroundLakeSWDescription = "You are on the sw side of a large underground lake. There are passages to the north and west across\nthe lake and a tunnel continues south from here.";
@@ -135,6 +137,7 @@ public class Main implements Comparator<Item> {
         Location insideLogCabin = new Location(m.insideLogCabinDescription, new ArrayList<>(Collections.singletonList(m.magnet)), new ArrayList<>(), new Location(), false, "inside log cabin");
         Location intersection = new Location(m.intersectionDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "intersection");
         Location lake = new Location(m.lakeDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lake");
+        Location lakeTown = new Location(m.lakeTownDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lake town");
         Location lightningTree = new Location(m.lightningTreeDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lightning tree");
         Location mineShaft = new Location(m.mineShaftDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "mine shaft");
         Location outsideLogCabin = new Location(m.outsideLogCabinDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "outside log cabin");
@@ -145,6 +148,7 @@ public class Main implements Comparator<Item> {
         Location undergroundLakeNorth = new Location(m.undergroundLakeNorthDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "north side of underground lake");
         Location undergroundLakeWest = new Location(m.undergroundLakeWestDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "west side of underground lake");
         Location undergroundLakeSW = new Location(m.undergroundLakeSWDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "sw side of underground lake");
+        Location upstairsLogCabin = new Location(m.upstairsLogCabin, new ArrayList<>(), new ArrayList<>(), new Location(), false, "second floor of log cabin");
         Location westEndOfMainstreet = new Location(m.westEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "west end of mainstreet");
         Boat boat = new Boat(m.boatDescription, new ArrayList<>(), new ArrayList<>(), new Boat(), false, "rickety wooden boat", false);
         Dam dam = new Dam(m.damDescription, new ArrayList<>(), new ArrayList<>(), new Dam(), false, "dam", false, false);
@@ -179,11 +183,14 @@ public class Main implements Comparator<Item> {
         eastEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.north, outsideLogCabin));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(m.east, outsideLogCabin));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("out")), outsideLogCabin));
+        insideLogCabin.connectingLocations.add(new ConnectingLocation(m.up, upstairsLogCabin));
         intersection.connectingLocations.add(new ConnectingLocation(m.north, dirtRoad));
         intersection.connectingLocations.add(new ConnectingLocation(m.east, topOfHill));
         intersection.connectingLocations.add(new ConnectingLocation(m.west, abandonedGoldMine));
         lake.connectingLocations.add(new ConnectingLocation(m.east, abandonedGoldMine));
         lake.connectingLocations.add(new ConnectingLocation(m.south, dam));
+        lakeTown.connectingLocations.add(new ConnectingLocation(m.west, dam)); // east goes farther into the town
+        lakeTown.connectingLocations.add(new ConnectingLocation(m.up, dam));
         lightningTree.connectingLocations.add(new ConnectingLocation(m.south, ditch));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.north, mineEntrance));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.south, undergroundLakeNorth));
@@ -212,6 +219,7 @@ public class Main implements Comparator<Item> {
 //        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.south, somelocation));
         undergroundLakeWest.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
 //        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.west, somelocation));
+        upstairsLogCabin.connectingLocations.add(new ConnectingLocation(m.down, insideLogCabin));
         westEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.east, topOfStairs));
 
         // Arraylist of Items for when you get an Item from a location and a Scanner for input from keyboard
@@ -219,8 +227,8 @@ public class Main implements Comparator<Item> {
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
 //        Location currentLocation = driveway;
-        Location currentLocation = dam;
-        dam.items.add(m.magnet);
+        Location currentLocation = outsideLogCabin;
+//        dam.items.add(m.magnet);
 //        dam.items.add(m.jar);
         currentLocation.previousLocation = currentLocation;
         currentLocation.visited = true;
