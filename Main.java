@@ -65,13 +65,13 @@ public class Main implements Comparator<Item> {
         dirtRoadDescription = "You are on a badly washboarded dirt road in dire need of maintenance that extends far north and\nruns winding down the hill to the south. Pine forests hug the road on both sides.";
         ditchDescription = "You are in the middle of the forest standing in a small ditch running north and south.";
         drivewayDescription = "You are at the north end of a dirt road surrounded by a forest of pines except for a small gap to\nthe east that exposes a steep, dirt driveway sloping down into the forest. To the south you can see\nthrough the trees and into the valley, thanks to whoever made the road. There you see what might be\nthe shimmering of a lake in the mountain sun. There's also a foot path going north.";
-        eastEndOfMainstreetDescription = "You are at the east end of an abandon gold mining town's mainstreet. Branching off from this\nstreet to the north is a smaller road and this mainstreet goes back west.";
+        eastEndOfMainstreetDescription = "You are at the east end of an abandon gold mining town's mainstreet. Branching off from this\nstreet to the south is a smaller road and this mainstreet goes back west.";
         footPathDescription = "You're on a foot path in the middle of a dense forest. Large pine trees are all around you, but not\nin an unnerving way. The path goes south and west from here.";
         insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace on the west wall with a magnificent fire\nburning inside. There's a little sign hanging on the wall next to the fireplace that reads \"Portal\nRoom\" and there's a spiral staircase in one corner."; // TODO add an upstairs and maybe a portal room or something like that
         intersectionDescription = "You have reached an intersection in the road. Looking east, the road makes a gradual turn back into\nthe forest and to the west the shimmering look very much like a lake now. Behind you, to the north,\nthe road makes a sharp turn into the forest.";
         mineEntranceDescription = "You've come to the entrance to this abandoned gold mine. The supports on it are looking a little\nworn and there are some loose nails that might come in handy if you could safely get them out of\nthe rotten wood. You could enter to the south if you're very careful. Piles of tailings are all\nover leaving one path away from the entrance to the north.";
         mineShaftDescription = "This is the mine shaft. It looks like it could cave in at any moment. If it does, hopefully there's\nanother way out. There's a small wooden sign here that says \"TOMMYKNOCKERS\" across the top. In\nsmaller writing underneath that it says, \"The most important thing you should know about\ntommyknockers is that, when you hear them knocking on the walls of the mine it means there's about\nto be a cave-in. One other thing to note is that they like to play tricks on those in the mines.\nOne of their favorites is to take miners' possessions.\"";
-        outsideLogCabinDescription = "You are in front of a log cabin that looks much less run-down than the rest of the town. Strange\nthat someone would live here where it looks like no one has been in many years.";
+        outsideLogCabinDescription = "You are in front of a log cabin that looks much less run-down than the rest of the town. A warm\nlight shines from the windows.";
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther south a\nshed peeks through the trees.";
         privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. It looks like there's\nnothing to be concerned about on this property since there's no gate, no fence, nothing to keep out\ntrespassers. There's not even a house. This is must be private property though since someone took\nthe effort to put in a driveway that continues east and a neat trail leading somewhere southeast.";
         lakeDescription = "You are on the north side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going east and there's a dam to the south.";
@@ -80,7 +80,7 @@ public class Main implements Comparator<Item> {
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and it's doors firmly shut\nand locked, the one and only thing that needs to be on this plot of land.";
         topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes into the\ntrees to the north and down the hill to the west.";
         topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill. A dam is to the north, at the\nbottom of the stairs, and the mainstreet of the abandoned gold mining town stretches east and west.";
-        upstairsLogCabin = "The second floor of this cabin isn't nearly as well kept as the first floor. There are cob webs\neverywhere and dust covers every uncovered surface. There's a spiral staircase going back to the\nfirst floor.";
+        upstairsLogCabin = "The second floor of this cabin isn't nearly as well kept as the first floor. There are cob webs\nall over and dust blankets every uncovered surface. There's a spiral staircase going back to the\nfirst floor.";
         undergroundLakeNorthDescription = "You are on the north side of large underground lake with a rickety wooden boat at the shore. It\nseems odd that the miners tolerated this. There are two passages across the lake from where you\nare standing: one going west and one going southwest. There's a dim light coming from around a\ncorner to the east.";
         undergroundLakeWestDescription = "You are on the west side of a large underground lake. There are passages to the south an sw across\nthe lake. The tunnel you're in now continues to the west.";
         undergroundLakeSWDescription = "You are on the sw side of a large underground lake. There are passages to the north and west across\nthe lake and a tunnel continues south from here.";
@@ -170,6 +170,8 @@ public class Main implements Comparator<Item> {
         dam.connectingLocations.add(new ConnectingLocation(m.north, lake));
         dam.connectingLocations.add(new ConnectingLocation(m.south, topOfStairs));
         dam.connectingLocations.add(new ConnectingLocation(m.up, topOfStairs));
+        dam.connectingLocations.add(new ConnectingLocation(m.east, lakeTown));
+        dam.connectingLocations.add(new ConnectingLocation(m.down, lakeTown));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.north, driveway));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.south, intersection));
         ditch.connectingLocations.add(new ConnectingLocation(m.north, lightningTree));
@@ -180,7 +182,7 @@ public class Main implements Comparator<Item> {
         driveway.connectingLocations.add(new ConnectingLocation(m.east, privateProperty));
         driveway.connectingLocations.add(new ConnectingLocation(m.down, privateProperty));
         eastEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.west, topOfStairs));
-        eastEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.north, outsideLogCabin));
+        eastEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.south, outsideLogCabin));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(m.east, outsideLogCabin));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("out")), outsideLogCabin));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(m.up, upstairsLogCabin));
@@ -198,7 +200,7 @@ public class Main implements Comparator<Item> {
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.north, abandonedGoldMine));
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.south, mineShaft));
         mineEntrance.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), mineShaft));
-        outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.south, eastEndOfMainstreet));
+        outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.north, eastEndOfMainstreet));
         outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.west, insideLogCabin));
         outsideLogCabin.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), insideLogCabin));
         picnicTable.connectingLocations.add(new ConnectingLocation(m.north, privateProperty));
