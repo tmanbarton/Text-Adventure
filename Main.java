@@ -170,8 +170,8 @@ public class Main implements Comparator<Item> {
         dam.connectingLocations.add(new ConnectingLocation(m.north, lake));
         dam.connectingLocations.add(new ConnectingLocation(m.south, topOfStairs));
         dam.connectingLocations.add(new ConnectingLocation(m.up, topOfStairs));
-        dam.connectingLocations.add(new ConnectingLocation(m.east, lakeTown));
-        dam.connectingLocations.add(new ConnectingLocation(m.down, lakeTown));
+        dam.connectingLocations.add(new ConnectingLocation(null, lakeTown));
+        dam.connectingLocations.add(new ConnectingLocation(null, lakeTown));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.north, driveway));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.south, intersection));
         ditch.connectingLocations.add(new ConnectingLocation(m.north, lightningTree));
@@ -228,8 +228,8 @@ public class Main implements Comparator<Item> {
         ArrayList<Item> inventory = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-//        Location currentLocation = driveway;
-        Location currentLocation = outsideLogCabin;
+        Location currentLocation = driveway;
+//        Location currentLocation = dam;
 //        dam.items.add(m.magnet);
 //        dam.items.add(m.jar);
         currentLocation.previousLocation = currentLocation;
@@ -266,7 +266,7 @@ public class Main implements Comparator<Item> {
                 // Loop through legal directions in the current location and compare to see if you can go that way
                 ArrayList<ConnectingLocation> currentConnections = currentLocation.connectingLocations;
                 for (int i = 0; i < currentLocation.connectingLocations.size(); i++) {
-                    if ((currentConnections.get(i).directions.contains(input) && !currentLocation.equals(currentConnections.get(i).location)) || (input.equals("back") && !currentLocation.previousLocation.equals(currentLocation)) || (input.equals("out") && currentLocation instanceof Boat)) {
+                    if (currentConnections.get(i).directions != null && (currentConnections.get(i).directions.contains(input) && !currentLocation.equals(currentConnections.get(i).location)) || (input.equals("back") && !currentLocation.previousLocation.equals(currentLocation)) || (input.equals("out") && currentLocation instanceof Boat)) {
                         if(input.equals("back") || (input.equals("out") && currentLocation instanceof Boat)) {
                             currentLocation = currentLocation.previousLocation;
                             printLocation(input, currentLocation);
