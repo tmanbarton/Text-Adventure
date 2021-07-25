@@ -10,7 +10,7 @@ public class Main implements Comparator<Item> {
     String dirtRoadDescription;
     String ditchDescription;
     String drivewayDescription;
-    String eastEndOfMainstreetDescription;
+    String eastEndOfSideStreetDescription;
     String footPathDescription;
     String insideLogCabinDescription;
     String intersectionDescription;
@@ -19,17 +19,20 @@ public class Main implements Comparator<Item> {
     String lightningTreeDescription;
     String mineEntranceDescription;
     String mineShaftDescription;
+    String roadInValleyDescription;
     String outsideLogCabinDescription;
+    String outsideTavernDescription;
     String picnicTableDescription;
     String privatePropertyDescription;
     String shedDescription;
+    String tavernDescrption;
     String topOfHillDescription;
     String topOfStairsDescription;
-    String upstairsLogCabin;
+    String upstairsLogCabinDescription;
     String undergroundLakeNorthDescription;
     String undergroundLakeWestDescription;
     String undergroundLakeSWDescription;
-    String westEndOfMainstreetDescription;
+    String westEndOfSideStreetDescription;
 
     ArrayList<String> north;
     ArrayList<String> south;
@@ -42,6 +45,8 @@ public class Main implements Comparator<Item> {
     ArrayList<String> up;
     ArrayList<String> down;
     ArrayList<String> directions;
+    ArrayList<String> in;
+    ArrayList<String> out;
 
     Item key;
     Item hammer;
@@ -65,27 +70,30 @@ public class Main implements Comparator<Item> {
         dirtRoadDescription = "You are on a badly washboarded dirt road in dire need of maintenance that extends far north and\nruns winding down the hill to the south. Pine forests hug the road on both sides.";
         ditchDescription = "You are in the middle of the forest standing in a small ditch running north and south.";
         drivewayDescription = "You are at the north end of a dirt road surrounded by a forest of pines except for a small gap to\nthe east that exposes a steep, dirt driveway sloping down into the forest. To the south you can see\nthrough the trees and into the valley, thanks to whoever made the road. There you see what might be\nthe shimmering of a lake in the mountain sun. There's also a foot path going north.";
-        eastEndOfMainstreetDescription = "You are at the east end of an abandon gold mining town's mainstreet. Branching off from this\nstreet to the south is a smaller road and this mainstreet goes back west.";
+        eastEndOfSideStreetDescription = "You are at the east end of a side street in an abandon gold mining town. Branching off from this\nstreet to the south is a smaller road.";
         footPathDescription = "You're on a foot path in the middle of a dense forest. Large pine trees are all around you, but not\nin an unnerving way. The path goes south and west from here.";
-        insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace on the west wall with a magnificent fire\nburning inside. There's a little sign hanging on the wall next to the fireplace that reads \"Portal\nRoom\" and there's a spiral staircase in one corner."; // TODO add an upstairs and maybe a portal room or something like that
+        insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace on the west wall with a magnificent fire\nburning inside. There's a little sign hanging on the wall next to the fireplace that reads \"Portal\nRoom\" and there's a spiral staircase in one corner."; // TODO maybe add a portal room or something like that
         intersectionDescription = "You have reached an intersection in the road. Looking east, the road makes a gradual turn back into\nthe forest and to the west the shimmering look very much like a lake now. Behind you, to the north,\nthe road makes a sharp turn into the forest.";
         mineEntranceDescription = "You've come to the entrance to this abandoned gold mine. The supports on it are looking a little\nworn and there are some loose nails that might come in handy if you could safely get them out of\nthe rotten wood. You could enter to the south if you're very careful. Piles of tailings are all\nover leaving one path away from the entrance to the north.";
         mineShaftDescription = "This is the mine shaft. It looks like it could cave in at any moment. If it does, hopefully there's\nanother way out. There's a small wooden sign here that says \"TOMMYKNOCKERS\" across the top. In\nsmaller writing underneath that it says, \"The most important thing you should know about\ntommyknockers is that, when you hear them knocking on the walls of the mine it means there's about\nto be a cave-in. One other thing to note is that they like to play tricks on those in the mines.\nOne of their favorites is to take miners' possessions.\"";
+        roadInValleyDescription = "You're on a road in the middle of a lush, green valley with grazing pastures all around.";
         outsideLogCabinDescription = "You are in front of a log cabin that looks much less run-down than the rest of the town. A warm\nlight shines from the windows.";
+        outsideTavernDescription = "On the west side of the road is a tavern with a wooden sign hanging above the door with\n\"Tommyknocker Tavern\" etched into it. Here is the former heartbeat of the town, now a dump of a\nplace. Its roof has caved in and the walls look as if they could collapse at any moment.";
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther south a\nshed peeks through the trees.";
         privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. It looks like there's\nnothing to be concerned about on this property since there's no gate, no fence, nothing to keep out\ntrespassers. There's not even a house. This is must be private property though since someone took\nthe effort to put in a driveway that continues east and a neat trail leading somewhere southeast.";
         lakeDescription = "You are on the north side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going east and there's a dam to the south.";
         lakeTownDescription = "You are in what once was a charming little town. Now there is dripping wet plant life from the\nrecently drained lake clinging to the buildings. The muddy ground squelches as you walk. To the\nwest is the dam and you can go farther into the town to the east.";
         lightningTreeDescription = "You're in a little clearing with a large tree in the middle that looks like it was struck by\nlightning a long time ago. The bark has long since fallen off and the remaining part of the tree\nis a neat reddish color.";
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and it's doors firmly shut\nand locked, the one and only thing that needs to be on this plot of land.";
+        tavernDescrption = "The Tommyknocker Tavern looks just as shabby on the inside as it does on the outside with all of its\nfurnishings falling apart and a musty smell in the air. It would be nice if the\nkegs in the corner\nwere full of decades old beer, but unfortunately they hold only air.";
         topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes into the\ntrees to the north and down the hill to the west.";
-        topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill. A dam is to the north, at the\nbottom of the stairs, and the mainstreet of the abandoned gold mining town stretches east and west.";
-        upstairsLogCabin = "The second floor of this cabin isn't nearly as well kept as the first floor. There are cob webs\nall over and dust blankets every uncovered surface. There's a spiral staircase going back to the\nfirst floor.";
+        topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill now standing next to a street\nrunning east and west in the abandoned gold mining town. A dam is to the north, at the bottom of\nthe stairs.";
+        upstairsLogCabinDescription = "The second floor of this cabin isn't nearly as well kept as the first floor. There are cob webs\nall over and dust blankets every uncovered surface. There's a spiral staircase going back to the\nfirst floor.";
         undergroundLakeNorthDescription = "You are on the north side of large underground lake with a rickety wooden boat at the shore. It\nseems odd that the miners tolerated this. There are two passages across the lake from where you\nare standing: one going west and one going southwest. There's a dim light coming from around a\ncorner to the east.";
         undergroundLakeWestDescription = "You are on the west side of a large underground lake. There are passages to the south an sw across\nthe lake. The tunnel you're in now continues to the west.";
         undergroundLakeSWDescription = "You are on the sw side of a large underground lake. There are passages to the north and west across\nthe lake and a tunnel continues south from here.";
-        westEndOfMainstreetDescription = "You are at the west and of an abandoned gold mining town's main street.";
-        // Arraylists that contain all possible, valid inputs for directions. Use for location objects in arraylist of string arraylists
+        westEndOfSideStreetDescription = "You are at the west and of a side street in an abandoned gold mining town. The main street goes\nnorth and south form here.";
+        // Arraylists that contain all possible, valid inputs for directions. Use for location objects
         north = new ArrayList<>(Arrays.asList("north", "n", "go north", "go n", "walk north", "walk n", "run north", "run n"));
         south = new ArrayList<>(Arrays.asList("south", "s", "go south", "go s", "walk south", "walk s", "run south", "run s"));
         east = new ArrayList<>(Arrays.asList("east", "e", "go east", "go e", "walk east", "walk e", "run east", "run e"));
@@ -96,6 +104,8 @@ public class Main implements Comparator<Item> {
         southwest = new ArrayList<>(Arrays.asList("sw", "go sw", "walk sw", "run sw"));
         up = new ArrayList<>(Arrays.asList("up", "u", "go up", "go u", "walk up", "walk u", "run u", "run up"));
         down = new ArrayList<>(Arrays.asList("down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d"));
+        in = new ArrayList<>(Arrays.asList("in", "go in"));
+        out = new ArrayList<>(Arrays.asList("out", "go out"));//TODO something's wrong with the go part
         // One big arraylist containing all possible direction commands to check if the entered command was a direction
         directions = new ArrayList<>(Arrays.asList("north", "n", "go north", "go n", "walk north", "walk n", "run north", "run n",
                 "south", "s", "go south", "go s", "walk south", "walk s", "run south", "run s",
@@ -107,7 +117,7 @@ public class Main implements Comparator<Item> {
                 "sw", "go sw", "walk sw", "run sw",
                 "up", "u", "go up", "go u", "walk up", "walk u", "run u", "run up",
                 "down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d",
-                "in", "out", "back"));
+                "in", "out", "back", "go back"));
 
         key = new Item(1, "There is a shiny key here", "Shiny key", "key");
         hammer = new Item(2, "There is a hammer here", "Hammer", "hammer");
@@ -132,7 +142,7 @@ public class Main implements Comparator<Item> {
         Location dirtRoad = new Location(m.dirtRoadDescription, new ArrayList<>(), new ArrayList<>(), new Location(),false, "dirt road");
         Location ditch = new Location(m.ditchDescription, new ArrayList<>(Collections.singletonList(m.key)), new ArrayList<>(), new Location(), false, "ditch");
         Location driveway = new Location(m.drivewayDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "driveway");
-        Location eastEndOfMainstreet = new Location(m.eastEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "east end of mainstreet");
+        Location eastEndOfSideStreet = new Location(m.eastEndOfSideStreetDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "east end of side street");
         Location footPath = new Location(m.footPathDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "bend in road");
         Location insideLogCabin = new Location(m.insideLogCabinDescription, new ArrayList<>(Collections.singletonList(m.magnet)), new ArrayList<>(), new Location(), false, "inside log cabin");
         Location intersection = new Location(m.intersectionDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "intersection");
@@ -140,16 +150,19 @@ public class Main implements Comparator<Item> {
         Location lakeTown = new Location(m.lakeTownDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lake town");
         Location lightningTree = new Location(m.lightningTreeDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "lightning tree");
         Location mineShaft = new Location(m.mineShaftDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "mine shaft");
+        Location roadInValley = new Location(m.roadInValleyDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "road in a valley");
         Location outsideLogCabin = new Location(m.outsideLogCabinDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "outside log cabin");
+        Location outsideTavern = new Location(m.outsideTavernDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "ouside Tommyknocker Tavern");
         Location picnicTable = new Location(m.picnicTableDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "picnic table");
         Location privateProperty = new Location(m.privatePropertyDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "private property");
+        Location tavern = new Location(m.tavernDescrption, new ArrayList<>(), new ArrayList<>(), new Location(), false, "Tommyknocker Tavern");
         Location topOfHill = new Location(m.topOfHillDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "top of hill");
         Location topOfStairs = new Location(m.topOfStairsDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "top of stairs");
         Location undergroundLakeNorth = new Location(m.undergroundLakeNorthDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "north side of underground lake");
         Location undergroundLakeWest = new Location(m.undergroundLakeWestDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "west side of underground lake");
         Location undergroundLakeSW = new Location(m.undergroundLakeSWDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "sw side of underground lake");
-        Location upstairsLogCabin = new Location(m.upstairsLogCabin, new ArrayList<>(), new ArrayList<>(), new Location(), false, "second floor of log cabin");
-        Location westEndOfMainstreet = new Location(m.westEndOfMainstreetDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "west end of mainstreet");
+        Location upstairsLogCabin = new Location(m.upstairsLogCabinDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "second floor of log cabin");
+        Location westEndOfSideStreet = new Location(m.westEndOfSideStreetDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "west end of side street");
         Boat boat = new Boat(m.boatDescription, new ArrayList<>(), new ArrayList<>(), new Boat(), false, "rickety wooden boat", false);
         Dam dam = new Dam(m.damDescription, new ArrayList<>(), new ArrayList<>(), new Dam(), false, "dam", false, false);
         Shed shed = new Shed(m.shedDescription, new ArrayList<>(), new ArrayList<>(), new Shed(), false, "shed", false, false);
@@ -162,8 +175,6 @@ public class Main implements Comparator<Item> {
         antHill.connectingLocations.add(new ConnectingLocation(m.north, ditch));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.west, privateProperty));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.east, ditch));
-        footPath.connectingLocations.add(new ConnectingLocation(m.south, driveway));
-        footPath.connectingLocations.add(new ConnectingLocation(m.west, topOfHill));
         boat.connectingLocations.add(new ConnectingLocation(m.north, undergroundLakeNorth));
         boat.connectingLocations.add(new ConnectingLocation(m.west, undergroundLakeWest));
         boat.connectingLocations.add(new ConnectingLocation(m.southwest, undergroundLakeSW));
@@ -181,10 +192,12 @@ public class Main implements Comparator<Item> {
         driveway.connectingLocations.add(new ConnectingLocation(m.south, dirtRoad));
         driveway.connectingLocations.add(new ConnectingLocation(m.east, privateProperty));
         driveway.connectingLocations.add(new ConnectingLocation(m.down, privateProperty));
-        eastEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.west, topOfStairs));
-        eastEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.south, outsideLogCabin));
+        eastEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.west, topOfStairs));
+        eastEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.south, outsideLogCabin));
+        footPath.connectingLocations.add(new ConnectingLocation(m.south, driveway));
+        footPath.connectingLocations.add(new ConnectingLocation(m.west, topOfHill));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(m.east, outsideLogCabin));
-        insideLogCabin.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("out")), outsideLogCabin));
+        insideLogCabin.connectingLocations.add(new ConnectingLocation(m.out, outsideLogCabin));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(m.up, upstairsLogCabin));
         intersection.connectingLocations.add(new ConnectingLocation(m.north, dirtRoad));
         intersection.connectingLocations.add(new ConnectingLocation(m.east, topOfHill));
@@ -196,40 +209,47 @@ public class Main implements Comparator<Item> {
         lightningTree.connectingLocations.add(new ConnectingLocation(m.south, ditch));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.north, mineEntrance));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.south, undergroundLakeNorth));
-        mineShaft.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("out")), mineEntrance));
+        mineShaft.connectingLocations.add(new ConnectingLocation(m.out, mineEntrance));
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.north, abandonedGoldMine));
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.south, mineShaft));
-        mineEntrance.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), mineShaft));
-        outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.north, eastEndOfMainstreet));
+        mineEntrance.connectingLocations.add(new ConnectingLocation(m.in, mineShaft));
+        outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.north, eastEndOfSideStreet));
         outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.west, insideLogCabin));
-        outsideLogCabin.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), insideLogCabin));
+        outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.in, insideLogCabin));
+        outsideTavern.connectingLocations.add(new ConnectingLocation(m.south, westEndOfSideStreet));
+        outsideTavern.connectingLocations.add(new ConnectingLocation(m.west, tavern));
+        outsideTavern.connectingLocations.add(new ConnectingLocation(m.in, tavern));
         picnicTable.connectingLocations.add(new ConnectingLocation(m.north, privateProperty));
         picnicTable.connectingLocations.add(new ConnectingLocation(m.south, shed));
         privateProperty.connectingLocations.add(new ConnectingLocation(m.west, driveway));
         privateProperty.connectingLocations.add(new ConnectingLocation(m.east, archeryRange));
         privateProperty.connectingLocations.add(new ConnectingLocation(m.southeast, picnicTable));
+        roadInValley.connectingLocations.add(new ConnectingLocation(m.north, westEndOfSideStreet));
         shed.connectingLocations.add(new ConnectingLocation(m.north, picnicTable));
+        tavern.connectingLocations.add(new ConnectingLocation(m.east, outsideTavern));
+        tavern.connectingLocations.add(new ConnectingLocation(m.out, outsideTavern));
         topOfHill.connectingLocations.add(new ConnectingLocation(m.north, footPath));
         topOfHill.connectingLocations.add(new ConnectingLocation(m.west, intersection));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.north, dam));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.down, dam));
-        topOfStairs.connectingLocations.add(new ConnectingLocation(m.east, eastEndOfMainstreet));
-        topOfStairs.connectingLocations.add(new ConnectingLocation(m.west, westEndOfMainstreet));
-        undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
+        topOfStairs.connectingLocations.add(new ConnectingLocation(m.east, eastEndOfSideStreet));
+        topOfStairs.connectingLocations.add(new ConnectingLocation(m.west, westEndOfSideStreet));
+        undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(m.in, boat));
         undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(m.east, mineShaft));
-        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
-//        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.south, somelocation));
-        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(new ArrayList<>(Collections.singletonList("in")), boat));
-//        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.west, somelocation));
+        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.in, boat));
+//        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.south, somelocation)); TODO
+        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.in, boat));
+//        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.west, somelocation)); TODO
         upstairsLogCabin.connectingLocations.add(new ConnectingLocation(m.down, insideLogCabin));
-        westEndOfMainstreet.connectingLocations.add(new ConnectingLocation(m.east, topOfStairs));
-
+        westEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.north, outsideTavern));
+        westEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.south, roadInValley));
+        westEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.east, topOfStairs));
         // Arraylist of Items for when you get an Item from a location and a Scanner for input from keyboard
         ArrayList<Item> inventory = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-        Location currentLocation = driveway;
-//        Location currentLocation = dam;
+//        Location currentLocation = driveway;
+        Location currentLocation = westEndOfSideStreet;
 //        dam.items.add(m.magnet);
 //        dam.items.add(m.jar);
         currentLocation.previousLocation = currentLocation;
@@ -266,8 +286,8 @@ public class Main implements Comparator<Item> {
                 // Loop through legal directions in the current location and compare to see if you can go that way
                 ArrayList<ConnectingLocation> currentConnections = currentLocation.connectingLocations;
                 for (int i = 0; i < currentLocation.connectingLocations.size(); i++) {
-                    if (currentConnections.get(i).directions != null && (currentConnections.get(i).directions.contains(input) && !currentLocation.equals(currentConnections.get(i).location)) || (input.equals("back") && !currentLocation.previousLocation.equals(currentLocation)) || (input.equals("out") && currentLocation instanceof Boat)) {
-                        if(input.equals("back") || (input.equals("out") && currentLocation instanceof Boat)) {
+                    if (currentConnections.get(i).directions != null && (currentConnections.get(i).directions.contains(input) && !currentLocation.equals(currentConnections.get(i).location)) || ((input.equals("back") || input.equals("go back")) && !currentLocation.previousLocation.equals(currentLocation)) || (input.equals("out") && currentLocation instanceof Boat)) {
+                        if(input.equals("back") || input.equals("go back") || (input.equals("out") && currentLocation instanceof Boat)) {
                             currentLocation = currentLocation.previousLocation;
                             printLocation(input, currentLocation);
                             break;
@@ -313,6 +333,7 @@ public class Main implements Comparator<Item> {
             input = scan.nextLine().toLowerCase();
         }
     }
+
     public static void dontKnowWord() {
         Random r = new Random();
         int randomNum = r.nextInt(3);
@@ -404,12 +425,21 @@ public class Main implements Comparator<Item> {
         else if(input.startsWith("fill")) {
             location.fill(input, location, inventory);
         }
-        else if(input.length() >= 4 && input.startsWith("drop")) {
+        else if((input.length() >= 4 && input.startsWith("drop")) || (input.length() >= 5 && input.startsWith("throw"))) {
             if(input.equals("drop") || input.equals("drop ")) {
                 System.out.println("What do you want to drop?");
                 return;
             }
-            location.drop(input.substring(5), location, inventory);
+            else if(input.equals("throw") || input.equals("throw ")) {
+                System.out.println("What do you want to throw?");
+                return;
+            }
+            if (input.startsWith("drop")) {
+                location.drop(input.substring(5), location, inventory);
+            }
+            else if (input.startsWith("throw")) {
+                location.drop(input.substring(6), location, inventory);
+            }
         }
         else if(input.length() >= 5 && input.equals("shoot")) {
             location.shoot(input, location, inventory);
@@ -432,5 +462,44 @@ public class Main implements Comparator<Item> {
         else {
             dontKnowWord();
         }
+    }
+
+    // Interactive Rubik's Cube out of char arrays and a Scanner
+    public static void rubiksCube() {
+        // 6 char arrays for each face of the cube
+        char[] up = new char[] {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'};
+        char[] front = new char[] {'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G'};
+        char[] right = new char[] {'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'};
+        char[] back = new char[] {'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'};
+        char[] left = new char[] {'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'};
+        char[] down = new char[] {'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'};
+        char[][] cube = {up, front, right, back, left, down};
+        // Format. Instructions
+        System.out.println("                                   ______");
+        System.out.println("      W W W                       |      |");
+        System.out.println("      W W W                       |   U  |");
+        System.out.println("      W W W                 ______|______|______ ______");
+        System.out.println("O O O G G G R R R B B B    |      |      |      |      |");
+        System.out.println("O O O G G G R R R B B B    |   L  |   F  |   R  |   B  |");
+        System.out.println("O O O G G G R R R B B B    |______|______|______|______|");
+        System.out.println("      Y Y Y                       |      |");
+        System.out.println("      Y Y Y                       |   D  |");
+        System.out.println("      Y Y Y                       |______|");
+        System.out.println("Possible commands:\nb, f, u, d, l, or r for face turns\nm, s, or e for slice turns\nx, y, or z and all prime for cube turns\n"
+                + "or any combination of these, seperated by a space\nAdd a ' after a letter for a counterclockwise turn\nAdd a 2 after a letterfor a 180 degree turn\nscramble to scramble the cube\nq or quit to stop playing\nh or help to repeat these instruction");
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        // Main loop
+        while(!(input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q"))) {
+
+            RubiksCube.findTurn(cube, input);
+            input = sc.nextLine();
+        }
+        if(input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
+            System.out.println("Thank you for playing!");
+            sc.close();
+        }
+        RubiksCube r = new RubiksCube();
     }
 }

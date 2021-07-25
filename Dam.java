@@ -20,7 +20,7 @@ public class Dam extends Location {
             location.connectingLocations.get(4).directions = m.down;
         }
         else {
-            System.out.println("The wheel is firmly locked in place.");
+            System.out.println("The wheel is locked firmly in place.");
         }
     }
 }
