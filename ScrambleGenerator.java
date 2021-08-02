@@ -118,8 +118,4 @@ public class ScrambleGenerator {
         }
         return scrambleAlg;
     }
-
-    public static void printScramble(String scramble) {
-        System.out.println(scramble);
-    }
 }

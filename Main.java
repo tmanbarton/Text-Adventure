@@ -24,8 +24,9 @@ public class Main implements Comparator<Item> {
     String outsideTavernDescription;
     String picnicTableDescription;
     String privatePropertyDescription;
+    String graniteRoomDescription;
     String shedDescription;
-    String tavernDescrption;
+    String tavernDescription;
     String topOfHillDescription;
     String topOfStairsDescription;
     String upstairsLogCabinDescription;
@@ -57,6 +58,7 @@ public class Main implements Comparator<Item> {
     Item gold;
     Item shovel;
     Item magnet;
+    Cube cube;
 
     ArrayList<String> allVerbs;
 
@@ -81,11 +83,12 @@ public class Main implements Comparator<Item> {
         outsideTavernDescription = "On the west side of the road is a tavern with a wooden sign hanging above the door with\n\"Tommyknocker Tavern\" etched into it. Here is the former heartbeat of the town, now a dump of a\nplace. Its roof has caved in and the walls look as if they could collapse at any moment.";
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther south a\nshed peeks through the trees.";
         privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. It looks like there's\nnothing to be concerned about on this property since there's no gate, no fence, nothing to keep out\ntrespassers. There's not even a house. This is must be private property though since someone took\nthe effort to put in a driveway that continues east and a neat trail leading somewhere southeast.";
+        graniteRoomDescription = "On a polished granite pedestal, black as night, in the middle of this room\nwith walls of the same black rock sits a plastic puzzle. It is a 3 x 3 x 3 cube with different\ncolored stickers for each side in stark contrast of the black consuming the room. The sides can be\nturned. It is scrambled. The only exit is to the east.";
         lakeDescription = "You are on the north side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going east and there's a dam to the south.";
         lakeTownDescription = "You are in what once was a charming little town. Now there is dripping wet plant life from the\nrecently drained lake clinging to the buildings. The muddy ground squelches as you walk. To the\nwest is the dam and you can go farther into the town to the east.";
         lightningTreeDescription = "You're in a little clearing with a large tree in the middle that looks like it was struck by\nlightning a long time ago. The bark has long since fallen off and the remaining part of the tree\nis a neat reddish color.";
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and it's doors firmly shut\nand locked, the one and only thing that needs to be on this plot of land.";
-        tavernDescrption = "The Tommyknocker Tavern looks just as shabby on the inside as it does on the outside with all of its\nfurnishings falling apart and a musty smell in the air. It would be nice if the\nkegs in the corner\nwere full of decades old beer, but unfortunately they hold only air.";
+        tavernDescription = "The Tommyknocker Tavern looks just as shabby on the inside as it does on the outside with all of its\nfurnishings falling apart and a musty smell in the air. It would be nice if the kegs in the corner\nwere full, but unfortunately they hold only air.";
         topOfHillDescription = "You are at the top of a steep hill and have a wonderful view of the valley. The road goes into the\ntrees to the north and down the hill to the west.";
         topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill now standing next to a street\nrunning east and west in the abandoned gold mining town. A dam is to the north, at the bottom of\nthe stairs.";
         upstairsLogCabinDescription = "The second floor of this cabin isn't nearly as well kept as the first floor. There are cob webs\nall over and dust blankets every uncovered surface. There's a spiral staircase going back to the\nfirst floor.";
@@ -105,7 +108,7 @@ public class Main implements Comparator<Item> {
         up = new ArrayList<>(Arrays.asList("up", "u", "go up", "go u", "walk up", "walk u", "run u", "run up"));
         down = new ArrayList<>(Arrays.asList("down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d"));
         in = new ArrayList<>(Arrays.asList("in", "go in"));
-        out = new ArrayList<>(Arrays.asList("out", "go out"));//TODO something's wrong with the go part
+        out = new ArrayList<>(Arrays.asList("out", "go out"));
         // One big arraylist containing all possible direction commands to check if the entered command was a direction
         directions = new ArrayList<>(Arrays.asList("north", "n", "go north", "go n", "walk north", "walk n", "run north", "run n",
                 "south", "s", "go south", "go s", "walk south", "walk s", "run south", "run s",
@@ -117,7 +120,7 @@ public class Main implements Comparator<Item> {
                 "sw", "go sw", "walk sw", "run sw",
                 "up", "u", "go up", "go u", "walk up", "walk u", "run u", "run up",
                 "down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d",
-                "in", "out", "back", "go back"));
+                "in", "go in", "out", "go out", "back", "go back"));
 
         key = new Item(1, "There is a shiny key here", "Shiny key", "key");
         hammer = new Item(2, "There is a hammer here", "Hammer", "hammer");
@@ -128,9 +131,11 @@ public class Main implements Comparator<Item> {
         shovel = new Item(8, "There is a shovel here", "Shovel", "shovel");
         tent = new Item(9, "There is a tent here, packed neatly in a bag.", "Tent in bag", "tent");
         magnet = new Item(10, "There is a thick, circular magnet here, about the size of your palm.", "Magnet", "magnet");
+//        cube = new Cube(11, "There is a plastic cube puzzle lying on the ground", "cube", "cube", false, false);
+        cube = new Cube(11, "", "cube", "cube", false, false);
 
         // Lists of all valid verbs that the player can enter that are not directions.
-        allVerbs = new ArrayList<>(Arrays.asList("get", "drop", "inventory", "look", "throw", "open", "unlock", "turn", "shoot", "fill"));
+        allVerbs = new ArrayList<>(Arrays.asList("get", "drop", "inventory", "look", "throw", "open", "unlock", "turn", "shoot", "fill", "play"));
     }
 
     public static void main(String[] args) {
@@ -155,7 +160,7 @@ public class Main implements Comparator<Item> {
         Location outsideTavern = new Location(m.outsideTavernDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "ouside Tommyknocker Tavern");
         Location picnicTable = new Location(m.picnicTableDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "picnic table");
         Location privateProperty = new Location(m.privatePropertyDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "private property");
-        Location tavern = new Location(m.tavernDescrption, new ArrayList<>(), new ArrayList<>(), new Location(), false, "Tommyknocker Tavern");
+        Location tavern = new Location(m.tavernDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "Tommyknocker Tavern");
         Location topOfHill = new Location(m.topOfHillDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "top of hill");
         Location topOfStairs = new Location(m.topOfStairsDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "top of stairs");
         Location undergroundLakeNorth = new Location(m.undergroundLakeNorthDescription, new ArrayList<>(), new ArrayList<>(), new Location(), false, "north side of underground lake");
@@ -167,6 +172,7 @@ public class Main implements Comparator<Item> {
         Dam dam = new Dam(m.damDescription, new ArrayList<>(), new ArrayList<>(), new Dam(), false, "dam", false, false);
         Shed shed = new Shed(m.shedDescription, new ArrayList<>(), new ArrayList<>(), new Shed(), false, "shed", false, false);
         MineEntrance mineEntrance = new MineEntrance(m.mineEntranceDescription, new ArrayList<>(Collections.singletonList(m.gold)), new ArrayList<>(), new MineEntrance(), false, "mine entrance", false);
+        GraniteRoom graniteRoom = new GraniteRoom(m.graniteRoomDescription, new ArrayList<>(Collections.singletonList(m.cube)), new ArrayList<>(), new Location(), false, "granite room", false);
         // Add locations to connectingLocations arraylist parameter of Location to create graph
         // Some ConnectingLocations have in and out as directions since that will get you to another location in addition to entering a direction
         abandonedGoldMine.connectingLocations.add(new ConnectingLocation(m.south, mineEntrance));
@@ -204,7 +210,7 @@ public class Main implements Comparator<Item> {
         intersection.connectingLocations.add(new ConnectingLocation(m.west, abandonedGoldMine));
         lake.connectingLocations.add(new ConnectingLocation(m.east, abandonedGoldMine));
         lake.connectingLocations.add(new ConnectingLocation(m.south, dam));
-        lakeTown.connectingLocations.add(new ConnectingLocation(m.west, dam)); // east goes farther into the town
+        lakeTown.connectingLocations.add(new ConnectingLocation(m.west, dam)); // TODO east goes farther into the town
         lakeTown.connectingLocations.add(new ConnectingLocation(m.up, dam));
         lightningTree.connectingLocations.add(new ConnectingLocation(m.south, ditch));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.north, mineEntrance));
@@ -224,6 +230,7 @@ public class Main implements Comparator<Item> {
         privateProperty.connectingLocations.add(new ConnectingLocation(m.west, driveway));
         privateProperty.connectingLocations.add(new ConnectingLocation(m.east, archeryRange));
         privateProperty.connectingLocations.add(new ConnectingLocation(m.southeast, picnicTable));
+        graniteRoom.connectingLocations.add(new ConnectingLocation(m.east, undergroundLakeWest));
         roadInValley.connectingLocations.add(new ConnectingLocation(m.north, westEndOfSideStreet));
         shed.connectingLocations.add(new ConnectingLocation(m.north, picnicTable));
         tavern.connectingLocations.add(new ConnectingLocation(m.east, outsideTavern));
@@ -237,9 +244,9 @@ public class Main implements Comparator<Item> {
         undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(m.in, boat));
         undergroundLakeNorth.connectingLocations.add(new ConnectingLocation(m.east, mineShaft));
         undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.in, boat));
-//        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.south, somelocation)); TODO
+//        undergroundLakeSW.connectingLocations.add(new ConnectingLocation(m.south, somelocation)); TODO add location
         undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.in, boat));
-//        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.west, somelocation)); TODO
+        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.west, graniteRoom));
         upstairsLogCabin.connectingLocations.add(new ConnectingLocation(m.down, insideLogCabin));
         westEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.north, outsideTavern));
         westEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.south, roadInValley));
@@ -249,7 +256,8 @@ public class Main implements Comparator<Item> {
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
 //        Location currentLocation = driveway;
-        Location currentLocation = westEndOfSideStreet;
+        Location currentLocation = graniteRoom;
+//        inventory.add(m.cube);
 //        dam.items.add(m.magnet);
 //        dam.items.add(m.jar);
         currentLocation.previousLocation = currentLocation;
@@ -330,7 +338,10 @@ public class Main implements Comparator<Item> {
                 }
             }
             // input will always be lowercase so don't have to worry about checking .equalsIgnoreCase
-            input = scan.nextLine().toLowerCase();
+            if(scan.hasNextLine()) {
+                input = scan.nextLine().toLowerCase();
+            }
+            // TODO quit in simulator gives no such element exception
         }
     }
 
@@ -364,7 +375,9 @@ public class Main implements Comparator<Item> {
             System.out.println(location.description);
             if(!location.items.isEmpty()) {
                 for(Item item : location.items) {
-                    System.out.println(item.locationPrint);
+                    if(!item.locationPrint.equals("")) {
+                        System.out.println(item.locationPrint);
+                    }
                 }
             }
         }
@@ -459,47 +472,12 @@ public class Main implements Comparator<Item> {
         else if(input.equals("turn")) {
             location.turn(location);
         }
+        else if(input.equals("play") && isItemHere("cube", inventory)) {
+            ScrambleGenerator.generateScramble();
+            new Main().cube.rubiksCubeSimulator(findItem("cube", inventory));
+        }
         else {
             dontKnowWord();
         }
-    }
-
-    // Interactive Rubik's Cube out of char arrays and a Scanner
-    public static void rubiksCube() {
-        // 6 char arrays for each face of the cube
-        char[] up = new char[] {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'};
-        char[] front = new char[] {'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G'};
-        char[] right = new char[] {'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'};
-        char[] back = new char[] {'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'};
-        char[] left = new char[] {'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'};
-        char[] down = new char[] {'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'};
-        char[][] cube = {up, front, right, back, left, down};
-        // Format. Instructions
-        System.out.println("                                   ______");
-        System.out.println("      W W W                       |      |");
-        System.out.println("      W W W                       |   U  |");
-        System.out.println("      W W W                 ______|______|______ ______");
-        System.out.println("O O O G G G R R R B B B    |      |      |      |      |");
-        System.out.println("O O O G G G R R R B B B    |   L  |   F  |   R  |   B  |");
-        System.out.println("O O O G G G R R R B B B    |______|______|______|______|");
-        System.out.println("      Y Y Y                       |      |");
-        System.out.println("      Y Y Y                       |   D  |");
-        System.out.println("      Y Y Y                       |______|");
-        System.out.println("Possible commands:\nb, f, u, d, l, or r for face turns\nm, s, or e for slice turns\nx, y, or z and all prime for cube turns\n"
-                + "or any combination of these, seperated by a space\nAdd a ' after a letter for a counterclockwise turn\nAdd a 2 after a letterfor a 180 degree turn\nscramble to scramble the cube\nq or quit to stop playing\nh or help to repeat these instruction");
-
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        // Main loop
-        while(!(input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q"))) {
-
-            RubiksCube.findTurn(cube, input);
-            input = sc.nextLine();
-        }
-        if(input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
-            System.out.println("Thank you for playing!");
-            sc.close();
-        }
-        RubiksCube r = new RubiksCube();
     }
 }

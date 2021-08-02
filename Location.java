@@ -59,9 +59,9 @@ public class Location {
         else if(input.equals("gold") && jarInInventory && goldAtLocation && jar != null) {
             System.out.println("The jar is now full of gold flakes.");
             jar.inventoryPrint = "Jar filled with gold flakes";
-            for(Item i : location.items) {
-                if(i.name.equals("gold")) {
-                    Main.addAndRemove(inventory, location.items, i);
+            for(Item item : location.items) {
+                if(item.name.equals("gold")) {
+                    Main.addAndRemove(inventory, location.items, item);
                     break;
                 }
             }
@@ -73,6 +73,11 @@ public class Location {
         // Everything's right for getting an Item.
         else {
             Item toGet = Main.findItem(input, location.items);
+            if(input.equals("cube") && toGet instanceof Cube && !((Cube) toGet).taken) {
+                toGet.locationPrint = "There is a plastic cube puzzle lying on the ground";
+                ((Cube) toGet).taken = true;
+                location.description = "There is a polished granite pedestal, black as night, in the middle of this room\nwith walls of the same black rock.";
+            }
             Main.addAndRemove(inventory, location.items, toGet);
             System.out.println("OK");
         }
