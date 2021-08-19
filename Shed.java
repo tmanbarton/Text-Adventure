@@ -5,8 +5,8 @@ public class Shed extends Location {
     boolean visited;        // For checking if the shed has been unlocked and opened to know what to print and what items should be in
     boolean unlocked;       // Check if shed has been unlocked. Name and description will change
     boolean opened;         // Check if shed is open. Name, description and items will change
-    public Shed(String description, ArrayList<Item> items, ArrayList<ConnectingLocation> connectingLocations, Location location, boolean visited, String name, boolean unlocked, boolean opened) {
-        super(description, items, connectingLocations, location, visited, name);
+    public Shed(String description, String shortDescription, ArrayList<Item> items, ArrayList<ConnectingLocation> connectingLocations, Location location, boolean visited, String name, boolean unlocked, boolean opened) {
+        super(description, shortDescription, items, connectingLocations, location, visited, name);
         this.visited = visited;
         this.unlocked = unlocked;
         this.opened = opened;

@@ -3,43 +3,56 @@ import java.util.Scanner;
 public class Cube extends Item {
     boolean solved;
     boolean taken;
-    public Cube(int order, String locationPrint, String inventoryPrint, String name, boolean solved, boolean taken) {
+    char[][] charCube;
+
+
+    public Cube(int order,
+                String locationPrint,
+                String inventoryPrint,
+                String name,
+                boolean solved,
+                boolean taken, char[][] charCube
+    ) {
         super(order, locationPrint, inventoryPrint, name);
         this.solved = solved;
         this.taken = taken;
+        this.charCube = new char[6][9];
     }
 
     public void rubiksCubeSimulator(Item item) {
-        char[] up = new char[] {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'};
-        char[] front = new char[] {'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G'};
-        char[] right = new char[] {'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'};
-        char[] back = new char[] {'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'};
-        char[] left = new char[] {'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'};
-        char[] down = new char[] {'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'};
-        char[][] cube = new char[][] {up, front, right, back, left, down};
-
-        System.out.println("                                   ______");
-        System.out.println("      W W W                       |      |");
-        System.out.println("      W W W                       |   U  |");
-        System.out.println("      W W W                 ______|______|______ ______");
-        System.out.println("O O O G G G R R R B B B    |      |      |      |      |");
-        System.out.println("O O O G G G R R R B B B    |   L  |   F  |   R  |   B  |");
-        System.out.println("O O O G G G R R R B B B    |______|______|______|______|");
-        System.out.println("      Y Y Y                       |      |");
-        System.out.println("      Y Y Y                       |   D  |");
-        System.out.println("      Y Y Y                       |______|");
-        System.out.println("Possible commands:\nb, f, u, d, l, or r for face turns\nm, s, or e for slice turns\nx, y, or z and all prime for cube turns\n"
-                + "or any combination of these, separated by a space\nAdd a ' after a letter for a counterclockwise turn\nAdd a 2 after a letter for a 180 degree turn\nq or quit to stop playing");
+        System.out.println("         _______");
+        System.out.println("        |       |                      f - front clockwise");
+        System.out.println("        |   U   |                      r' - right counterclockwise");
+        System.out.println(" _______|_______|_______ _______       d2 - down 180 degrees");
+        System.out.println("|       |       |       |       |      m - l but only middle layer");
+        System.out.println("|   L   |   F   |   R   |   B   |      s - f but only middle layer");
+        System.out.println("|_______|_______|_______|_______|      e' - u' but only middle layer");
+        System.out.println("        |       |                      x - r but rotate whole cube");
+        System.out.println("        |   D   |                      y' - u' but turn whole cube");
+        System.out.println("        |_______|                      z - f but turn whole cube");
+        System.out.println("q - exit game");
+        System.out.println("h - show instructions");
+        System.out.println();
+        printCube(((Cube)item).charCube);
+        if(isSolved(((Cube) item).charCube)) {
+            System.out.println("You solved it!! Something neat happened");
+            return;
+        }
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while(!(input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q"))) {
-            findTurn(cube, input, item);
+        while(!input.equalsIgnoreCase("q")) {
+            findTurn(((Cube) item).charCube, input);
+            printCube(((Cube) item).charCube);
+            if(isSolved(((Cube) item).charCube)) {
+                System.out.println("You solved it!! Something neat happens");
+                break;
+            }
             input = sc.nextLine();
         }
-        if(input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
-            System.out.println("Thank you for playing!");
+        if(input.equalsIgnoreCase("q")) {
+            System.out.println("OK");
         }
     }
 
@@ -47,15 +60,9 @@ public class Cube extends Item {
      * String array: letters, check for quit, check for wrong multiple entries, loop through
      * letters and go to respective method based on letter, any other letter is invalid
      */
-    public static void findTurn(char[][] cube, String input, Item item) {
+    public static void findTurn(char[][] cube, String input) {
         String[] commands = input.split(" ");
 
-//        if(item.locationPrint.equals("")) {           TODO scramble only first time you start playing with the cube
-//            int[] turns = ScrambleGenerator.generateScramble();
-//            String algorithm = ScrambleGenerator.writeScramble(turns);
-//            System.out.println();
-//            findTurn(cube, algorithm, item);
-//        }
         for(int i = 0; i < commands.length; i++) {
             String command = commands[i];
             if(input.equalsIgnoreCase("help") || input.equalsIgnoreCase("h")) {
@@ -69,10 +76,10 @@ public class Cube extends Item {
                 System.out.println("           |      |");
                 System.out.println("           |   D  |");
                 System.out.println("           |______|");
-                System.out.println("Possible commands:\nb, f, u, d, l, or r for face turns\nm, s, or e for slice turns\nx, y, or z and all prime for cube turns\n"
-                        + "or any combination of these, separated by a space\nAdd a ' after a letter for a counterclockwise turn\nAdd a 2 after a letter for a 180 degree turn\nq or quit to stop playing");
+                System.out.println("f - front clockwise\nr' - right counterclockwise\nd2 - down 180 degrees\nx - r but rotate whole cube\ny' - u' but turn whole cube\nz - f but turn whole cube\nm - l but only middle layer\ne' - u' but only middle layer\ns - f but only middle layer");
+                System.out.println();
             }
-            if(command.equalsIgnoreCase("u") || command.equalsIgnoreCase("u'") || command.equalsIgnoreCase("u2"))
+            else if(command.equalsIgnoreCase("u") || command.equalsIgnoreCase("u'") || command.equalsIgnoreCase("u2"))
                 upTurn(cube, command);
             else if(command.equalsIgnoreCase("f") || command.equalsIgnoreCase("f'") || command.equalsIgnoreCase("f2"))
                 frontTurn(cube, command);
@@ -96,19 +103,19 @@ public class Cube extends Item {
                 yCubeTurn(cube, command);
             else if(command.equalsIgnoreCase("z") || command.equalsIgnoreCase("z'") || command.equalsIgnoreCase("z2"))
                 zCubeTurn(cube, command);
-            else if(i > 0 && command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("q") ||
-                    command.equalsIgnoreCase("help") || command.equalsIgnoreCase("h") || command.equalsIgnoreCase("scramble")) {
-                System.out.println("Invalid input!");
-                break;
-            }
+//            else if(i > 0 && command.equalsIgnoreCase("q") ||
+//                    command.equalsIgnoreCase("help") || command.equalsIgnoreCase("h")) {
+//                System.out.println("Invalid input!");
+//                break;
+//            }
             else {
                 System.out.println("Invalid input!");
                 break;
             }
         }
-        if(!(input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("h") || input.equalsIgnoreCase("help") || input.equalsIgnoreCase("scramble"))) {
-            printCube(cube);
-        }
+//        if(!(input.equalsIgnoreCase("q") || input.equalsIgnoreCase("h") || input.equalsIgnoreCase("help"))) {
+//            printCube(cube);
+//        }
     }
 
     /*Update d char array and other arrays a D turn would affect*/
@@ -579,5 +586,17 @@ public class Cube extends Item {
         System.out.println("      " + d[0] +  " " + d[1] + " " + d[2]);
         System.out.println("      " + d[3] +  " " + d[4] + " " + d[5]);
         System.out.println("      " + d[6] +  " " + d[7] + " " + d[8]);
+    }
+
+    public boolean isSolved(char[][] cube) {
+
+        for(int i = 1; i < cube.length; i++) {
+            for(int j = 0; j < cube[i].length; j++) {
+                if(cube[i][0] != cube[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

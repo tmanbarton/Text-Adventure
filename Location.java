@@ -8,14 +8,16 @@ public class Location {
     Location previousLocation;                  // The last Location you were at. "back" will take you there
     boolean visited;                            // Has this location been visited yet? Used to know what to print for description
     String name;
+    String shortDescription;
 
-    public Location(String description, ArrayList<Item> items, ArrayList<ConnectingLocation> connectingLocations, Location previousLocation, boolean visited, String name) {
+    public Location(String description, String shortDescription, ArrayList<Item> items, ArrayList<ConnectingLocation> connectingLocations, Location previousLocation, boolean visited, String name) {
         this.description = description;
         this.items = items;
         this.connectingLocations = connectingLocations;
         this.previousLocation = previousLocation;
         this.visited = visited;
         this.name = name;
+        this.shortDescription = shortDescription;
     }
 
     public Location(){}
@@ -73,10 +75,15 @@ public class Location {
         // Everything's right for getting an Item.
         else {
             Item toGet = Main.findItem(input, location.items);
-            if(input.equals("cube") && toGet instanceof Cube && !((Cube) toGet).taken) {
+            if(input.equals("cube") && location instanceof GraniteRoom && !((GraniteRoom)location).puzzleTaken) {
                 toGet.locationPrint = "There is a plastic cube puzzle lying on the ground";
-                ((Cube) toGet).taken = true;
+                ((GraniteRoom)location).puzzleTaken = true;
                 location.description = "There is a polished granite pedestal, black as night, in the middle of this room\nwith walls of the same black rock.";
+            }
+            else if(input.equals("ruby") && location instanceof RubyOnRails && !((RubyOnRails)location).rubyTaken) {
+                toGet.locationPrint = "A large ruby lays on the ground";
+                ((RubyOnRails)location).rubyTaken = true;
+                location.description = "You've reached a dead end. A crumpled mine cart, no longer able to run on the rails, has fallen on its\nside.";
             }
             Main.addAndRemove(inventory, location.items, toGet);
             System.out.println("OK");
