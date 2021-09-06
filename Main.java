@@ -25,9 +25,11 @@ public class Main implements Comparator<Item> {
     String lightningTreeDescription;
     String mineEntranceDescription;
     String mineShaftDescription;
+    String fieldsOfGrassDescription;
     String mustyBendDescription;
     String narrowCorridorDescription;
     String outsideLogCabinDescription;
+    String outsideMineCageDescription;
     String outsideTavernDescription;
     String picnicTableDescription;
     String privatePropertyDescription;
@@ -36,7 +38,7 @@ public class Main implements Comparator<Item> {
     String shedDescription;
     String insideTavernDescription;
     String topOfHillDescription;
-    String topOfMountainPassDescription;
+    String mountainPassDescription;
     String topOfStairsDescription;
     String upstairsLogCabinDescription;
     String undergroundLakeWestDescription;
@@ -88,6 +90,7 @@ public class Main implements Comparator<Item> {
         drivewayDescription = "You are at the west end of a dirt road surrounded by a forest of pine trees with a small gap to the\nnorth that exposes a steep, dirt driveway sloping down into the forest. Looking down the road to the\neast you can see over the trees and into the valley. There you see what might be the shimmering of\na lake in the mountain sun. There's also a foot path going northwest.";
         dynamiteHolesDescription = "There are a bunch of holes drilled in the wall here. The miners of old must have thought about\nusing dynamite to blow up this part but changed their minds. The rails split again. The railway now\nleads down, north, and up a slope to the sw.";
         eastEndOfSideStreetDescription = "You are at the east end of a side street in an abandoned gold mining town. The main street goes\nnorth and south form here.";
+        fieldsOfGrassDescription = "Fields of grass surround you. The road goes south into the valley and to the east it winds up the mountain, turning north.";
         footPathDescription = "You're on a foot path in the middle of a dense forest. Large pine trees are all around you. The path\ngoes south and east.";
         graniteRoomDescription = "On a polished granite pedestal, black as night, in the middle of this room\nwith walls of the same black rock sits a plastic puzzle. It is a 3 x 3 x 3 cube with different\ncolored stickers for each side in stark contrast of the black consuming the room. The sides can be\nturned. It is scrambled. The only exit is to the west.";
         insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace on the west wall with a magnificent fire\nburning inside. There's a little sign hanging on the wall next to the fireplace that reads \"Portal\nRoom\" and there's a spiral staircase in one corner."; // TODO maybe add a portal room or something like that
@@ -100,21 +103,23 @@ public class Main implements Comparator<Item> {
         mustyBendDescription = "You're at a bend in the rails with a musty feel in the air. The rails go east and south here.";
         narrowCorridorDescription = "You are in a long, narrow corridor. At the end of the corridor the rails split. One set going down\nto the ne and one continuing on north. At the western end the corridor widens a bit.";
         outsideLogCabinDescription = "You are in front of a log cabin that looks much less run-down than the rest of the town. A warm\nlight shines from the windows. A road goes south.";
+        outsideMineCageDescription = "";
         outsideTavernDescription = "On the east side of the road is a tavern with a wooden sign hanging above the door with\n\"Tommyknocker Tavern\" etched into it. Here is the former heartbeat of the town, now a dump of a\nplace. Its roof has caved in and the walls look as if they could collapse at any moment.";
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther north a\nshed peeks through the trees. A tidy trail leads south.";
         privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. There are a couple\n\"Private Property! Keep Off!\" signs nailed to trees, but no gates or anything so the owners aren't\ntoo concerned about dealing with trespassers. A driveway continues north and a tidy trail leads off\ninto the forest to the northeast.";
-        roadInValleyDescription = "You're on a north-south road in the middle of a lush, green valley with grazing pastures all around.";
+        roadInValleyDescription = "You're on a north-south road in the middle of a lush, green valley with grazing pastures all around and a little stream runs under the road where you are.";
         rubyOnRailsDescription = "You've reached a dead end. A crumpled mine cart, no longer able to run on the rails, has fallen on its\nside and dumped a large ruby onto the rails.";
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and its doors firmly shut\nand locked, the one and only thing that needs to be on this plot of land.";
         insideTavernDescription = "The Tommyknocker Tavern looks just as shabby on the inside as it does on the outside with all of its\nfurnishings falling apart and a dusty smell in the air.";
         topOfHillDescription = "You are at the top of a steep hill and have a magnificent view of the lush, green valley. The road\ngoes into the trees to the west and down the hill to the south.";
-        topOfMountainPassDescription = "The road you're on has reached a mountain pass. This vantage point gives a magnificent view of the valley. ";
+        mountainPassDescription = "The road you're on has reached a mountain pass. This vantage point gives a magnificent view of the\nvalley. The road goes down the mountain to the south and there's a working mine cage to the west.";
         topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill. The stairs are next to a street\nrunning east and west in the abandoned gold mining town. A dam is to the south at the bottom of\nthe stairs.";
         upstairsLogCabinDescription = "The second floor of this cabin isn't nearly as well kept as the first floor. There are cob webs\nall over and dust blankets every uncovered surface. There's a spiral staircase going back to the\nfirst floor.";
         undergroundLakeWestDescription = "You are on the west side of a large underground lake with a rickety wooden boat at the shore. Looks\nlike the place flooded long after it was abandoned. There are two passages across the lake from\nwhere you are standing: one going east and one going northeast. There's a dim light coming from\naround a corner to the south.";
         undergroundLakeEastDescription = "You are on the east side of a large underground lake. There are passages to the west an ne across\nthe lake. There's a dim light coming from the west one and the tunnel you're in now continues to the east.";
         undergroundLakeNEDescription = "You are on the ne side of a large underground lake. There are passages to the west and east across\nthe lake. Mine rails lead into a passage to the east from where you are.";
         westEndOfSideStreetDescription = "You are at the west and of a side street in an abandoned gold mining town. Branching off from this\nstreet is a smaller road to the north.";
+
         // Arraylists that contain all possible, valid inputs for directions. Use for location objects
         north = new ArrayList<>(Arrays.asList("north", "n", "go north", "go n", "walk north", "walk n", "run north", "run n"));
         south = new ArrayList<>(Arrays.asList("south", "s", "go south", "go s", "walk south", "walk s", "run south", "run s"));
@@ -128,6 +133,7 @@ public class Main implements Comparator<Item> {
         down = new ArrayList<>(Arrays.asList("down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d"));
         in = new ArrayList<>(Arrays.asList("in", "go in"));
         out = new ArrayList<>(Arrays.asList("out", "go out"));
+
         // One big arraylist containing all possible direction commands to check if the entered command was a direction
         directions = new ArrayList<>(Arrays.asList("north", "n", "go north", "go n", "walk north", "walk n", "run north", "run n",
                 "south", "s", "go south", "go s", "walk south", "walk s", "run south", "run s",
@@ -141,6 +147,7 @@ public class Main implements Comparator<Item> {
                 "down", "d", "go down", "go d", "walk down", "walk d", "run down", "run d",
                 "in", "go in", "out", "go out", "back", "go back"));
 
+        // Items that are added to locations when they are declared
         key = new Item(1, "There is a shiny key here", "Shiny key", "key");
         hammer = new Item(2, "There is a hammer here", "Hammer", "hammer");
         bow = new Item(3, "There is a bow here, strung an ready for shooting", "Bow", "bow");
@@ -160,7 +167,6 @@ public class Main implements Comparator<Item> {
     public static void main(String[] args) {
         Main m = new Main();
         // Locations for graph
-        Location tailings = new Location(m.tailingsDescription, "You're amongst piles of tailings", new ArrayList<>(), new ArrayList<>(), new Location(),  false, "abandoned gold mine");
         Location antHill = new Location(m.antHillDescription, "You're at a large ant hill", new ArrayList<>(), new ArrayList<>(), new Location(), false, "ant hill");
         Location archeryRange = new Location(m.archeryRangeDescription, "You're at Archery Range", new ArrayList<>(), new ArrayList<>(), new Location(),false, "archery range");
         Location bottomOfVerticalMineShaft = new Location(m.bottomOfVerticalMineShaftDescription, "You are at the bottom of a vertical mine shaft", new ArrayList<>(), new ArrayList<>(), new Location(), false, "bottom of vertical mine shaft");
@@ -172,6 +178,7 @@ public class Main implements Comparator<Item> {
         Location driveway = new Location(m.drivewayDescription, "You're at Driveway", new ArrayList<>(), new ArrayList<>(), new Location(), false, "driveway");
         Location dynamiteHoles = new Location(m.dynamiteHolesDescription, "You're by a section of wall with holes drilled for dynamite", new ArrayList<>(), new ArrayList<>(), new Location(), false, "dynamite holes");
         Location eastEndOfSideStreet = new Location(m.eastEndOfSideStreetDescription, "You're at the east end of the main street", new ArrayList<>(), new ArrayList<>(), new Location(), false, "east end of side street");
+        Location fieldsOfGrass = new Location(m.fieldsOfGrassDescription, "You're surrounded by fields of grass", new ArrayList<>(), new ArrayList<>(), new Location(), false, "fields of grass");
         Location footPath = new Location(m.footPathDescription, "You're on a foot path", new ArrayList<>(), new ArrayList<>(), new Location(), false, "foot path");
         Location insideLogCabin = new Location(m.insideLogCabinDescription, "You're inside Log Cabin", new ArrayList<>(Collections.singletonList(m.magnet)), new ArrayList<>(), new Location(), false, "inside log cabin");
         Location intersection = new Location(m.intersectionDescription, "You're at an intersection in the road", new ArrayList<>(), new ArrayList<>(), new Location(), false, "intersection");
@@ -179,6 +186,7 @@ public class Main implements Comparator<Item> {
         Location lakeTown = new Location(m.lakeTownDescription, "You are next to Lake Town", new ArrayList<>(), new ArrayList<>(), new Location(), false, "lake town");
         Location lightningTree = new Location(m.lightningTreeDescription, "You're at Lightning Tree", new ArrayList<>(), new ArrayList<>(), new Location(), false, "lightning tree");
         Location mineShaft = new Location(m.mineShaftDescription, "You're in Mine Shaft", new ArrayList<>(), new ArrayList<>(), new Location(), false, "mine shaft");
+        Location mountainPass = new Location(m.mountainPassDescription, "You're at the top of a mountain pass", new ArrayList<>(), new ArrayList<>(), new Location(), false, "mountain pass");
         Location mustyBend = new Location(m.mustyBendDescription, "You're at a musty bend", new ArrayList<>(), new ArrayList<>(), new Location(), false, "musty bend");
         Location narrowCorridor = new Location(m.narrowCorridorDescription, "You're in a narrow corridor", new ArrayList<>(), new ArrayList<>(), new Location(), false, "narrow corridor");
         Location outsideLogCabin = new Location(m.outsideLogCabinDescription, "You're outside Log Cabin", new ArrayList<>(), new ArrayList<>(), new Location(), false, "outside log cabin");
@@ -187,6 +195,7 @@ public class Main implements Comparator<Item> {
         Location privateProperty = new Location(m.privatePropertyDescription, "You're at Private Property", new ArrayList<>(), new ArrayList<>(), new Location(), false, "private property");
         Location roadInValley = new Location(m.roadInValleyDescription, "You're on a road in a valley", new ArrayList<>(), new ArrayList<>(), new Location(), false, "road in a valley");
         Location insideTavern = new Location(m.insideTavernDescription, "You're inside the Tommyknocker Tavern", new ArrayList<>(), new ArrayList<>(), new Location(), false, "Tommyknocker Tavern");
+        Location tailings = new Location(m.tailingsDescription, "You're amongst piles of tailings", new ArrayList<>(), new ArrayList<>(), new Location(),  false, "abandoned gold mine");
         Location topOfHill = new Location(m.topOfHillDescription, "You're at Top of Hill", new ArrayList<>(), new ArrayList<>(), new Location(), false, "top of hill");
         Location topOfStairs = new Location(m.topOfStairsDescription, "You're at Top of Stairs", new ArrayList<>(), new ArrayList<>(), new Location(), false, "top of stairs");
         Location undergroundLakeWest = new Location(m.undergroundLakeWestDescription, "You're on the west side of an underground lake", new ArrayList<>(), new ArrayList<>(), new Location(), false, "north side of underground lake");
@@ -200,106 +209,116 @@ public class Main implements Comparator<Item> {
         Shed shed = new Shed(m.shedDescription, "You're standing before a cheerful little shed", new ArrayList<>(), new ArrayList<>(), new Shed(), false, "shed", false, false);
         RubyOnRails rubyOnRails = new RubyOnRails(m.rubyOnRailsDescription, "You're at Ruby On Rails", new ArrayList<>(Collections.singletonList(m.ruby)), new ArrayList<>(), new Location(), false, "ruby on rails", false);
         MineEntrance mineEntrance = new MineEntrance(m.mineEntranceDescription, "You're at the entrance of an abandoned gold mine", new ArrayList<>(Collections.singletonList(m.gold)), new ArrayList<>(), new MineEntrance(), false, "mine entrance", false);
-        // Add locations to connectingLocations arraylist parameter of Location to create graph
-        // Some ConnectingLocations have in and out as directions since that will get you to another location in addition to entering a direction
-        tailings.connectingLocations.add(new ConnectingLocation(m.south, mineEntrance));
-        tailings.connectingLocations.add(new ConnectingLocation(m.east, lake));
-        tailings.connectingLocations.add(new ConnectingLocation(m.west, intersection));
+
+        // Create graph
         antHill.connectingLocations.add(new ConnectingLocation(m.west, ditch));
-        archeryRange.connectingLocations.add(new ConnectingLocation(m.south, privateProperty));
         archeryRange.connectingLocations.add(new ConnectingLocation(m.north, ditch));
-        boat.connectingLocations.add(new ConnectingLocation(m.west, undergroundLakeWest));
+        archeryRange.connectingLocations.add(new ConnectingLocation(m.south, privateProperty));
         boat.connectingLocations.add(new ConnectingLocation(m.east, undergroundLakeEast));
+        boat.connectingLocations.add(new ConnectingLocation(m.west, undergroundLakeWest));
         boat.connectingLocations.add(new ConnectingLocation(m.northeast, undergroundLakeNE));
         bottomOfVerticalMineShaft.connectingLocations.add(new ConnectingLocation(m.west, dankPassage));
 //        bottomOfVerticalMineShaft.connectingLocations.add(new ConnectingLocation(m.in, mine cage));
         brokenRock.connectingLocations.add(new ConnectingLocation(m.down, dirtyPassage));
-        dam.connectingLocations.add(new ConnectingLocation(m.south, lake));
         dam.connectingLocations.add(new ConnectingLocation(m.north, topOfStairs));
+        dam.connectingLocations.add(new ConnectingLocation(m.south, lake));
         dam.connectingLocations.add(new ConnectingLocation(m.up, topOfStairs));
         dam.connectingLocations.add(new ConnectingLocation(null, lakeTown));
         dam.connectingLocations.add(new ConnectingLocation(null, lakeTown));
         dankPassage.connectingLocations.add(new ConnectingLocation(m.south, narrowCorridor));
         dankPassage.connectingLocations.add(new ConnectingLocation(m.east, bottomOfVerticalMineShaft));
         dankPassage.connectingLocations.add(new ConnectingLocation(m.west, mustyBend));
-        dirtRoad.connectingLocations.add(new ConnectingLocation(m.west, driveway));
         dirtRoad.connectingLocations.add(new ConnectingLocation(m.east, intersection));
-        dirtyPassage.connectingLocations.add(new ConnectingLocation(m.west, undergroundLakeNE));
+        dirtRoad.connectingLocations.add(new ConnectingLocation(m.west, driveway));
         dirtyPassage.connectingLocations.add(new ConnectingLocation(m.east, narrowCorridor));
+        dirtyPassage.connectingLocations.add(new ConnectingLocation(m.west, undergroundLakeNE));
         dirtyPassage.connectingLocations.add(new ConnectingLocation(m.up, brokenRock));
-        ditch.connectingLocations.add(new ConnectingLocation(m.west, lightningTree));
-        ditch.connectingLocations.add(new ConnectingLocation(m.east, antHill));
         ditch.connectingLocations.add(new ConnectingLocation(m.south, archeryRange));
-        driveway.connectingLocations.add(new ConnectingLocation(m.east, dirtRoad));
+        ditch.connectingLocations.add(new ConnectingLocation(m.east, antHill));
+        ditch.connectingLocations.add(new ConnectingLocation(m.west, lightningTree));
         driveway.connectingLocations.add(new ConnectingLocation(m.north, privateProperty));
+        driveway.connectingLocations.add(new ConnectingLocation(m.east, dirtRoad));
         driveway.connectingLocations.add(new ConnectingLocation(m.northwest, footPath));
         driveway.connectingLocations.add(new ConnectingLocation(m.down, privateProperty));
         dynamiteHoles.connectingLocations.add(new ConnectingLocation(m.north, mustyBend));
         dynamiteHoles.connectingLocations.add(new ConnectingLocation(m.southwest, narrowCorridor));
         dynamiteHoles.connectingLocations.add(new ConnectingLocation(m.up, narrowCorridor));
         dynamiteHoles.connectingLocations.add(new ConnectingLocation(m.down, rubyOnRails));
-        eastEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.south, outsideTavern));
         eastEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.north, roadInValley));
+        eastEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.south, outsideTavern));
         eastEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.west, topOfStairs));
+        fieldsOfGrass.connectingLocations.add(new ConnectingLocation(m.south, roadInValley));
+        fieldsOfGrass.connectingLocations.add(new ConnectingLocation(m.east, mountainPass));
+        fieldsOfGrass.connectingLocations.add(new ConnectingLocation(m.up, mountainPass));
         footPath.connectingLocations.add(new ConnectingLocation(m.south, driveway));
         footPath.connectingLocations.add(new ConnectingLocation(m.east, topOfHill));
         graniteRoom.connectingLocations.add(new ConnectingLocation(m.west, undergroundLakeEast));
         graniteRoom.connectingLocations.add(new ConnectingLocation(m.out, undergroundLakeEast));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(m.east, outsideLogCabin));
-        insideLogCabin.connectingLocations.add(new ConnectingLocation(m.out, outsideLogCabin));
         insideLogCabin.connectingLocations.add(new ConnectingLocation(m.up, upstairsLogCabin));
-        intersection.connectingLocations.add(new ConnectingLocation(m.west, dirtRoad));
+        insideLogCabin.connectingLocations.add(new ConnectingLocation(m.out, outsideLogCabin));
         intersection.connectingLocations.add(new ConnectingLocation(m.north, topOfHill));
         intersection.connectingLocations.add(new ConnectingLocation(m.south, tailings));
-        lake.connectingLocations.add(new ConnectingLocation(m.west, tailings));
+        intersection.connectingLocations.add(new ConnectingLocation(m.west, dirtRoad));
+        insideTavern.connectingLocations.add(new ConnectingLocation(m.west, outsideTavern));
+        insideTavern.connectingLocations.add(new ConnectingLocation(m.out, outsideTavern));
         lake.connectingLocations.add(new ConnectingLocation(m.north, dam));
-        lakeTown.connectingLocations.add(new ConnectingLocation(m.east, dam)); // TODO east goes farther into the town
+        lake.connectingLocations.add(new ConnectingLocation(m.west, tailings));
+        lakeTown.connectingLocations.add(new ConnectingLocation(m.east, dam));
+//        lakeTown.connectingLocations.add(new ConnectingLocation(m.west, farther into the town));
         lakeTown.connectingLocations.add(new ConnectingLocation(m.up, dam));
         lightningTree.connectingLocations.add(new ConnectingLocation(m.east, ditch));
-        mineShaft.connectingLocations.add(new ConnectingLocation(m.west, mineEntrance));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.east, undergroundLakeWest));
+        mineShaft.connectingLocations.add(new ConnectingLocation(m.west, mineEntrance));
         mineShaft.connectingLocations.add(new ConnectingLocation(m.out, mineEntrance));
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.north, tailings));
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.east, mineShaft));
         mineEntrance.connectingLocations.add(new ConnectingLocation(m.in, mineShaft));
+        mountainPass.connectingLocations.add(new ConnectingLocation(m.south, fieldsOfGrass));
+//        mountainPass.connectingLocations.add(new ConnectingLocation(m.west, mine cage));
+        mountainPass.connectingLocations.add(new ConnectingLocation(m.down, fieldsOfGrass));
         mustyBend.connectingLocations.add(new ConnectingLocation(m.south, dynamiteHoles));
         mustyBend.connectingLocations.add(new ConnectingLocation(m.east, dankPassage));
+        narrowCorridor.connectingLocations.add(new ConnectingLocation(m.north, dankPassage));
         narrowCorridor.connectingLocations.add(new ConnectingLocation(m.west, dirtyPassage));
         narrowCorridor.connectingLocations.add(new ConnectingLocation(m.northeast, dynamiteHoles));
         narrowCorridor.connectingLocations.add(new ConnectingLocation(m.down, dynamiteHoles));
-        narrowCorridor.connectingLocations.add(new ConnectingLocation(m.north, dankPassage));
         outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.south, westEndOfSideStreet));
         outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.west, insideLogCabin));
         outsideLogCabin.connectingLocations.add(new ConnectingLocation(m.in, insideLogCabin));
+
         outsideTavern.connectingLocations.add(new ConnectingLocation(m.north, eastEndOfSideStreet));
+//        outsideTavern.connectingLocations.add(new ConnectingLocation(m.south, head towards colorado springs?));
         outsideTavern.connectingLocations.add(new ConnectingLocation(m.east, insideTavern));
         outsideTavern.connectingLocations.add(new ConnectingLocation(m.in, insideTavern));
-        picnicTable.connectingLocations.add(new ConnectingLocation(m.south, privateProperty));
         picnicTable.connectingLocations.add(new ConnectingLocation(m.north, shed));
-        privateProperty.connectingLocations.add(new ConnectingLocation(m.south, driveway));
+        picnicTable.connectingLocations.add(new ConnectingLocation(m.south, privateProperty));
         privateProperty.connectingLocations.add(new ConnectingLocation(m.north, archeryRange));
+        privateProperty.connectingLocations.add(new ConnectingLocation(m.south, driveway));
         privateProperty.connectingLocations.add(new ConnectingLocation(m.northeast, picnicTable));
+        roadInValley.connectingLocations.add(new ConnectingLocation(m.north, fieldsOfGrass));
         roadInValley.connectingLocations.add(new ConnectingLocation(m.south, eastEndOfSideStreet));
         rubyOnRails.connectingLocations.add(new ConnectingLocation(m.up, dynamiteHoles));
         shed.connectingLocations.add(new ConnectingLocation(m.south, picnicTable));
-        insideTavern.connectingLocations.add(new ConnectingLocation(m.west, outsideTavern));
-        insideTavern.connectingLocations.add(new ConnectingLocation(m.out, outsideTavern));
-        topOfHill.connectingLocations.add(new ConnectingLocation(m.west, footPath));
+        tailings.connectingLocations.add(new ConnectingLocation(m.south, mineEntrance));
+        tailings.connectingLocations.add(new ConnectingLocation(m.east, lake));
+        tailings.connectingLocations.add(new ConnectingLocation(m.west, intersection));
         topOfHill.connectingLocations.add(new ConnectingLocation(m.south, intersection));
+        topOfHill.connectingLocations.add(new ConnectingLocation(m.west, footPath));
         topOfHill.connectingLocations.add(new ConnectingLocation(m.down, intersection));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.south, dam));
-        topOfStairs.connectingLocations.add(new ConnectingLocation(m.down, dam));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.east, eastEndOfSideStreet));
         topOfStairs.connectingLocations.add(new ConnectingLocation(m.west, westEndOfSideStreet));
-        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.in, boat));
+        topOfStairs.connectingLocations.add(new ConnectingLocation(m.down, dam));
         undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.south, mineShaft));
-        undergroundLakeNE.connectingLocations.add(new ConnectingLocation(m.in, boat));
+        undergroundLakeWest.connectingLocations.add(new ConnectingLocation(m.in, boat));
         undergroundLakeNE.connectingLocations.add(new ConnectingLocation(m.east, dirtyPassage));
-        undergroundLakeEast.connectingLocations.add(new ConnectingLocation(m.in, boat));
+        undergroundLakeNE.connectingLocations.add(new ConnectingLocation(m.in, boat));
         undergroundLakeEast.connectingLocations.add(new ConnectingLocation(m.east, graniteRoom));
+        undergroundLakeEast.connectingLocations.add(new ConnectingLocation(m.in, boat));
         upstairsLogCabin.connectingLocations.add(new ConnectingLocation(m.down, insideLogCabin));
-        westEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.east, topOfStairs));
         westEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.north, outsideLogCabin));
+        westEndOfSideStreet.connectingLocations.add(new ConnectingLocation(m.east, topOfStairs));
 
         char[] up_ = {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'};
         char[] front = {'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G'};
@@ -316,8 +335,8 @@ public class Main implements Comparator<Item> {
         ArrayList<Item> inventory = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-        Location currentLocation = driveway;
-//        Location currentLocation = bottomOfVerticalMineShaft;
+//        Location currentLocation = driveway;
+        Location currentLocation = roadInValley;
 //        inventory.add(m.cube);
 //        dam.items.add(m.magnet);
 //        dam.items.add(m.jar);
