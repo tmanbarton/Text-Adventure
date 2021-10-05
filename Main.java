@@ -76,27 +76,27 @@ public class Main implements Comparator<Item> {
 
     public Main() {
         // Location descriptions
-        tailingsDescription = "All around are piles of tailings that look like they have been puked into this valley. There's not\nmuch else to be seen except the entrance to a mine to the south. The shimmering in the east is\ndefinitely a lake and there's a path leading in that direction.";
+        tailingsDescription = "All around are piles of tailings that look like they have been puked into this valley. There's not\nmuch else to be seen except the entrance to a mine to the south. The shimmering in the east is\ndefinitely a lake and there's a path leading in that direction and another to the north.";
         antHillDescription = "Nearby is an ant hill with little black ants scurrying about doing their business."; //TODO if input is "dig" and you have the shovel, reveal a salamander in ant hill. Then you can get the salamander
         archeryRangeDescription = "You step in front of two archery targets made of hay bales and spray-painted circles that are in an\narchery range made from a rope tied to four trees, creating a rectangle. There's a ditch to the north\nand a long driveway leading south.";
         boatDescription = "You're sitting in a rickety wooden boat in a large underground lake with passages to the west,\neast, and northeast.";
         bottomOfVerticalMineShaftDescription = "You are at the bottom of a vertical mine shaft with a working mine cage. Next to the mine cage is a\nbutton labeled \"Up/Down\". A mine railway starts here and runs west";
         brokenRockDescription = "The only thing up here is a bunch of broken rock.";
-        damDescription = "You're on a short dam that created this lake by stopping up a large river. The dam\ngoes north and south along the east end of the lake. Close by is a wheel with it's axel extending\ndeep into the dam. It's orange metal has faded to rust except for some different metal at the center,\nshining in the sun. South leads around the lake and to the north there's a set of stairs.";
+        damDescription = "You're on a short dam that created this lake by stopping up a large river. The dam\ngoes north and south along the east end of the lake. Close by is a wheel with its axel extending\ndeep into the dam. Its orange metal has faded to rust except for some different metal at the center,\nshining in the sun. South leads around the lake and to the north there's a set of stairs.";
         dankPassageDescription = "The walls and floor here are wet. The dank atmosphere of this place makes it a little muggy. The\nrails go west and you can see some metal equipment to the east.";
-        dirtRoadDescription = "You are on a badly washboarded dirt road in dire need of maintenance that extends far west and\nruns winding down the hill to the east. Pine forests hug the road on both sides.";
+        dirtRoadDescription = "You are on a badly washboarded dirt road in dire need of maintenance that extends far west. It runs\nwinding down the hill to the east. Pine forests hug the road on both sides.";
         dirtyPassageDescription = "You're in a dirty broken passage. To the west the passage gets wider. To the east the passage\nnarrows. Above you part of the ceiling caved in, leaving a hole and a pile of debris that cover the\nrails.";
         ditchDescription = "You are in the middle of the forest standing in a small ditch running east and west.";
-        drivewayDescription = "You are at the west end of a dirt road surrounded by a forest of pine trees with a small gap to the\nnorth that exposes a steep, dirt driveway sloping down into the forest. Looking down the road to the\neast you can see over the trees and into the valley. There you see what might be the shimmering of\na lake in the mountain sun. There's also a foot path going northwest.";
+        drivewayDescription = "You are at the west end of a dirt road surrounded by a forest of pine trees. There is a\nsmall gap to the north that exposes a steep, dirt driveway sloping down into the forest. Looking\ndown the road to the east you can see over the trees and into the valley. There you see what might\nbe the shimmering of a lake in the mountain sun. There's also a foot path going northwest.";
         dynamiteHolesDescription = "There are a bunch of holes drilled in the wall here. The miners of old must have thought about\nusing dynamite to blow up this part but changed their minds. The rails split again. The railway now\nleads down, north, and up a slope to the sw.";
         eastEndOfSideStreetDescription = "You are at the east end of a side street in an abandoned gold mining town. The main street goes\nnorth and south form here.";
-        fieldsOfGrassDescription = "Fields of grass surround you. The road goes south into the valley and to the east it winds up the mountain, turning north.";
+        fieldsOfGrassDescription = "Fields of grass surround you. The road goes south into the valley and to the east it winds up the\nmountain, turning north.";
         footPathDescription = "You're on a foot path in the middle of a dense forest. Large pine trees are all around you. The path\ngoes south and east.";
         graniteRoomDescription = "On a polished granite pedestal, black as night, in the middle of this room\nwith walls of the same black rock sits a plastic puzzle. It is a 3 x 3 x 3 cube with different\ncolored stickers for each side in stark contrast of the black consuming the room. The sides can be\nturned. It is scrambled. The only exit is to the west.";
-        insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace on the west wall with a magnificent fire\nburning inside. There's a little sign hanging on the wall next to the fireplace that reads \"Portal\nRoom\" and there's a spiral staircase in one corner."; // TODO maybe add a portal room or something like that
-        intersectionDescription = "You have reached an intersection in the road. It leads into the forest to the north and west. The\nsouthern road goes into a thinner part of the forest. The shimmering in the east looks very much\nlike a lake now.";
-        lakeDescription = "You are on the south side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going west and there's a dam to the north.";
-        lakeTownDescription = "You are in what once was a charming little town. Now there is dripping wet plant life from the\nrecently drained lake clinging to the buildings. The muddy ground squelches as you walk. To the\nwest is the dam and you can go farther into the town to the east.";
+        insideLogCabinDescription = "You are inside a well-kept log cabin with a huge fireplace burning a magnificent fire inside.\nThere's a little wooden sign hanging on the wall next to the fireplace that reads \"Run\" with 5\nrectangles in a line carved into the wood. In one corner there's a spiral staircase going upstairs."; // TODO Put a deck of cards somewhere and fill the 5 rectangles with a run of cards
+        intersectionDescription = "You have reached an intersection in the road. It leads into the forest to the north and west. The\nsouthern road goes into a thinner part of the forest. The shimmering, which is now in the south,\nlooks very much like a lake now.";
+        lakeDescription = "You are on the south side of a lake. The water sparkles in the intense sun and you can see far into\nthe clear water but the lake is very deep and there's nothing to see but lake bottom from here.\nThere's a path going west and there's a dam to the north.";    // TODO Get rid of lake when wheel turned
+        lakeTownDescription = "You are in what once was a charming little town. Now there is dripping wet plant life from the\nrecently drained lake clinging to the buildings. The muddy ground squelches as you walk. To the\neast is the dam and you can go farther into the town to the west.";
         lightningTreeDescription = "You're in a little clearing with a large tree in the middle that looks like it was struck by\nlightning a long time ago. The bark has long since fallen off and the remaining part of the tree\nis a reddish color.";
         mineEntranceDescription = "You've come to the entrance to this abandoned gold mine. The supports on it are looking a little\nworn and there are some loose nails that might come in handy if you could safely get them out of\nthe rotten wood. You could enter to the east if you're very careful. Piles of tailings are all\nover leaving one path away from the entrance to the north.";
         mineShaftDescription = "This is the mine shaft. It looks like it could cave in at any moment. There's a small wooden sign\nhere that says \"BEWARE OF TOMMYKNOCKERS\" with an ugly picture of one the green-skinned, dwarf-sized\ncreatures. The mine shaft continues east.";
@@ -104,10 +104,10 @@ public class Main implements Comparator<Item> {
         narrowCorridorDescription = "You are in a long, narrow corridor. At the end of the corridor the rails split. One set going down\nto the ne and one continuing on north. At the western end the corridor widens a bit.";
         outsideLogCabinDescription = "You are in front of a log cabin that looks much less run-down than the rest of the town. A warm\nlight shines from the windows. A road goes south.";
         outsideMineCageDescription = "";
-        outsideTavernDescription = "On the east side of the road is a tavern with a wooden sign hanging above the door with\n\"Tommyknocker Tavern\" etched into it. Here is the former heartbeat of the town, now a dump of a\nplace. Its roof has caved in and the walls look as if they could collapse at any moment.";
+        outsideTavernDescription = "On the east side of the road is a tavern with a wooden sign hanging above the door with\n\"Tommyknocker Tavern\" etched into it. Here is the former heartbeat of the town, now a dump of a\nplace. Its roof has caved in and the walls look as if they could collapse at any moment. The road\ngoes north from here.";
         picnicTableDescription = "A sturdy looking picnic table is in this little clearing you've stepped into and farther north a\nshed peeks through the trees. A tidy trail leads south.";
         privatePropertyDescription = "All around you is a dense pine forest that gives the air a friendly smell. There are a couple\n\"Private Property! Keep Off!\" signs nailed to trees, but no gates or anything so the owners aren't\ntoo concerned about dealing with trespassers. A driveway continues north and a tidy trail leads off\ninto the forest to the northeast.";
-        roadInValleyDescription = "You're on a north-south road in the middle of a lush, green valley with grazing pastures all around and a little stream runs under the road where you are.";
+        roadInValleyDescription = "You're on a north-south road in the middle of a lush, green valley with grazing pastures all around.\nThere is a little stream runs under the road where you are.";
         rubyOnRailsDescription = "You've reached a dead end. A crumpled mine cart, no longer able to run on the rails, has fallen on its\nside and dumped a large ruby onto the rails.";
         shedDescription = "Here is a cheerful shed with wood matching that of the picnic table's and its doors firmly shut\nand locked, the one and only thing that needs to be on this plot of land.";
         insideTavernDescription = "The Tommyknocker Tavern looks just as shabby on the inside as it does on the outside with all of its\nfurnishings falling apart and a dusty smell in the air.";
@@ -115,7 +115,7 @@ public class Main implements Comparator<Item> {
         mountainPassDescription = "The road you're on has reached a mountain pass. This vantage point gives a magnificent view of the\nvalley. The road goes down the mountain to the south and there's a working mine cage to the west.";
         topOfStairsDescription = "You are at the top of a set of wooden stairs embedded in the hill. The stairs are next to a street\nrunning east and west in the abandoned gold mining town. A dam is to the south at the bottom of\nthe stairs.";
         upstairsLogCabinDescription = "The second floor of this cabin isn't nearly as well kept as the first floor. There are cob webs\nall over and dust blankets every uncovered surface. There's a spiral staircase going back to the\nfirst floor.";
-        undergroundLakeWestDescription = "You are on the west side of a large underground lake with a rickety wooden boat at the shore. Looks\nlike the place flooded long after it was abandoned. There are two passages across the lake from\nwhere you are standing: one going east and one going northeast. There's a dim light coming from\naround a corner to the south.";
+        undergroundLakeWestDescription = "You are on the west side of a large underground lake with a rickety wooden boat at the shore. It\nlooks like the place flooded long after it was abandoned. There are two passages across the lake\nfrom where you are standing: one going east and one going northeast. There's a dim light coming from\naround a corner to the south.";
         undergroundLakeEastDescription = "You are on the east side of a large underground lake. There are passages to the west an ne across\nthe lake. There's a dim light coming from the west one and the tunnel you're in now continues to the east.";
         undergroundLakeNEDescription = "You are on the ne side of a large underground lake. There are passages to the west and east across\nthe lake. Mine rails lead into a passage to the east from where you are.";
         westEndOfSideStreetDescription = "You are at the west and of a side street in an abandoned gold mining town. Branching off from this\nstreet is a smaller road to the north.";
@@ -153,15 +153,15 @@ public class Main implements Comparator<Item> {
         bow = new Item(3, "There is a bow here, strung an ready for shooting", "Bow", "bow");
         arrow = new Item(4, "There is an arrow here", "Arrow", "arrow");
         jar = new Item(5, "There is a jar here.", "Jar", "jar");
-        gold = new Item(6, "There are some gold flakes on the ground here", "Gold flakes in jar", "gold");
-        shovel = new Item(8, "There is a shovel here", "Shovel", "shovel");
+        gold = new Item(6, "There are some gold flakes on the ground here.", "Gold flakes in jar", "gold");
+        shovel = new Item(8, "There is a shovel here.", "Shovel", "shovel");
         tent = new Item(9, "There is a tent here, packed neatly in a bag.", "Tent in bag", "tent");
         magnet = new Item(10, "There is a thick, circular magnet here, about the size of your palm.", "Magnet", "magnet");
         ruby = new Item(11, "A large ruby lays on the ground", "Ruby", "ruby");
         cube = new Cube(12, "There is a plastic cube puzzle lying on the ground", "Cube", "cube", false, false, null);
 
         // Lists of all valid verbs that the player can enter that are not directions.
-        allVerbs = new ArrayList<>(Arrays.asList("get", "drop", "inventory", "look", "throw", "open", "unlock", "turn", "shoot", "fill", "play"));
+        allVerbs = new ArrayList<>(Arrays.asList("get", "drop", "inventory", "look", "throw", "open", "unlock", "turn", "shoot", "fill", "solve"));
     }
 
     public static void main(String[] args) {
@@ -302,7 +302,7 @@ public class Main implements Comparator<Item> {
         shed.connectingLocations.add(new ConnectingLocation(m.south, picnicTable));
         tailings.connectingLocations.add(new ConnectingLocation(m.south, mineEntrance));
         tailings.connectingLocations.add(new ConnectingLocation(m.east, lake));
-        tailings.connectingLocations.add(new ConnectingLocation(m.west, intersection));
+        tailings.connectingLocations.add(new ConnectingLocation(m.north, intersection));
         topOfHill.connectingLocations.add(new ConnectingLocation(m.south, intersection));
         topOfHill.connectingLocations.add(new ConnectingLocation(m.west, footPath));
         topOfHill.connectingLocations.add(new ConnectingLocation(m.down, intersection));
@@ -332,27 +332,31 @@ public class Main implements Comparator<Item> {
         String algorithm = ScrambleGenerator.writeScramble(turns);
         Cube.findTurn(charCube, algorithm);
         // Arraylist of Items for when you get an Item from a location and a Scanner for input from keyboard
-        ArrayList<Item> inventory = new ArrayList<>();
-        Scanner scan = new Scanner(System.in);
+//        ArrayList<Item> inventory = new ArrayList<>();
+//        Scanner scan = new Scanner(System.in);
         // First location is driveway. Change for debugging
-//        Location currentLocation = driveway;
-        Location currentLocation = roadInValley;
+        Location currentLocation = driveway;
+//        Location currentLocation = roadInValley;
 //        inventory.add(m.cube);
 //        dam.items.add(m.magnet);
 //        dam.items.add(m.jar);
         currentLocation.previousLocation = currentLocation;
         currentLocation.visited = true;
 
+        m.mainGamePlay(currentLocation);
+    }
+
+    public void mainGamePlay(Location currentLocation) {
+        ArrayList<Item> inventory = new ArrayList<>();
+        Scanner scan = new Scanner(System.in);
+
         // Game introduction
-        System.out.println("You're on a mountain with an abandoned gold mining town somewhere nearby. One of the gold mines is\nsupposedly still accessible, but you've heard that tommyknockers are in the mines here. I'll tell\nyou now that the #1 rule with tommyknockers is if you hear knocking on the walls, the mine is about\nto collapse.\n");
-        System.out.println("Right now you are at the west end of a dirt road surrounded by a forest of pine trees with a small gap to the\nnorth that exposes a steep, dirt driveway sloping down into the forest. Looking down the road to the\neast you can see over the trees and into the valley. There you see what might be the shimmering of\na lake in the mountain sun. There's also a foot path going northwest.");
-        // Input will always be lowercase so don't have to worry about forgetting to check .equalsIgnoreCase
+        System.out.println("You're on a mountain with an abandoned gold mining town somewhere nearby. You've heard that one of\nthe gold mines is still accessible, but there have been stories of local miners seeing tommyknockers\nin the mines.");
+//        System.out.println("Would you like some help?");   //TODO Help text for if user wants some instruction
+        System.out.println(currentLocation.description);
         String input = scan.nextLine().toLowerCase();
-        // Always loop for main game play
+        // Main game play
         while(true) {
-            // End if input is "quit" -> "y"/"yes"
-            // Continue if input is "quit" -> "n"/"no"
-            // If "quit" -> anything else, anything else has to be yes or no
             if(input.equals("quit")) {
                 System.out.println("Are you sure you want to quit?");
                 input = scan.nextLine().toLowerCase();
@@ -370,7 +374,8 @@ public class Main implements Comparator<Item> {
                     continue;
                 }
             }
-            if(m.isDirection(input)) {
+            Main main = new Main();
+            if(main.isDirection(input)) {
                 // Loop through legal directions in the current location and compare to see if you can go that way
                 ArrayList<ConnectingLocation> currentConnections = currentLocation.connectingLocations;
                 for (int i = 0; i < currentLocation.connectingLocations.size(); i++) {
@@ -409,11 +414,11 @@ public class Main implements Comparator<Item> {
                 String[] inputArray = input.split(" ");
                 inputCheck = inputArray[0];
                 // Is input a generic verb that can be applied at any location?
-                if(m.allVerbs.contains(inputCheck) || (input.length() >= 5 && "inventory".contains(input))) {
+                if(main.allVerbs.contains(inputCheck) || (input.length() >= 5 && "inventory".contains(input))) {
                     findAction(input.toLowerCase(), currentLocation, inventory);
                 }
                 //If input isn't a legal verb, direction, or if it's "in" or "out" + another word, print one of 3 Strings to let user know it's not a legal input
-                else if(!(m.allVerbs.contains(inputCheck) || m.directions.contains(inputCheck)) || ((inputCheck.equals("out") || inputCheck.equals("in") || input.equals("unlock") || input.equals("open") || input.equals("shoot")) && inputArray.length >= 2)) {//                    Random r = new Random();
+                else if(!(main.allVerbs.contains(inputCheck) || main.directions.contains(inputCheck)) || ((inputCheck.equals("out") || inputCheck.equals("in") || input.equals("unlock") || input.equals("open") || input.equals("shoot")) && inputArray.length >= 2)) {
                     dontKnowWord();
                 }
             }
@@ -550,9 +555,9 @@ public class Main implements Comparator<Item> {
         else if(input.equals("turn")) {
             location.turn(location);
         }
-        else if(input.equals("play")) {
+        else if(input.equals("solve")) {
             if(!isItemHere("cube", inventory)) {
-                System.out.println("You have nothing to play with.");
+                System.out.println("You have nothing to solve.");
             }
             else {
                 new Main().cube.rubiksCubeSimulator(findItem("cube", inventory));
