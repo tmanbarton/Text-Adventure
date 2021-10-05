@@ -38,15 +38,12 @@ public class Shed extends Location {
 
     // Actions to take when open is entered at Shed location
     public void open(Shed shed) {
-        // Don't need to do anything if the shed is already open
         if(shed.opened) {
             System.out.println("The shed is already open!");
         }
-        // Have to unlock the shed first
         else if(!shed.unlocked) {
             System.out.println("You must unlock the shed before opening it.");
         }
-        // Shed is unlocked but not opened. Set opened to true, change description, add all items that are in shed
         else {
             shed.opened = true;
             shed.description = "You stand before an open shed with a picnic table to the north.";

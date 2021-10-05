@@ -4,7 +4,7 @@ public class Location {
 
     String description;                         // Description of the location to be printed when user arrives there
     ArrayList<Item> items;                      // Items available to pick up at the location
-    ArrayList<ConnectingLocation> connectingLocations;    // Legal locations that are able to be reached from this one
+    ArrayList<ConnectingLocation> connectingLocations;    // Legal locations that are reachable from this one
     Location previousLocation;                  // The last Location you were at. "back" will take you there
     boolean visited;                            // Has this location been visited yet? Used to know what to print for description
     String name;
