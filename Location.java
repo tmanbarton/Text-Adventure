@@ -127,7 +127,7 @@ public class Location {
         // Drop requested item
         else if(item.name.equals(input)) {
             // Drop manet at dam
-            if(location instanceof Dam && input.equals("magnet")) {
+            if(location instanceof Dam && input.equals("magnet")) {     // TODO fix lake location is full after drain lake at dam
                 System.out.println("You drop the magnet and as it's falling it snaps to the shiny center of the wheel. You can hear some\nmechanical clicking somewhere inside the dam.");
                 ((Dam)location).magnetDropped = true;
                 location.description = "You're on a short dam that looks like it created this lake by stopping up a large river. The dam\ngoes north and south along the west end of the lake. Close by is a wheel with its axel extending\ndeep into the dam. Its orange metal is fading to rust except for some other metal at the center,\nshining in the sun. There's a large magnet stuck to this part of the wheel. South leads around the\nlake and to the north there's a set of stairs.";
