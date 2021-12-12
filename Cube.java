@@ -11,7 +11,7 @@ public class Cube extends Item {
                 String inventoryPrint,
                 String name,
                 boolean solved,
-                boolean taken, char[][] charCube
+                boolean taken
     ) {
         super(order, locationPrint, inventoryPrint, name);
         this.solved = solved;
@@ -103,19 +103,11 @@ public class Cube extends Item {
                 yCubeTurn(cube, command);
             else if(command.equalsIgnoreCase("z") || command.equalsIgnoreCase("z'") || command.equalsIgnoreCase("z2"))
                 zCubeTurn(cube, command);
-//            else if(i > 0 && command.equalsIgnoreCase("q") ||
-//                    command.equalsIgnoreCase("help") || command.equalsIgnoreCase("h")) {
-//                System.out.println("Invalid input!");
-//                break;
-//            }
             else {
                 System.out.println("Invalid input!");
                 break;
             }
         }
-//        if(!(input.equalsIgnoreCase("q") || input.equalsIgnoreCase("h") || input.equalsIgnoreCase("help"))) {
-//            printCube(cube);
-//        }
     }
 
     /*Update d char array and other arrays a D turn would affect*/

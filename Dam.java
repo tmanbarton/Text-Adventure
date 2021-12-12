@@ -18,6 +18,8 @@ public class Dam extends Location {
             Graph graph = new Graph();
             location.connectingLocations.get(3).directions = graph.west;
             location.connectingLocations.get(4).directions = graph.down;
+            location.connectingLocations.get(1).location.description = "You are on the south side of an empty lake. There's a path going west and there's a dam to the\nnorth.";
+            //TODO change description of tailings, intersection, and driveway to get rid of lake also
         }
         else {
             System.out.println("The wheel is locked firmly in place.");

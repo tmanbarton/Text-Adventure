@@ -173,7 +173,7 @@ public class Graph {
         tent = new Item(9, "There is a tent here, packed neatly in a bag.", "Tent in bag", "tent");
         magnet = new Item(10, "There is a thick, circular magnet here, about the size of your palm.", "Magnet", "magnet");
         ruby = new Item(11, "A large ruby lays on the ground", "Ruby", "ruby");
-        cube = new Cube(12, "There is a plastic cube puzzle lying on the ground", "Cube", "cube", false, false, null);
+        cube = new Cube(12, "There is a plastic cube puzzle lying on the ground", "Cube", "cube", false, false);
 
         north = new ArrayList<>(Arrays.asList("north", "n", "go north", "go n", "walk north", "walk n", "run north", "run n"));
         south = new ArrayList<>(Arrays.asList("south", "s", "go south", "go s", "walk south", "walk s", "run south", "run s"));

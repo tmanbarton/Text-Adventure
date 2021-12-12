@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class ScrambleGenerator {
-    public static int[] generateScramble() {
+    public static String generateScramble() {
 
         // array of random ints. Dimension determines number of turns in scramble algorithm
         int[] randomInts = new int[25];
@@ -53,10 +53,11 @@ public class ScrambleGenerator {
             }
             randomInts[i] = randomNumber;
         }
-        return randomInts;
+        String algorithm = intArrayToString(randomInts);
+        return algorithm;
     }
 
-    public static String writeScramble(int[] numbers) {
+    public static String intArrayToString(int[] numbers) {
         String scrambleAlg = "";
         for(int i = 0; i < numbers.length; i++) {
             switch(numbers[i]) {

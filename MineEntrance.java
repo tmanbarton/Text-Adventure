@@ -15,7 +15,7 @@ public class MineEntrance extends Location {
     public MineEntrance() {}
 
     // If you try to get nails if they haven't been knocked off yet
-    public void nails(Location location) {
+    public void getNails(Location location) {
         // First ask if you actually want to get them. If you do get them you die. If not you don't. Loop until they answer the question
         if(!((MineEntrance) location).nailsOff) {
             Scanner scan = new Scanner(System.in);
@@ -45,8 +45,8 @@ public class MineEntrance extends Location {
         // the entrance has caved in.
         if(!(((MineEntrance) location).nailsOff)) {
             System.out.println("You shoot the arrow and the nails go flying off with a small ringing sound as your arrow glances\noff of them. The nails and your arrow land a few feet away then there's a loud crack of the support\nand the entrance caves in with an even loud crash and cloud of dust. Good thing you didn't try to\ntake them by hand.");
-            Item arrow = Main.findItem("arrow", inventory);
-            Main.addAndRemove(location.items, inventory, arrow);
+            Item arrow = Actions.getItemByName("arrow", inventory);
+            Actions.transferItem(location.items, inventory, arrow);
             Item nails = new Item(7, "There are some nails scattered on the ground here", "Some nails", "nails");
             location.items.add(nails);
             ((MineEntrance) location).nailsOff = true;
@@ -62,8 +62,8 @@ public class MineEntrance extends Location {
         // If nails are already off, print message and remove arrow from inventory and add to location.
         else {
             System.out.println("Your arrow goes flying off into the the distance and lands with a soft thud into the ground.");
-            Item arrow = Main.findItem("arrow", inventory);
-            Main.addAndRemove(location.items, inventory, arrow);
+            Item arrow = Actions.getItemByName("arrow", inventory);
+            Actions.transferItem(location.items, inventory, arrow);
         }
     }
 }

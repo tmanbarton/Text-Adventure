@@ -22,7 +22,7 @@ public class Shed extends Location {
         // If it isn't unlocked
         else {
             // Check if key is inventory. If it isn't you can't unlock shed. If it is you can
-            boolean keyInInventory = Main.isItemHere("key", inventory);
+            boolean keyInInventory = Actions.isItemHere("key", inventory);
             if(!keyInInventory) {
                 System.out.println("You need a key to unlock the shed.");
             }
@@ -59,7 +59,7 @@ public class Shed extends Location {
             shed.items.add(arrow);
             shed.items.add(shovel);
             shed.items.add(tent);
-            Main.printLocation("", shed);
+            Actions.printLocation("", shed);
         }
     }
 }
