@@ -1,7 +1,7 @@
 
 let caretPosition = 32;     // In pixels
 const userInput = document.getElementById('user-input');
-const caret = document.getElementById('blink');
+const caret = document.getElementById('caret-blink');
 
 userInput.addEventListener('keydown', function(event) {
     if(event.key === 'Enter') {
@@ -19,20 +19,29 @@ userInput.addEventListener('keydown', function(event) {
     }
     if(caretPosition !== 32 && event.key === 'ArrowLeft') {
         stopBlinking();
-        // All these __ * 8 because ubuntu mono is 8px wide
-        caretPosition = (userInput.selectionStart * 8) + 24
-        moveCaret(caretPosition);
+        // All these * 8 because ubuntu mono is 8px wide
+        caretPosition = (userInput.selectionStart * 8) + 24;
+        let width = userInput.offsetWidth;
+        if(caretPosition <= width) {
+            moveCaret(caretPosition);
+        }
     }
     else if(caretPosition < userInput.value.length * 8 + 32 && event.key === 'ArrowRight') {
         stopBlinking();
         caretPosition = (userInput.selectionStart * 8) + 40;
-        moveCaret(caretPosition);
+        let width = userInput.offsetWidth;
+        if(caretPosition <= width) {
+            moveCaret(caretPosition);
+        }
     }
 });
 
 userInput.addEventListener('click', function() {
     caretPosition = (userInput.selectionStart * 8) + 32;
+    let width = userInput.offsetWidth;
+    if(caretPosition <= width) {
         moveCaret(caretPosition);
+    }
 });
 
 userInput.addEventListener("input", function() {
@@ -40,21 +49,24 @@ userInput.addEventListener("input", function() {
     let input = userInput.value;
     input = input.replace(/\s/g, '&nbsp;');
     caretPosition = (userInput.selectionStart * 8) + 32;
-    moveCaret(caretPosition);
+    let width = userInput.offsetWidth;
+    if(caretPosition <= width) {
+        moveCaret(caretPosition);
+    }
 });
 
 const terminal = document.getElementById('terminal');
 terminal.addEventListener('click', function() {
     userInput.focus();
-})
+});
 
 function moveCaret(pixels) {
     caret.style.transform = 'translateX(' + pixels + 'px) translateY(-46px)';
 }
 
 function stopBlinking() {
-    caret.id = 'solid';
+    caret.id = 'caret-solid';
     setTimeout(function() {
-        caret.id = 'blink';
+        caret.id = 'caret-blink';
     }, 250);
 }

@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +39,7 @@ public class GameController {
                 currentLocation = move(input, currentLocation);
             }
             else {
-                new Actions().takeAction(input, currentLocation, inventory);
+                new Actions().checkAction(input, currentLocation, inventory);
             }
             // input will always be lowercase so don't have to worry about checking .equalsIgnoreCase
             if(scan.hasNextLine()) {

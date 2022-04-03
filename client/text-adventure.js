@@ -19,7 +19,7 @@ userInput.addEventListener('keydown', function(event) {
     }
     if(caretPosition !== 32 && event.key === 'ArrowLeft') {
         stopBlinking();
-        // All these __ * 8 because ubuntu mono is 8px wide
+        // All these * 8 because ubuntu mono is 8px wide
         caretPosition = (userInput.selectionStart * 8) + 24;
         let width = userInput.offsetWidth;
         if(caretPosition <= width) {
@@ -58,7 +58,7 @@ userInput.addEventListener("input", function() {
 const terminal = document.getElementById('terminal');
 terminal.addEventListener('click', function() {
     userInput.focus();
-})
+});
 
 function moveCaret(pixels) {
     caret.style.transform = 'translateX(' + pixels + 'px) translateY(-46px)';

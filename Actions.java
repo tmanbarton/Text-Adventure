@@ -11,16 +11,14 @@ public class Actions implements Comparator<Item> {
         return item1.order - item2.order;
     }
 
-    public void takeAction(String input, Location location, ArrayList<Item> inventory) {
+    // Check if input is valid action, proceed with action if so or say it's invalid if not
+    public void checkAction(String input, Location location, ArrayList<Item> inventory) {
         Graph graph = new Graph();
-        String inputCheck;
         String[] inputArray = input.split(" ");
-        inputCheck = inputArray[0];
-        // Is input a generic verb that can be applied at any location?
+        String inputCheck = inputArray[0];
         if(graph.allVerbs.contains(inputCheck) || (input.length() >= 5 && "inventory".contains(input))) {
-            findAction(input.toLowerCase(), location, inventory);
+            findAction(input.toLowerCase().trim(), location, inventory);
         }
-        //If input isn't a legal verb, direction, or if it's "in" or "out" + another word, print one of 3 Strings to let user know it's not a legal input
         else if(!(graph.allVerbs.contains(inputCheck) || graph.allDirections.contains(inputCheck)) || inputArray.length >= 2) {
             dontKnowWord();
         }
@@ -29,12 +27,11 @@ public class Actions implements Comparator<Item> {
     // Parse input and, based on first word, decide what action to take
     public void findAction(String input, Location location, ArrayList<Item> inventory) {
         Actions actions = new Actions();
-        String[] countWords = input.split(" ");
-        if(countWords.length >= 3) {
+        if(input.split(" ").length >= 3) {
             dontKnowWord();
         }
         else if(input.startsWith("get")) {
-            if(input.equals("get") || input.equals("get ")) {
+            if(input.equals("get")) {
                 System.out.println("What do you want to get?");
                 return;
             }
@@ -48,11 +45,9 @@ public class Actions implements Comparator<Item> {
         else if(input.startsWith("drop") || input.startsWith("throw")) {
             if(input.equals("drop") || input.equals("drop ")) {
                 System.out.println("What do you want to drop?");
-                return;
             }
-            else if(input.equals("throw") || input.equals("throw ")) {
+            else if(input.equals("throw")) {
                 System.out.println("What do you want to throw?");
-                return;
             }
             if (input.startsWith("drop")) {
                 actions.drop(input.substring(5), location, inventory);
@@ -228,7 +223,6 @@ public class Actions implements Comparator<Item> {
             return;
         }
         Item item = Actions.getItemByName(input, inventory);
-        // Not in inventory
         if(item == null) {
             System.out.println("You don't have that!");
         }
@@ -250,18 +244,15 @@ public class Actions implements Comparator<Item> {
         }
     }
 
-    // Similar to get but only applies to jar and gold items
+    // Similar to get but only applies to the jar and gold items
     public void fill(String input, Location location, ArrayList<Item> inventory) {
-        // Jar must be in inventory to fill
         boolean jarInInventory = Actions.isItemHere("jar", inventory);
-        // You can't fill anything other than the jar
         if(input.length() >= 6 && !input.substring(5).equals("jar")) {
             System.out.println("You can't fill that.");
         }
         else if(!jarInInventory) {
             System.out.println("You have nothing to fill.");
         }
-        // Else jar is inventory: Can only be filled with gold, change description if it's filled, and add gold to inventory if necessary
         else {
             boolean goldAtLocation = Actions.isItemHere("gold", location.items);
             boolean goldInInventory = Actions.isItemHere("gold", inventory);
