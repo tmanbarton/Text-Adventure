@@ -274,9 +274,9 @@ public class Graph {
         ditch.connectingLocations.add(new ConnectingLocation(east, antHill));
         ditch.connectingLocations.add(new ConnectingLocation(west, lightningTree));
         driveway.connectingLocations.add(new ConnectingLocation(north, privateProperty));
+        driveway.connectingLocations.add(new ConnectingLocation(down, privateProperty));
         driveway.connectingLocations.add(new ConnectingLocation(east, dirtRoad));
         driveway.connectingLocations.add(new ConnectingLocation(northwest, footPath));
-        driveway.connectingLocations.add(new ConnectingLocation(down, privateProperty));
         dynamiteHoles.connectingLocations.add(new ConnectingLocation(north, mustyBend));
         dynamiteHoles.connectingLocations.add(new ConnectingLocation(southwest, narrowCorridor));
         dynamiteHoles.connectingLocations.add(new ConnectingLocation(up, narrowCorridor));
@@ -331,6 +331,7 @@ public class Graph {
         picnicTable.connectingLocations.add(new ConnectingLocation(south, privateProperty));
         privateProperty.connectingLocations.add(new ConnectingLocation(north, archeryRange));
         privateProperty.connectingLocations.add(new ConnectingLocation(south, driveway));
+        privateProperty.connectingLocations.add(new ConnectingLocation(up, driveway));
         privateProperty.connectingLocations.add(new ConnectingLocation(northeast, picnicTable));
         roadInValley.connectingLocations.add(new ConnectingLocation(north, fieldsOfGrass));
         roadInValley.connectingLocations.add(new ConnectingLocation(south, eastEndOfSideStreet));
